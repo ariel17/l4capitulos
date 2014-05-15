@@ -3,3 +3,11 @@
 
 # Compilation artifacts
 *.py[oc]
+
+# Bower components
+bower_components
+jquery*.js
+bootstrap*.css
+
+# NodeJS modules
+node_modules
