@@ -1,0 +1,2 @@
+# Default requirements for project deployment
+-r requirements/production.txt

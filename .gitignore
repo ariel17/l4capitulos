@@ -1,0 +1,5 @@
+# Editor metadata
+*.sw[op]
+
+# Compilation artifacts
+*.py[oc]

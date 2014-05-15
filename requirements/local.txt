@@ -1,0 +1,2 @@
+# Requirements for local environment
+-r base.txt

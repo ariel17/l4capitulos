@@ -1,0 +1,2 @@
+# Base requirements for project
+Django==1.6.5
