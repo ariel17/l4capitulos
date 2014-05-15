@@ -53,6 +53,29 @@ class Book(models.Model):
 
     authors = models.ManyToManyField(Author)
 
+    isbn = models.CharField(
+        _('ISBN'),
+        max_length=50,
+        blank=True,
+        null=True,
+        help_text=_("The book's ISBN number that identifies it.")
+    )
+
+    published_at = models.DateField(
+        _('Published at'),
+        blank=True,
+        null=True,
+        help_text=_("The publication date of the book.")
+    )
+
+    editorial = models.CharField(
+        _('Editorial'),
+        max_length=100,
+        blank=True,
+        null=True,
+        help_text=_("The editorial that printed and released the book.")
+    )
+
     summary = models.TextField(
         _('Summary'),
         blank=True,
@@ -60,7 +83,7 @@ class Book(models.Model):
         help_text=_('Book summary about its content and why should buy it.')
     )
 
-    created_at = models.DateTimeField(
+    added_at = models.DateTimeField(
         _('Added at'),
         auto_now=True
     )
