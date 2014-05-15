@@ -15,6 +15,7 @@ from .models import Author, Book
 
 class AuthorAdmin(admin.ModelAdmin):
     fields = ('first_name', 'last_name')
+    list_display = ('first_name', 'last_name')
 
 
 class BookAdmin(admin.ModelAdmin):
@@ -26,6 +27,7 @@ class BookAdmin(admin.ModelAdmin):
             'fields': ('quantity', 'price')
         }),
     )
+    list_display = ('title', 'quantity', 'price')
 
 
 admin.site.register(Author, AuthorAdmin)
