@@ -11,3 +11,6 @@ bootstrap*.css
 
 # NodeJS modules
 node_modules
+
+# Collected static content
+static
