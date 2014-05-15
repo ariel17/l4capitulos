@@ -1,0 +1,54 @@
+{% extends "backoffice/base.html" %}
+
+{% block "title" %}Dashboard{% endblock %}
+
+{% block "content" %}
+    <h1 class="page-header">Dashboard</h1>
+    
+    <div class="row placeholders">
+      <div class="col-xs-6 col-sm-3 placeholder">
+        <div class="dashboard_count">{{ books.count }}</div>
+        <h4>Books available</h4>
+        <span class="text-muted">xxxxxx</span>
+      </div>
+      <div class="col-xs-6 col-sm-3 placeholder">
+        <div class="dashboard_count">100</div>
+        <h4>Books selled</h4>
+        <span class="text-muted">xxxxxx</span>
+      </div>
+      <div class="col-xs-6 col-sm-3 placeholder">
+        <div class="dashboard_count">100</div>
+        <h4>Books selled</h4>
+        <span class="text-muted">xxxxxx</span>
+      </div>
+      <div class="col-xs-6 col-sm-3 placeholder">
+        <div class="dashboard_count">100</div>
+        <h4>Books selled</h4>
+        <span class="text-muted">xxxxxx</span>
+      </div>
+    </div>
+    
+    <h2 class="sub-header">Book inventory</h2>
+    <div class="table-responsive">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Title</th>
+            <th>Quantity</th>
+            <th>Price</th>
+          </tr>
+        </thead>
+        <tbody>
+            {% for book in books %}
+                <tr>
+                    <td>{{ book.pk }}</td>
+                    <td>{{ book.title }}</td>
+                    <td>{{ book.quantity }}</td>
+                    <td>{{ book.price }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+      </table>
+    </div>
+{% endblock "content" %}    
