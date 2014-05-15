@@ -50,6 +50,7 @@ THIRD_PARTY_APPS = (
 )
 
 PROJECT_APPS = (
+    'backoffice',
     'book',
 )
 
@@ -101,3 +102,7 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 STATICFILES_DIRS = (
     os.path.normpath(os.path.join(BASE_DIR, 'assets')),
 )
+
+
+# Default settings for Backoffice
+BACKOFFICE_PROFILE_DEFAULT_LAST_ACTIVITY_ITEMS = 10
