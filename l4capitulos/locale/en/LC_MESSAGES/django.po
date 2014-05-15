@@ -1,0 +1,112 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2014-05-15 20:19+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: book/admin.py:23
+msgid "Book description"
+msgstr ""
+
+#: book/admin.py:26
+msgid "Sell options"
+msgstr ""
+
+#: book/models.py:19
+msgid "First name"
+msgstr ""
+
+#: book/models.py:23
+msgid "The author's first name."
+msgstr ""
+
+#: book/models.py:27
+msgid "Last name"
+msgstr ""
+
+#: book/models.py:29
+msgid "The author's last name."
+msgstr ""
+
+#: book/models.py:49 templates/backoffice/home.html:38
+msgid "Title"
+msgstr ""
+
+#: book/models.py:51
+msgid "The book's title."
+msgstr ""
+
+#: book/models.py:57
+msgid "Summary"
+msgstr ""
+
+#: book/models.py:60
+msgid "Book summary about its content and why should buy it."
+msgstr ""
+
+#: book/models.py:64
+msgid "Added at"
+msgstr ""
+
+#: book/models.py:69 templates/backoffice/home.html:40
+msgid "Price"
+msgstr ""
+
+#: book/models.py:73
+msgid "The book sell price."
+msgstr ""
+
+#: book/models.py:77 templates/backoffice/home.html:39
+msgid "Quantity"
+msgstr ""
+
+#: book/models.py:79
+msgid "How many copies of this book we have."
+msgstr ""
+
+#: l4capitulos/settings/base.py:79
+msgid "Spanish"
+msgstr ""
+
+#: l4capitulos/settings/base.py:80
+msgid "English"
+msgstr ""
+
+#: templates/backoffice/base.html:12
+msgid "Backoffice"
+msgstr ""
+
+#: templates/backoffice/home.html:4 templates/backoffice/home.html.py:7
+#: templates/backoffice/sidebar.html:4
+msgid "Dashboard"
+msgstr ""
+
+#: templates/backoffice/home.html:12
+msgid "Books available"
+msgstr ""
+
+#: templates/backoffice/home.html:17 templates/backoffice/home.html.py:22
+#: templates/backoffice/home.html:27
+msgid "Books selled"
+msgstr ""
+
+#: templates/backoffice/home.html:32
+msgid "Book inventory"
+msgstr ""
+
+#: templates/backoffice/sidebar.html:5
+msgid "Inventory"
+msgstr ""
