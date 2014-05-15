@@ -9,9 +9,13 @@ __author__ = "Ariel Gerardo Rios (ariel.gerardo.rios@gmail.com)"
 
 from django.shortcuts import render
 
+from book.models import Book
 
-def backoffice_home(request):
+
+def home(request):
     """
     The home page.
     """
-    return render(request, 'backoffice/backoffice.html', {})
+    return render(request, 'backoffice/home.html', {
+        'books': Book.objects.all(),
+    })

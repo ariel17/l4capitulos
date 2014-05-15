@@ -18,6 +18,5 @@ urlpatterns = patterns('',
     # url(r'^blog/', include('blog.urls')),
 
     url(r'^admin/', include(admin.site.urls)),
-    url(r'^backoffice/$', 'backoffice.views.backoffice_home',
-        name='backoffice_home')
+    url(r'^backoffice/$', 'backoffice.views.home', name='backoffice_home')
 )
