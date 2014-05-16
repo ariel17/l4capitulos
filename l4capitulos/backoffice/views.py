@@ -11,6 +11,7 @@ from django.shortcuts import render
 
 from book.models import Book
 from .forms.books import BookForm
+from .forms.finances import PurchaseForm
 
 
 def home(request):
@@ -42,10 +43,44 @@ def book_edit(request, book_id):
     """
     TODO
     """
-    pass
+    return render(request, 'backoffice/book_edit.html', {
+        'form': BookForm(),
+    })
 
 
 def book_delete(request, book_id):
+    """
+    TODO
+    """
+    pass
+
+
+def purchase(request):
+    """
+    TODO
+    """
+    pass
+
+
+def purchase_add(request):
+    """
+    TODO
+    """
+    return render(request, 'backoffice/purchase_add.html', {
+        'form': PurchaseForm(),
+    })
+
+
+def purchase_edit(request, purchase_id):
+    """
+    TODO
+    """
+    return render(request, 'backoffice/purchase_edit.html', {
+        'form': PurchaseForm(),
+    })
+
+
+def purchase_delete(request, purchase_id):
     """
     TODO
     """

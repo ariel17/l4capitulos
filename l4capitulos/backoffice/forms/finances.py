@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 
 """
-Description: Form declaration for book models.
+Description: Form declaration for purchase models in backoffice.
 """
 __author__ = "Ariel Gerardo Rios (ariel.gerardo.rios@gmail.com)"
 
@@ -13,50 +13,28 @@ from django.utils.translation import ugettext as _
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Layout, Fieldset, ButtonHolder, Submit, Button
 
-from book.models import Author, Book
+from finance.models import Purchase
 
 
-class BookForm(forms.Form):
+class PurchaseForm(forms.Form):
 
-    title = forms.CharField(
-        widget=forms.TextInput(attrs={"placeholder": _("Title")}),
-        required=True,
-    )
-
-    authors = forms.ModelMultipleChoiceField(
-        queryset=Author.objects.all(),
-    )
-
-    isbn = forms.CharField(
-        widget=forms.TextInput(attrs={"placeholder": _("ISBN number")}),
+    date = forms.DateField(
         required=False,
     )
 
-    published_at = forms.DateField(
+    price = forms.DecimalField(
+        widget=forms.TextInput(attrs={"placeholder": _("Price")}),
         required=False,
-    )
-
-    editorial = forms.CharField(
-        widget=forms.TextInput(attrs={"placeholder": _("Editorial's name")}),
-        required=False,
-    )
-
-    summary = forms.CharField(
-        widget=forms.Textarea(
-            attrs={"placeholder": _("A short book summary")}
-        ),
     )
 
     def __init__(self, *args, **kwargs):
-        super(BookForm, self).__init__(*args, **kwargs)
+        super(PurchaseForm, self).__init__(*args, **kwargs)
         self.helper = FormHelper()
         self.helper.layout = Layout(
             Fieldset(
-                'Book description',
-                'title',
-                'isbn',
-                'published_at',
-                'summary',
+                'Purchase information',
+                'date',
+                'price',
             ),
             ButtonHolder(
                 Button('cancel', _('Cancel'), css_class='btn btn-default'),
@@ -72,4 +50,4 @@ class BookForm(forms.Form):
         )
 
     class Meta:
-        model = Book
+        model = Purchase
