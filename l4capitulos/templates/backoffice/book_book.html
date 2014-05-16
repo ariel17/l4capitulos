@@ -1,55 +1,42 @@
 {% extends "backoffice/base.html" %}
-{% load i18n %}
+{% load i18n crispy_forms_tags %}
 
-{% block "title" %}{% trans "Dashboard" %}{% endblock %}
+{% block "title" %}{% trans "Books" %}{% endblock %}
 
 {% block "content" %}
-<h1 class="page-header">{% trans "Dashboard" %}</h1>
+<h1 class="page-header">{% trans "Search books" %}</h1>
     
-    <div class="row placeholders">
-      <div class="col-xs-6 col-sm-3 placeholder">
-        <div class="dashboard_count">{{ books.count }}</div>
-        <h4>{% trans "Books available" %}</h4>
-        <span class="text-muted">xxxxxx</span>
-      </div>
-      <div class="col-xs-6 col-sm-3 placeholder">
-        <div class="dashboard_count">100</div>
-        <h4>{% trans "Books selled" %}</h4>
-        <span class="text-muted">xxxxxx</span>
-      </div>
-      <div class="col-xs-6 col-sm-3 placeholder">
-        <div class="dashboard_count">100</div>
-        <h4>{% trans "Books selled" %}</h4>
-        <span class="text-muted">xxxxxx</span>
-      </div>
-      <div class="col-xs-6 col-sm-3 placeholder">
-        <div class="dashboard_count">100</div>
-        <h4>{% trans "Books selled" %}</h4>
-        <span class="text-muted">xxxxxx</span>
-      </div>
-    </div>
+    {% crispy form %}
     
-    <h2 class="sub-header">{% trans "Book inventory" %}</h2>
-    <div class="table-responsive">
-      <table class="table table-striped">
-        <thead>
-          <tr>
-            <th>#</th>
-            <th>{% trans "Title" %}</th>
-            <th>{% trans "Quantity" %}</th>
-            <th>{% trans "Price" %}</th>
-          </tr>
-        </thead>
-        <tbody>
-            {% for book in books %}
-                <tr>
-                    <td>{{ book.pk }}</td>
-                    <td>{{ book.title }}</td>
-                    <td>{{ book.quantity }}</td>
-                    <td>{{ book.price }}</td>
-                </tr>
-            {% endfor %}
-        </tbody>
-      </table>
-    </div>
+    {% if books %}
+        <h2 class="sub-header">{% trans "Books" %}</h2>
+        <div class="table-responsive">
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>{% trans "Title" %}</th>
+                <th>{% trans "Authors" %}</th>
+                <th>{% trans "ISBN" %}</th>
+                <th>{% trans "Published at" %}</th>
+                <th>{% trans "Editorial" %}</th>
+                <th>{% trans "Added at" %}</th>
+              </tr>
+            </thead>
+            <tbody>
+                {% for book in books %}
+                    <tr>
+                        <td>{{ book.pk }}</td>
+                        <td>{{ book.title }}</td>
+                        <td>{{ book.authors }}</td>
+                        <td>{{ book.isbn }}</td>
+                        <td>{{ book.published_at }}</td>
+                        <td>{{ book.editorial }}</td>
+                        <td>{{ book.added_at }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+          </table>
+        </div>
+    {% endif %}        
 {% endblock "content" %}    

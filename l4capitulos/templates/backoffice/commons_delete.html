@@ -1,0 +1,15 @@
+{% extends "backoffice/base.html" %}
+{% load i18n crispy_forms_tags %}
+
+{% block "title" %}{% trans "Delete {{ obj.__class__.__name__ }}" %}{% endblock %}
+
+{% block "content" %}
+<h1 class="page-header">
+    {% blocktrans %}
+        Are you sure to delete {{ obj }}
+    {% endblocktrans %}
+</h1>
+
+{% crispy form %}
+    
+{% endblock "content" %}    
