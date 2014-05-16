@@ -47,11 +47,13 @@ DJANGO_APPS = (
 
 THIRD_PARTY_APPS = (
     'south',
+    'crispy_forms',
 )
 
 PROJECT_APPS = (
     'backoffice',
     'book',
+    'finance',
 )
 
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + PROJECT_APPS
@@ -102,6 +104,10 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 STATICFILES_DIRS = (
     os.path.normpath(os.path.join(BASE_DIR, 'assets')),
 )
+
+
+# Crispy forms configuration
+CRISPY_TEMPLATE_PACK = 'bootstrap3'
 
 
 # Default settings for Backoffice
