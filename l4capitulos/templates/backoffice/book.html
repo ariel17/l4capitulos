@@ -1,0 +1,55 @@
+{% extends "backoffice/base.html" %}
+{% load i18n %}
+
+{% block "title" %}{% trans "Dashboard" %}{% endblock %}
+
+{% block "content" %}
+<h1 class="page-header">{% trans "Dashboard" %}</h1>
+    
+    <div class="row placeholders">
+      <div class="col-xs-6 col-sm-3 placeholder">
+        <div class="dashboard_count">{{ books.count }}</div>
+        <h4>{% trans "Books available" %}</h4>
+        <span class="text-muted">xxxxxx</span>
+      </div>
+      <div class="col-xs-6 col-sm-3 placeholder">
+        <div class="dashboard_count">100</div>
+        <h4>{% trans "Books selled" %}</h4>
+        <span class="text-muted">xxxxxx</span>
+      </div>
+      <div class="col-xs-6 col-sm-3 placeholder">
+        <div class="dashboard_count">100</div>
+        <h4>{% trans "Books selled" %}</h4>
+        <span class="text-muted">xxxxxx</span>
+      </div>
+      <div class="col-xs-6 col-sm-3 placeholder">
+        <div class="dashboard_count">100</div>
+        <h4>{% trans "Books selled" %}</h4>
+        <span class="text-muted">xxxxxx</span>
+      </div>
+    </div>
+    
+    <h2 class="sub-header">{% trans "Book inventory" %}</h2>
+    <div class="table-responsive">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>{% trans "Title" %}</th>
+            <th>{% trans "Quantity" %}</th>
+            <th>{% trans "Price" %}</th>
+          </tr>
+        </thead>
+        <tbody>
+            {% for book in books %}
+                <tr>
+                    <td>{{ book.pk }}</td>
+                    <td>{{ book.title }}</td>
+                    <td>{{ book.quantity }}</td>
+                    <td>{{ book.price }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+      </table>
+    </div>
+{% endblock "content" %}    

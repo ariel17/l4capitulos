@@ -1,0 +1,11 @@
+{% extends "backoffice/base.html" %}
+{% load i18n crispy_forms_tags %}
+
+{% block "title" %}{% trans "Dashboard" %}{% endblock %}
+
+{% block "content" %}
+<h1 class="page-header">{% trans "Dashboard" %}</h1>
+
+{% crispy form %}
+    
+{% endblock "content" %}    
