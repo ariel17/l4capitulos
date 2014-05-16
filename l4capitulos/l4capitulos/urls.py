@@ -18,6 +18,7 @@ urlpatterns = patterns('',
     # url(r'^blog/', include('blog.urls')),
 
     url(r'^admin/', include(admin.site.urls)),
+
     url(r'^backoffice/$', 'backoffice.views.home', name='backoffice_home'),
 
     url(r'^backoffice/book/$', 'backoffice.views.book',
@@ -31,4 +32,16 @@ urlpatterns = patterns('',
 
     url(r'^backoffice/book/delete/(?P<book_id>\d+)/$',
         'backoffice.views.book_delete', name='backoffice_book_delete'),
+
+    url(r'^backoffice/purchase/$', 'backoffice.views.purchase',
+        name='backoffice_purchase'),
+
+    url(r'^backoffice/purchase/add/$', 'backoffice.views.purchase_add',
+        name='backoffice_purchase_add'),
+
+    url(r'^backoffice/purchase/edit/(?P<purchase_id>\d+)/$',
+        'backoffice.views.purchase_edit', name='backoffice_purchase_edit'),
+
+    url(r'^backoffice/book/purchase/(?P<purchase_id>\d+)/$',
+        'backoffice.views.purchase_delete', name='backoffice_purchase_delete'),
 )
