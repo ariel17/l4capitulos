@@ -28,7 +28,7 @@ class Migration(SchemaMigration):
 
         # Adding field 'Book.added_at'
         db.add_column(u'book_book', 'added_at',
-                      self.gf('django.db.models.fields.DateTimeField')(auto_now=True, default=None, blank=True),
+                      self.gf('django.db.models.fields.DateTimeField')(auto_now=True, null=True, default=None, blank=True),
                       keep_default=False)
 
 

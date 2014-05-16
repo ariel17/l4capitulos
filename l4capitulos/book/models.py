@@ -85,7 +85,9 @@ class Book(models.Model):
 
     added_at = models.DateTimeField(
         _('Added at'),
-        auto_now=True
+        auto_now=True,
+        blank=True,
+        null=True,
     )
 
     price = models.DecimalField(
