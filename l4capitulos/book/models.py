@@ -90,19 +90,5 @@ class Book(models.Model):
         null=True,
     )
 
-    price = models.DecimalField(
-        _('Price'),
-        max_digits=10,
-        decimal_places=2,
-        default=0,
-        help_text=_('The book sell price.'),
-    )
-
-    quantity = models.PositiveIntegerField(
-        _('Quantity'),
-        default=0,
-        help_text=_('How many copies of this book we have.')
-    )
-
     def __unicode__(self):
         return unicode(self.title)

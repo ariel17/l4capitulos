@@ -19,15 +19,10 @@ class AuthorAdmin(admin.ModelAdmin):
 
 
 class BookAdmin(admin.ModelAdmin):
-    fieldsets = (
-        (_('Book description'), {
-            'fields': ('title', 'authors')
-        }),
-        (_('Sell options'), {
-            'fields': ('quantity', 'price')
-        }),
-    )
-    list_display = ('title', 'quantity', 'price')
+    fields = ('title', 'authors', 'isbn', 'published_at', 'editorial',
+              'summary', 'added_at')
+    list_display = ('title', 'isbn', 'editorial', 'added_at')
+    list_display_links = ('title', 'editorial')
 
 
 admin.site.register(Author, AuthorAdmin)
