@@ -12,6 +12,9 @@ from django.utils.translation import ugettext as _
 
 
 class Purchase(models.Model):
+    """
+    Registers the item purchases.
+    """
 
     date = models.DateField(
         _('Purchased at'),
