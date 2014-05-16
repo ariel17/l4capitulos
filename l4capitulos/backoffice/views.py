@@ -23,64 +23,64 @@ def home(request):
     })
 
 
-def book(request):
+def book_book(request):
     """
     TODO
     """
     pass
 
 
-def book_add(request):
+def book_book_add(request):
     """
     TODO
     """
-    return render(request, 'backoffice/book_add.html', {
+    return render(request, 'backoffice/book_book_add.html', {
         'form': BookForm(),
     })
 
 
-def book_edit(request, book_id):
+def book_book_edit(request, book_id):
     """
     TODO
     """
-    return render(request, 'backoffice/book_edit.html', {
+    return render(request, 'backoffice/book_book_edit.html', {
         'form': BookForm(),
     })
 
 
-def book_delete(request, book_id):
+def book_book_delete(request, book_id):
     """
     TODO
     """
     pass
 
 
-def purchase(request):
+def finance_purchase(request):
     """
     TODO
     """
     pass
 
 
-def purchase_add(request):
+def finance_purchase_add(request):
     """
     TODO
     """
-    return render(request, 'backoffice/purchase_add.html', {
+    return render(request, 'backoffice/finance_purchase_add.html', {
         'form': PurchaseForm(),
     })
 
 
-def purchase_edit(request, purchase_id):
+def finance_purchase_edit(request, purchase_id):
     """
     TODO
     """
-    return render(request, 'backoffice/purchase_edit.html', {
+    return render(request, 'backoffice/finance_purchase_edit.html', {
         'form': PurchaseForm(),
     })
 
 
-def purchase_delete(request, purchase_id):
+def finance_purchase_delete(request, purchase_id):
     """
     TODO
     """

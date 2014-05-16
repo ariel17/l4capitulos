@@ -21,27 +21,45 @@ urlpatterns = patterns('',
 
     url(r'^backoffice/$', 'backoffice.views.home', name='backoffice_home'),
 
-    url(r'^backoffice/book/$', 'backoffice.views.book',
-        name='backoffice_book'),
+    url(r'^backoffice/book/author/$', 'backoffice.views.book_author',
+        name='backoffice_book_author'),
 
-    url(r'^backoffice/book/add/$', 'backoffice.views.book_add',
-        name='backoffice_book_add'),
+    url(r'^backoffice/book/author/add/$', 'backoffice.views.book_author_add',
+        name='backoffice_book_author_add'),
 
-    url(r'^backoffice/book/edit/(?P<book_id>\d+)/$',
-        'backoffice.views.book_edit', name='backoffice_book_edit'),
+    url(r'^backoffice/book/author/edit/(?P<author_id>\d+)/$',
+        'backoffice.views.book_author_edit',
+        name='backoffice_book_author_edit'),
 
-    url(r'^backoffice/book/delete/(?P<book_id>\d+)/$',
-        'backoffice.views.book_delete', name='backoffice_book_delete'),
+    url(r'^backoffice/book/author/delete/(?P<author_id>\d+)/$',
+        'backoffice.views.book_author_delete',
+        name='backoffice_book_author_delete'),
 
-    url(r'^backoffice/purchase/$', 'backoffice.views.purchase',
-        name='backoffice_purchase'),
+    url(r'^backoffice/book/book/$', 'backoffice.views.book_book',
+        name='backoffice_book_book'),
 
-    url(r'^backoffice/purchase/add/$', 'backoffice.views.purchase_add',
-        name='backoffice_purchase_add'),
+    url(r'^backoffice/book/book/add/$', 'backoffice.views.book_book_add',
+        name='backoffice_book_book_add'),
 
-    url(r'^backoffice/purchase/edit/(?P<purchase_id>\d+)/$',
-        'backoffice.views.purchase_edit', name='backoffice_purchase_edit'),
+    url(r'^backoffice/book/book/edit/(?P<book_id>\d+)/$',
+        'backoffice.views.book_book_edit', name='backoffice_book_book_edit'),
 
-    url(r'^backoffice/book/purchase/(?P<purchase_id>\d+)/$',
-        'backoffice.views.purchase_delete', name='backoffice_purchase_delete'),
+    url(r'^backoffice/book/book/delete/(?P<book_id>\d+)/$',
+        'backoffice.views.book_book_delete',
+        name='backoffice_book_book_delete'),
+
+    url(r'^backoffice/finance/purchase/$', 'backoffice.views.finance_purchase',
+        name='backoffice_finance_purchase'),
+
+    url(r'^backoffice/finance/purchase/add/$',
+        'backoffice.views.finance_purchase_add',
+        name='backoffice_finance_purchase_add'),
+
+    url(r'^backoffice/finance/purchase/edit/(?P<purchase_id>\d+)/$',
+        'backoffice.views.finance_purchase_edit',
+        name='backoffice_finance_purchase_edit'),
+
+    url(r'^backoffice/finance/purchase/(?P<purchase_id>\d+)/$',
+        'backoffice.views.finance_purchase_delete',
+        name='backoffice_finance_purchase_delete'),
 )
