@@ -20,7 +20,7 @@ class AuthorAdmin(admin.ModelAdmin):
 
 class BookAdmin(admin.ModelAdmin):
     fields = ('title', 'authors', 'isbn', 'published_at', 'editorial',
-              'summary', 'added_at')
+              'summary',)
     list_display = ('title', 'isbn', 'editorial', 'added_at')
     list_display_links = ('title', 'editorial')
 
