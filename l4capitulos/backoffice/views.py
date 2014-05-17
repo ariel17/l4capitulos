@@ -7,12 +7,13 @@ Description: Backoffice application views.
 __author__ = "Ariel Gerardo Rios (ariel.gerardo.rios@gmail.com)"
 
 
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 
-from .forms.commons import DeleteForm
 from .forms.books import BookForm, BookSearchForm, AuthorForm
-from .forms.finances import PurchaseForm
-from book.models import Book
+from .forms.commons import DeleteForm
+from .forms.finances import PurchaseForm, PurchaseSearchForm
+from book.models import Author, Book
+from finance.models import Purchase
 
 
 def home(request):
@@ -29,6 +30,8 @@ def book_author(request):
     TODO
     """
     return render(request, 'backoffice/book_author.html', {
+        'form': None,
+        'authors': Author.objects.all(),
     })
 
 
@@ -54,7 +57,11 @@ def book_author_delete(request, author_id):
     """
     TODO
     """
+    author = get_object_or_404(Author, pk=author_id)
+
     return render(request, 'backoffice/commons_delete.html', {
+        'obj': author,
+        'model': author.__class__.__name__,
         'form': DeleteForm(),
     })
 
@@ -91,7 +98,11 @@ def book_book_delete(request, book_id):
     """
     TODO
     """
+    book = get_object_or_404(Book, pk=book_id)
+
     return render(request, 'backoffice/commons_delete.html', {
+        'obj': book,
+        'model': book.__class__.__name__,
         'form': DeleteForm(),
     })
 
@@ -101,6 +112,8 @@ def finance_purchase(request):
     TODO
     """
     return render(request, 'backoffice/finance_purchase.html', {
+        'form': PurchaseSearchForm(),
+        'purchases': Purchase.objects.all(),
     })
 
 
@@ -126,6 +139,10 @@ def finance_purchase_delete(request, purchase_id):
     """
     TODO
     """
+    purchase = get_object_or_404(Purchase, pk=purchase_id)
+
     return render(request, 'backoffice/commons_delete.html', {
+        'obj': purchase,
+        'model': purchase.__class__.__name__,
         'form': DeleteForm(),
     })

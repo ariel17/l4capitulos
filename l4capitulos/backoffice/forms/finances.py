@@ -10,8 +10,9 @@ __author__ = "Ariel Gerardo Rios (ariel.gerardo.rios@gmail.com)"
 from django import forms
 from django.utils.translation import ugettext as _
 
+from crispy_forms.bootstrap import FormActions
 from crispy_forms.helper import FormHelper
-from crispy_forms.layout import Layout, Fieldset, ButtonHolder, Submit, Button
+from crispy_forms.layout import Layout, Fieldset, ButtonHolder, Submit, Button, Div, Field
 
 from finance.models import Purchase
 
@@ -19,12 +20,12 @@ from finance.models import Purchase
 class PurchaseForm(forms.Form):
 
     date = forms.DateField(
-        required=False,
+        required=True,
     )
 
     price = forms.DecimalField(
         widget=forms.TextInput(attrs={"placeholder": _("Price")}),
-        required=False,
+        required=True,
     )
 
     def __init__(self, *args, **kwargs):
@@ -47,6 +48,54 @@ class PurchaseForm(forms.Form):
 
                 Submit('save', _('Save'), css_class='button white'),
             )
+        )
+
+    class Meta:
+        model = Purchase
+
+
+class PurchaseSearchForm(forms.Form):
+
+    date_from = forms.DateField(
+        required=False,
+    )
+
+    date_to = forms.DateField(
+        required=False,
+    )
+
+    price_from = forms.DecimalField(
+        widget=forms.TextInput(attrs={"placeholder": _("Price from")}),
+        required=False,
+    )
+
+    price_to = forms.DecimalField(
+        widget=forms.TextInput(attrs={"placeholder": _("Price to")}),
+        required=False,
+    )
+
+    def __init__(self, *args, **kwargs):
+        super(PurchaseSearchForm, self).__init__(*args, **kwargs)
+        self.helper = FormHelper()
+        self.helper.form_class = 'form-inline'
+        self.helper.layout = Layout(
+            Div(
+                Field("date_from"),
+                Field("date_to"),
+                css_class="row group-padding-12"
+            ),
+
+            Div(
+                Field("price_from"),
+                Field("price_to"),
+                css_class="row group-padding-12"
+            ),
+
+            ButtonHolder(
+                FormActions(
+                    Submit('search', _('Search')),
+                )
+            ),
         )
 
     class Meta:
