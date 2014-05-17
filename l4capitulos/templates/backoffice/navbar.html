@@ -1,3 +1,4 @@
+{% load staticfiles i18n %}
 <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
   <div class="container-fluid">
     <div class="navbar-header">
@@ -7,7 +8,7 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="{% url "backoffice_home" %}">4 Capítulos</a>
+      <a class="navbar-brand" href="{% url "backoffice_home" %}"></a>
     </div>
     <div class="navbar-collapse collapse">
       <ul class="nav navbar-nav navbar-right">
@@ -15,9 +16,6 @@
         <li><a href="#">Profile</a></li>
         <li><a href="#">Help</a></li>
       </ul>
-      <form class="navbar-form navbar-right">
-        <input type="text" class="form-control" placeholder="Search...">
-      </form>
     </div>
   </div>
 </div>

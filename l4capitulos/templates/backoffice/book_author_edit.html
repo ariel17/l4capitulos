@@ -4,8 +4,46 @@
 {% block "title" %}{% trans "Edit an author" %}{% endblock %}
 
 {% block "content" %}
-<h1 class="page-header">{% trans "Edit author" %}</h1>
+    <h1 class="page-header">
+        {% blocktrans with author_name=author.get_full_name %}
+            Edit {{ author_name }}
+        {% endblocktrans %}
+    </h1>
 
-{% crispy form %}
-    
+    {% crispy form %}
+
+    {% if books %}
+        <h2 class="sub-header">{% trans "Books" %}</h2>
+        <div class="table-responsive">
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>{% trans "Title" %}</th>
+                <th>{% trans "Published at" %}</th>
+                <th>{% trans "Editorial" %}</th>
+                <th>{% trans "Actions" %}</th>
+              </tr>
+            </thead>
+            <tbody>
+                {% for book in books %}
+                    <tr>
+                        <td>{{ book.pk }}</td>
+                        <td>{{ book.title }}</td>
+                        <td>{{ book.published_at }}</td>
+                        <td>{{ book.editorial }}</td>
+                        <td>
+                            <a type="button" class="btn btn-default btn-xs" href="{% url "backoffice_book_book_edit" book.pk %}">
+                                <span class="glyphicon glyphicon-pencil"></span> Edit
+                            </a>
+                            <a type="button" class="btn btn-default btn-xs" href="{% url "backoffice_book_book_delete" book.pk %}">
+                                <span class="glyphicon glyphicon-remove"></span> Delete
+                            </a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+          </table>
+        </div>
+    {% endif %}        
 {% endblock "content" %}    

@@ -8,7 +8,20 @@
     
     {% crispy form %}
 
+    <div class="row">
+        <div class="col-md-12 padded-12">
+            <a type="button" class="btn btn-default btn-sm" href="{% url "backoffice_book_author_add" %}">
+                <span class="glyphicon glyphicon-plus"></span> {% trans "Add author" %}
+            </a>
+        </div>
+    </div>
+
     {% if authors %}
+        <h2 class="sub-header">
+            {% blocktrans with count=authors.count %}
+                Search results <small>{{ count }} author(s)</small>
+            {% endblocktrans %}
+        </h2>
         <div class="table-responsive">
           <table class="table table-striped">
             <thead>
@@ -26,14 +39,14 @@
                         <td>{{ author.first_name }}</td>
                         <td>{{ author.last_name }}</td>
                         <td>
-                            <a type="button" class="btn btn-default btn-xs" href="{% url "backoffice_book_book" %}?authors={{ author.get_full_name|urlencode }}">
-                                <span class="glyphicon glyphicon-search"></span> Books
+                            <a type="button" class="btn btn-default btn-xs" href="{% url "backoffice_book_book" %}?authors={{ author.last_name|urlencode }}">
+                                <span class="glyphicon glyphicon-search"></span> {% trans "Books" %}
                             </a>
                             <a type="button" class="btn btn-default btn-xs" href="{% url "backoffice_book_author_edit" author.pk %}">
-                                <span class="glyphicon glyphicon-pencil"></span> Edit
+                                <span class="glyphicon glyphicon-pencil"></span> {% trans "Edit" %}
                             </a>
                             <a type="button" class="btn btn-default btn-xs" href="{% url "backoffice_book_author_delete" author.pk %}">
-                                <span class="glyphicon glyphicon-remove"></span> Delete
+                                <span class="glyphicon glyphicon-remove"></span> {% trans "Delete" %}
                             </a>
                         </td>
                     </tr>
@@ -42,4 +55,5 @@
           </table>
         </div>
     {% endif %}        
+
 {% endblock "content" %}    

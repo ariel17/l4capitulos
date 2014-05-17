@@ -17,17 +17,7 @@ from crispy_forms.layout import Layout, Fieldset, ButtonHolder, Submit, Button, 
 from book.models import Author, Book
 
 
-class AuthorForm(forms.Form):
-
-    first_name = forms.CharField(
-        widget=forms.TextInput(attrs={"placeholder": _("Fist name")}),
-        required=False,
-    )
-
-    last_name = forms.CharField(
-        widget=forms.TextInput(attrs={"placeholder": _("Last name")}),
-        required=False,
-    )
+class AuthorForm(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
         super(AuthorForm, self).__init__(*args, **kwargs)
@@ -55,36 +45,42 @@ class AuthorForm(forms.Form):
         model = Author
 
 
-class BookForm(forms.Form):
+class AuthorSearchForm(forms.Form):
 
-    title = forms.CharField(
-        widget=forms.TextInput(attrs={"placeholder": _("Title")}),
-        required=True,
-    )
-
-    authors = forms.ModelMultipleChoiceField(
-        queryset=Author.objects.all(),
-    )
-
-    isbn = forms.CharField(
-        widget=forms.TextInput(attrs={"placeholder": _("ISBN number")}),
+    first_name = forms.CharField(
+        widget=forms.TextInput(attrs={"placeholder": _("First name")}),
         required=False,
     )
 
-    published_at = forms.DateField(
+    last_name = forms.CharField(
+        widget=forms.TextInput(attrs={"placeholder": _("Last name")}),
         required=False,
     )
 
-    editorial = forms.CharField(
-        widget=forms.TextInput(attrs={"placeholder": _("Editorial's name")}),
-        required=False,
-    )
+    def __init__(self, *args, **kwargs):
+        super(AuthorSearchForm, self).__init__(*args, **kwargs)
+        self.helper = FormHelper()
+        self.helper.form_method = 'get'
+        self.helper.form_class = 'form-inline'
+        self.helper.layout = Layout(
+            Div(
+                Field("first_name"),
+                Field("last_name"),
+                css_class="row group-padding-12"
+            ),
 
-    summary = forms.CharField(
-        widget=forms.Textarea(
-            attrs={"placeholder": _("A short book summary")}
-        ),
-    )
+            ButtonHolder(
+                FormActions(
+                    Submit('search', _('Search')),
+                )
+            ),
+        )
+
+    class Meta:
+        model = Author
+
+
+class BookForm(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
         super(BookForm, self).__init__(*args, **kwargs)
@@ -180,19 +176,6 @@ class BookSearchForm(forms.Form):
                 Field("authors"),
                 css_class="row group-padding-12"
             ),
-
-            # Fieldset(
-            #     'hola',
-            #     "title",
-            #     "isbn",
-            #     "added_from",
-            #     "added_to",
-            #     "published_from",
-            #     "published_to",
-            #     "editorial",
-            #     "authors",
-            # ),
-
 
             ButtonHolder(
                 FormActions(

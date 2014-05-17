@@ -108,3 +108,17 @@ body {
 .group-padding-12 {
     padding: 0 12px 12px 12px;
 }
+
+.padded-12 {
+    padding: 12px;
+}
+
+/*
+ * Branding
+ */
+.navbar-brand {
+    display: block;
+    width: 207px;
+    height: 43px;
+    background: url('/static/img/4capitulos-207x43-inv.png') no-repeat 5px 5px;
+}

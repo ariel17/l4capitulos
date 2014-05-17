@@ -11,6 +11,31 @@ from django.db import models
 from django.utils.translation import ugettext as _
 
 
+class PurchaseManager(models.Manager):
+    """
+    Custom manager for purchase operations.
+    """
+    def search(self, *args, **kwargs):
+        """
+        Searches purchases filtering by indicated parameters.
+        """
+        purchases = self.all()
+
+        if 'date_from' in kwargs:
+            pass  # TODO
+
+        if 'date_to' in kwargs:
+            pass  # TODO
+
+        if 'price_from' in kwargs:
+            pass  # TODO
+
+        if 'price_to' in kwargs:
+            pass  # TODO
+
+        return purchases
+
+
 class Purchase(models.Model):
     """
     Registers the item purchases.
@@ -27,6 +52,8 @@ class Purchase(models.Model):
         decimal_places=2,
         help_text=_('The purchase price.')
     )
+
+    objects = PurchaseManager()
 
     def __unicode__(self):
         return u"#%d@%s at $ %s" % (

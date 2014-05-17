@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-05-15 20:19+0000\n"
+"POT-Creation-Date: 2014-05-17 19:27+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,71 +17,167 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: book/admin.py:23
-msgid "Book description"
+#: backoffice/models.py:25
+msgid "Last activity items"
 msgstr ""
 
-#: book/admin.py:26
-msgid "Sell options"
+#: backoffice/models.py:27
+msgid "How many last activity items to show."
 msgstr ""
 
-#: book/models.py:19
+#: backoffice/forms/books.py:32 backoffice/forms/books.py:103
+#: backoffice/forms/finances.py:32
+msgid "Cancel"
+msgstr ""
+
+#: backoffice/forms/books.py:34 backoffice/forms/books.py:105
+#: backoffice/forms/finances.py:34
+msgid "Save and close"
+msgstr ""
+
+#: backoffice/forms/books.py:37 backoffice/forms/books.py:108
+#: backoffice/forms/finances.py:37
+msgid "Save and new"
+msgstr ""
+
+#: backoffice/forms/books.py:40 backoffice/forms/books.py:111
+#: backoffice/forms/finances.py:40
+msgid "Save"
+msgstr ""
+
+#: backoffice/forms/books.py:51 book/models.py:42
+#: templates/backoffice/book_author.html:30
 msgid "First name"
 msgstr ""
 
-#: book/models.py:23
-msgid "The author's first name."
-msgstr ""
-
-#: book/models.py:27
+#: backoffice/forms/books.py:56 book/models.py:50
+#: templates/backoffice/book_author.html:31
 msgid "Last name"
 msgstr ""
 
-#: book/models.py:29
-msgid "The author's last name."
+#: backoffice/forms/books.py:74 backoffice/forms/books.py:182
+#: backoffice/forms/finances.py:88
+msgid "Search"
 msgstr ""
 
-#: book/models.py:49 templates/backoffice/home.html:38
+#: backoffice/forms/books.py:123 book/models.py:115
+#: templates/backoffice/book_author_edit.html:22
+#: templates/backoffice/book_book.html:30 templates/backoffice/home.html:38
+#: templates/backoffice/inventory.html:38
 msgid "Title"
 msgstr ""
 
-#: book/models.py:51
+#: backoffice/forms/books.py:128 templates/backoffice/book_author.html:4
+#: templates/backoffice/book_book.html:31 templates/backoffice/home.html:17
+#: templates/backoffice/sidebar.html:5
+msgid "Authors"
+msgstr ""
+
+#: backoffice/forms/books.py:133
+msgid "ISBN number"
+msgstr ""
+
+#: backoffice/forms/books.py:154
+msgid "Editorial's name"
+msgstr ""
+
+#: backoffice/forms/commons.py:24
+msgid "No"
+msgstr ""
+
+#: backoffice/forms/commons.py:25
+msgid "Yes"
+msgstr ""
+
+#: backoffice/forms/finances.py:59
+msgid "Price from"
+msgstr ""
+
+#: backoffice/forms/finances.py:64
+msgid "Price to"
+msgstr ""
+
+#: book/models.py:46
+msgid "The author's first name."
+msgstr ""
+
+#: book/models.py:52
+msgid "The author's last name."
+msgstr ""
+
+#: book/models.py:117
 msgid "The book's title."
 msgstr ""
 
-#: book/models.py:57
+#: book/models.py:123
+msgid "ISBN"
+msgstr ""
+
+#: book/models.py:127
+msgid "The book's ISBN number that identifies it."
+msgstr ""
+
+#: book/models.py:131 templates/backoffice/book_author_edit.html:23
+#: templates/backoffice/book_book.html:32
+msgid "Published at"
+msgstr ""
+
+#: book/models.py:134
+msgid "The publication date of the book."
+msgstr ""
+
+#: book/models.py:138 templates/backoffice/book_author_edit.html:24
+#: templates/backoffice/book_book.html:33
+msgid "Editorial"
+msgstr ""
+
+#: book/models.py:142
+msgid "The editorial that printed and released the book."
+msgstr ""
+
+#: book/models.py:146
 msgid "Summary"
 msgstr ""
 
-#: book/models.py:60
+#: book/models.py:149
 msgid "Book summary about its content and why should buy it."
 msgstr ""
 
-#: book/models.py:64
+#: book/models.py:153
 msgid "Added at"
 msgstr ""
 
-#: book/models.py:69 templates/backoffice/home.html:40
+#: finance/models.py:45
+msgid "Purchased at"
+msgstr ""
+
+#: finance/models.py:46
+msgid "The pucharse operation date."
+msgstr ""
+
+#: finance/models.py:50 templates/backoffice/finance_purchase.html:31
+#: templates/backoffice/home.html:40 templates/backoffice/inventory.html:40
 msgid "Price"
 msgstr ""
 
-#: book/models.py:73
-msgid "The book sell price."
+#: finance/models.py:53
+msgid "The purchase price."
 msgstr ""
 
-#: book/models.py:77 templates/backoffice/home.html:39
+#: finance/models.py:80 templates/backoffice/home.html:39
+#: templates/backoffice/inventory.html:39
 msgid "Quantity"
 msgstr ""
 
-#: book/models.py:79
-msgid "How many copies of this book we have."
+#: finance/models.py:82
+msgid "How many items came in the purchase."
 msgstr ""
 
-#: l4capitulos/settings/base.py:79
+#: l4capitulos/settings/base.py:85
 msgid "Spanish"
 msgstr ""
 
-#: l4capitulos/settings/base.py:80
+#: l4capitulos/settings/base.py:86
 msgid "English"
 msgstr ""
 
@@ -89,24 +185,170 @@ msgstr ""
 msgid "Backoffice"
 msgstr ""
 
-#: templates/backoffice/home.html:4 templates/backoffice/home.html.py:7
-#: templates/backoffice/sidebar.html:4
-msgid "Dashboard"
+#: templates/backoffice/book_author.html:7
+msgid "Search authors"
 msgstr ""
 
-#: templates/backoffice/home.html:12
+#: templates/backoffice/book_author.html:14
+msgid "Add author"
+msgstr ""
+
+#: templates/backoffice/book_author.html:21
+#, python-format
+msgid ""
+"\n"
+"                Search results <small>%(count)s author(s)</small>\n"
+"            "
+msgstr ""
+
+#: templates/backoffice/book_author.html:32
+#: templates/backoffice/book_author_edit.html:25
+#: templates/backoffice/book_book.html:34
+#: templates/backoffice/finance_purchase.html:32
+msgid "Actions"
+msgstr ""
+
+#: templates/backoffice/book_author.html:43
+#: templates/backoffice/book_author_edit.html:16
+#: templates/backoffice/book_book.html:4 templates/backoffice/sidebar.html:6
+msgid "Books"
+msgstr ""
+
+#: templates/backoffice/book_author.html:46
+msgid "Edit"
+msgstr ""
+
+#: templates/backoffice/book_author.html:49
+msgid "Delete"
+msgstr ""
+
+#: templates/backoffice/book_author_add.html:4
+msgid "Add an author"
+msgstr ""
+
+#: templates/backoffice/book_author_add.html:7
+msgid "New author"
+msgstr ""
+
+#: templates/backoffice/book_author_edit.html:4
+msgid "Edit an author"
+msgstr ""
+
+#: templates/backoffice/book_author_edit.html:8
+#, python-format
+msgid ""
+"\n"
+"            Edit %(author_name)s\n"
+"        "
+msgstr ""
+
+#: templates/backoffice/book_book.html:7
+msgid "Search books"
+msgstr ""
+
+#: templates/backoffice/book_book.html:14
+msgid "Add book"
+msgstr ""
+
+#: templates/backoffice/book_book.html:21
+#, python-format
+msgid ""
+"\n"
+"                Search results <small>%(count)s book(s)</small>\n"
+"            "
+msgstr ""
+
+#: templates/backoffice/book_book_add.html:4
+msgid "Add a book"
+msgstr ""
+
+#: templates/backoffice/book_book_add.html:7
+msgid "New book"
+msgstr ""
+
+#: templates/backoffice/book_book_edit.html:4
+msgid "Edit a book"
+msgstr ""
+
+#: templates/backoffice/book_book_edit.html:7
+msgid "Edit book"
+msgstr ""
+
+#: templates/backoffice/commons_delete.html:4
+msgid "Deleting {{ model }}"
+msgstr ""
+
+#: templates/backoffice/commons_delete.html:8
+#, python-format
+msgid ""
+"\n"
+"        Deleting instance of %(model)s\n"
+"    "
+msgstr ""
+
+#: templates/backoffice/finance_purchase.html:4
+msgid "Purchases"
+msgstr ""
+
+#: templates/backoffice/finance_purchase.html:7
+msgid "Search purchases"
+msgstr ""
+
+#: templates/backoffice/finance_purchase.html:14
+msgid "Add purchase"
+msgstr ""
+
+#: templates/backoffice/finance_purchase.html:21
+#, python-format
+msgid ""
+"\n"
+"                Search results <small>%(count)s purchase(s)</small>\n"
+"            "
+msgstr ""
+
+#: templates/backoffice/finance_purchase.html:30
+msgid "Date"
+msgstr ""
+
+#: templates/backoffice/finance_purchase_add.html:4
+msgid "Add a purchase"
+msgstr ""
+
+#: templates/backoffice/finance_purchase_add.html:7
+msgid "New purchase"
+msgstr ""
+
+#: templates/backoffice/finance_purchase_edit.html:4
+msgid "Edit a purchase"
+msgstr ""
+
+#: templates/backoffice/finance_purchase_edit.html:7
+msgid "Edit purchase"
+msgstr ""
+
+#: templates/backoffice/home.html:4 templates/backoffice/home.html.py:7
+#: templates/backoffice/sidebar.html:4
+msgid "Home"
+msgstr ""
+
+#: templates/backoffice/home.html:12 templates/backoffice/inventory.html:12
 msgid "Books available"
 msgstr ""
 
-#: templates/backoffice/home.html:17 templates/backoffice/home.html.py:22
-#: templates/backoffice/home.html:27
+#: templates/backoffice/home.html:22
+msgid "Purchases made"
+msgstr ""
+
+#: templates/backoffice/home.html:27 templates/backoffice/inventory.html:17
+#: templates/backoffice/inventory.html:22
+#: templates/backoffice/inventory.html:27
 msgid "Books selled"
 msgstr ""
 
-#: templates/backoffice/home.html:32
+#: templates/backoffice/home.html:32 templates/backoffice/inventory.html:32
 msgid "Book inventory"
 msgstr ""
 
-#: templates/backoffice/sidebar.html:5
-msgid "Inventory"
+#: templates/backoffice/inventory.html:4 templates/backoffice/inventory.html:7
+msgid "Dashboard"
 msgstr ""

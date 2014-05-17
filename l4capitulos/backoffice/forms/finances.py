@@ -17,16 +17,7 @@ from crispy_forms.layout import Layout, Fieldset, ButtonHolder, Submit, Button, 
 from finance.models import Purchase
 
 
-class PurchaseForm(forms.Form):
-
-    date = forms.DateField(
-        required=True,
-    )
-
-    price = forms.DecimalField(
-        widget=forms.TextInput(attrs={"placeholder": _("Price")}),
-        required=True,
-    )
+class PurchaseForm(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
         super(PurchaseForm, self).__init__(*args, **kwargs)
@@ -77,6 +68,7 @@ class PurchaseSearchForm(forms.Form):
     def __init__(self, *args, **kwargs):
         super(PurchaseSearchForm, self).__init__(*args, **kwargs)
         self.helper = FormHelper()
+        self.helper.form_method = 'get'
         self.helper.form_class = 'form-inline'
         self.helper.layout = Layout(
             Div(

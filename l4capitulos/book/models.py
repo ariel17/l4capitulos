@@ -11,6 +11,29 @@ from django.db import models
 from django.utils.translation import ugettext as _
 
 
+class AuthorManager(models.Manager):
+    """
+    Custom manager for author model instances.
+    """
+    def search(self, *args, **kwargs):
+        """
+        Search for possible matchings on author's fields.
+        """
+        authors = self.all()
+
+        if 'first_name' in kwargs:
+            first_name = kwargs['first_name'].strip()
+            if first_name:
+                authors = authors.filter(first_name__icontains=first_name)
+
+        if 'last_name' in kwargs:
+            last_name = kwargs['last_name'].strip()
+            if last_name:
+                authors = authors.filter(last_name__icontains=last_name)
+
+        return authors
+
+
 class Author(models.Model):
     """
     A person that writes books.
@@ -29,6 +52,8 @@ class Author(models.Model):
         help_text=_("The author's last name.")
     )
 
+    objects = AuthorManager()
+
     def __unicode__(self):
         return unicode(self.get_full_name())
 
@@ -39,6 +64,45 @@ class Author(models.Model):
         full_name = u"%s %s" % (self.first_name, self.last_name)
         full_name.strip()
         return full_name
+
+
+class BookManager(models.Manager):
+    """
+    Custom manager for book model instances.
+    """
+    def search(self, *args, **kwargs):
+        """
+        Searches a book in filtering by indicated parameters.
+        """
+        books = self.all()
+
+        if 'title' in kwargs:
+            title = kwargs['title'].strip()
+            if title:
+                books = books.filter(title__icontains=title)
+
+        if 'authors' in kwargs:
+            for author in kwargs['authors'].split(' '):
+                author = author.strip()
+                if author:
+                    books = books.filter(authors__last_name__icontains=author)
+
+        if 'isbn' in kwargs:
+            isbn = kwargs['isbn'].strip()
+            if isbn:
+                books = books.filter(isbn__icontains=isbn)
+
+        # added_from
+        # added_to
+        # published_from
+        # published_to
+
+        if 'editorial' in kwargs:
+            editorial = kwargs['editorial'].strip()
+            if editorial:
+                books = books.filter(editorial__icontains=editorial)
+
+        return books
 
 
 class Book(models.Model):
@@ -89,6 +153,8 @@ class Book(models.Model):
         blank=True,
         null=True,
     )
+
+    objects = BookManager()
 
     def __unicode__(self):
         return unicode(self.title)

@@ -8,7 +8,20 @@
     
     {% crispy form %}
 
+    <div class="row">
+        <div class="col-md-12 padded-12">
+            <a type="button" class="btn btn-default btn-sm" href="{% url "backoffice_book_book_add" %}">
+                <span class="glyphicon glyphicon-plus"></span> {% trans "Add book" %}
+            </a>
+        </div>
+    </div>
+
     {% if books %}
+        <h2 class="sub-header">
+            {% blocktrans with count=books.count %}
+                Search results <small>{{ count }} book(s)</small>
+            {% endblocktrans %}
+        </h2>
         <div class="table-responsive">
           <table class="table table-striped">
             <thead>
@@ -26,7 +39,11 @@
                     <tr>
                         <td>{{ book.pk }}</td>
                         <td>{{ book.title }}</td>
-                        <td>Author1, Author2</td>
+                        <td>
+                            {% for author in book.authors.all %}
+                                <a href="{% url "backoffice_book_author_edit" author.pk %}">{{ author.get_full_name }}</a>{% if not forloop.last %},{% endif %}
+                            {% endfor %}
+                        </td>
                         <td>{{ book.published_at }}</td>
                         <td>{{ book.editorial }}</td>
                         <td>

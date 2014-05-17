@@ -8,7 +8,20 @@
     
     {% crispy form %}
 
+    <div class="row">
+        <div class="col-md-12 padded-12">
+            <a type="button" class="btn btn-default btn-sm" href="{% url "backoffice_finance_purchase_add" %}">
+                <span class="glyphicon glyphicon-plus"></span> {% trans "Add purchase" %}
+            </a>
+        </div>
+    </div>
+
     {% if purchases %}
+        <h2 class="sub-header">
+            {% blocktrans with count=purchases.count %}
+                Search results <small>{{ count }} purchase(s)</small>
+            {% endblocktrans %}
+        </h2>
         <div class="table-responsive">
           <table class="table table-striped">
             <thead>
