@@ -18,7 +18,6 @@ class Purchase(models.Model):
 
     date = models.DateField(
         _('Purchased at'),
-        auto_now=True,
         help_text=_('The pucharse operation date.')
     )
 
@@ -30,8 +29,8 @@ class Purchase(models.Model):
     )
 
     def __unicode__(self):
-        return u"#%d@%s: %d item(s) at $ %s" % (
-            self.pk, self.date, self.total_items, self.price
+        return u"#%d@%s at $ %s" % (
+            self.pk, self.date, self.price
         )
 
     def get_unit_price(self):
