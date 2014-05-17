@@ -17,15 +17,24 @@
   "install": {
     "path": {
       "css": "l4capitulos/assets/css",
-      "js": "l4capitulos/assets/js"
+      "js": "l4capitulos/assets/js",
+      "map": "l4capitulos/assets/js",
+      "eot": "l4capitulos/assets/fonts",
+      "ttf": "l4capitulos/assets/fonts",
+      "svg": "l4capitulos/assets/fonts"
     },
     "sources": {
       "bootstrap": [
         "bower_components/bootstrap/dist/css/bootstrap.min.css",
-        "bower_components/bootstrap/dist/js/bootstrap.min.js"
+        "bower_components/bootstrap/dist/js/bootstrap.min.js",
+        "bower_components/bootstrap/dist/fonts/glyphicons-halflings-regular.eot",
+        "bower_components/bootstrap/dist/fonts/glyphicons-halflings-regular.ttf",
+        "bower_components/bootstrap/dist/fonts/glyphicons-halflings-regular.svg",
+        "bower_components/bootstrap/dist/fonts/glyphicons-halflings-regular.woff"
       ],
       "jquery": [
-        "bower_components/jquery/dist/jquery.min.js"
+        "bower_components/jquery/dist/jquery.min.js",
+        "bower_components/jquery/dist/jquery.min.map"
       ],
       "bootstrap-datepicker": [
         "bower_components/bootstrap-datepicker/js/bootstrap-datepicker.js"

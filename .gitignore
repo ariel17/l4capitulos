@@ -8,6 +8,7 @@
 bower_components
 jquery*
 bootstrap*
+fonts
 
 # NodeJS modules
 node_modules
