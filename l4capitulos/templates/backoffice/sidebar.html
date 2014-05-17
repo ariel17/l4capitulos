@@ -1,7 +1,8 @@
 {% load i18n %}
 <div class="col-sm-3 col-md-2 sidebar">
   <ul class="nav nav-sidebar">
-      <li class="active"><a href="{% url "backoffice_home" %}">{% trans "Dashboard" %}</a></li>
+      <li class="active"><a href="{% url "backoffice_home" %}">{% trans "Home" %}</a></li>
+      <li><a href="{% url "backoffice_book_author" %}">{% trans "Authors" %}</a></li>
       <li><a href="{% url "backoffice_book_book" %}">{% trans "Books" %}</a></li>
   </ul>
   <ul class="nav nav-sidebar">

@@ -7,9 +7,8 @@
 <h1 class="page-header">{% trans "Search books" %}</h1>
     
     {% crispy form %}
-    
+
     {% if books %}
-        <h2 class="sub-header">{% trans "Books" %}</h2>
         <div class="table-responsive">
           <table class="table table-striped">
             <thead>
@@ -17,10 +16,9 @@
                 <th>#</th>
                 <th>{% trans "Title" %}</th>
                 <th>{% trans "Authors" %}</th>
-                <th>{% trans "ISBN" %}</th>
                 <th>{% trans "Published at" %}</th>
                 <th>{% trans "Editorial" %}</th>
-                <th>{% trans "Added at" %}</th>
+                <th>{% trans "Actions" %}</th>
               </tr>
             </thead>
             <tbody>
@@ -28,11 +26,17 @@
                     <tr>
                         <td>{{ book.pk }}</td>
                         <td>{{ book.title }}</td>
-                        <td>{{ book.authors }}</td>
-                        <td>{{ book.isbn }}</td>
+                        <td>Author1, Author2</td>
                         <td>{{ book.published_at }}</td>
                         <td>{{ book.editorial }}</td>
-                        <td>{{ book.added_at }}</td>
+                        <td>
+                            <a type="button" class="btn btn-default btn-xs" href="{% url "backoffice_book_book_edit" book.pk %}">
+                                <span class="glyphicon glyphicon-pencil"></span> Edit
+                            </a>
+                            <a type="button" class="btn btn-default btn-xs" href="{% url "backoffice_book_book_delete" book.pk %}">
+                                <span class="glyphicon glyphicon-remove"></span> Delete
+                            </a>
+                        </td>
                     </tr>
                 {% endfor %}
             </tbody>

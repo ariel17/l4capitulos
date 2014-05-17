@@ -1,0 +1,45 @@
+{% extends "backoffice/base.html" %}
+{% load i18n crispy_forms_tags %}
+
+{% block "title" %}{% trans "Authors" %}{% endblock %}
+
+{% block "content" %}
+<h1 class="page-header">{% trans "Search authors" %}</h1>
+    
+    {% crispy form %}
+
+    {% if authors %}
+        <div class="table-responsive">
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>{% trans "First name" %}</th>
+                <th>{% trans "Last name" %}</th>
+                <th>{% trans "Actions" %}</th>
+              </tr>
+            </thead>
+            <tbody>
+                {% for author in authors %}
+                    <tr>
+                        <td>{{ author.pk }}</td>
+                        <td>{{ author.first_name }}</td>
+                        <td>{{ author.last_name }}</td>
+                        <td>
+                            <a type="button" class="btn btn-default btn-xs" href="{% url "backoffice_book_book" %}?authors={{ author.get_full_name|urlencode }}">
+                                <span class="glyphicon glyphicon-search"></span> Books
+                            </a>
+                            <a type="button" class="btn btn-default btn-xs" href="{% url "backoffice_book_author_edit" author.pk %}">
+                                <span class="glyphicon glyphicon-pencil"></span> Edit
+                            </a>
+                            <a type="button" class="btn btn-default btn-xs" href="{% url "backoffice_book_author_delete" author.pk %}">
+                                <span class="glyphicon glyphicon-remove"></span> Delete
+                            </a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+          </table>
+        </div>
+    {% endif %}        
+{% endblock "content" %}    

@@ -1,0 +1,42 @@
+{% extends "backoffice/base.html" %}
+{% load i18n crispy_forms_tags %}
+
+{% block "title" %}{% trans "Purchases" %}{% endblock %}
+
+{% block "content" %}
+<h1 class="page-header">{% trans "Search purchases" %}</h1>
+    
+    {% crispy form %}
+
+    {% if purchases %}
+        <div class="table-responsive">
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>{% trans "Date" %}</th>
+                <th>{% trans "Price" %}</th>
+                <th>{% trans "Actions" %}</th>
+              </tr>
+            </thead>
+            <tbody>
+                {% for purchase in purchases %}
+                    <tr>
+                        <td>{{ purchase.pk }}</td>
+                        <td>{{ purchase.date }}</td>
+                        <td>{{ purchase.price }}</td>
+                        <td>
+                            <a type="button" class="btn btn-default btn-xs" href="{% url "backoffice_finance_purchase_edit" purchase.pk %}">
+                                <span class="glyphicon glyphicon-pencil"></span> Edit
+                            </a>
+                            <a type="button" class="btn btn-default btn-xs" href="{% url "backoffice_finance_purchase_delete" purchase.pk %}">
+                                <span class="glyphicon glyphicon-remove"></span> Delete
+                            </a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+          </table>
+        </div>
+    {% endif %}        
+{% endblock "content" %}    
