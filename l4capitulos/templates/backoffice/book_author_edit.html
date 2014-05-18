@@ -10,6 +10,12 @@
         {% endblocktrans %}
     </h1>
 
+    {% if saved %}
+        <div class="alert alert-success">
+            {% trans "The author information has been updated :)" %}
+        </div>
+    {% endif %}
+
     {% crispy form %}
 
     {% if books %}

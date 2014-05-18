@@ -1,0 +1,21 @@
+{% extends "backoffice/base.html" %}
+{% load i18n crispy_forms_tags %}
+
+{% block "title" %}{% trans "Edit a category" %}{% endblock %}
+
+{% block "content" %}
+    <h1 class="page-header">
+        {% blocktrans with category_name=category.name %}
+            Edit {{ category_name }}
+        {% endblocktrans %}
+    </h1>
+
+    {% if saved %}
+        <div class="alert alert-success">
+            {% trans "The category information has been updated :)" %}
+        </div>
+    {% endif %}
+
+    {% crispy form %}
+
+{% endblock "content" %}    

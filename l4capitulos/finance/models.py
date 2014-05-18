@@ -67,6 +67,12 @@ class Purchase(models.Model):
         total_quantity = sum([i.quantity for i in self.item_set.all()])
         return self.price / total_quantity
 
+    def get_total_units(self):
+        """
+        Counts the total units through all items.
+        """
+        return sum([i.quantity for i in self.item_set.all()])
+
 
 class Item(models.Model):
     """

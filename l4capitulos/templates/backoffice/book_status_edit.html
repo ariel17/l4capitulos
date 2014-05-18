@@ -1,0 +1,21 @@
+{% extends "backoffice/base.html" %}
+{% load i18n crispy_forms_tags %}
+
+{% block "title" %}{% trans "Edit an status" %}{% endblock %}
+
+{% block "content" %}
+    <h1 class="page-header">
+        {% blocktrans with status_name=status.name %}
+            Edit {{ status_name }}
+        {% endblocktrans %}
+    </h1>
+
+    {% if saved %}
+        <div class="alert alert-success">
+            {% trans "The status information has been updated :)" %}
+        </div>
+    {% endif %}
+
+    {% crispy form %}
+
+{% endblock "content" %}    

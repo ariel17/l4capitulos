@@ -1,12 +1,50 @@
 {% load i18n %}
 <div class="col-sm-3 col-md-2 sidebar">
   <ul class="nav nav-sidebar">
-      <li class="active"><a href="{% url "backoffice_home" %}">{% trans "Home" %}</a></li>
-      <li><a href="{% url "backoffice_book_author" %}">{% trans "Authors" %}</a></li>
-      <li><a href="{% url "backoffice_book_book" %}">{% trans "Books" %}</a></li>
+      <li class="active">
+          <a href="{% url "backoffice_home" %}">
+              <span class="glyphicon glyphicon-home"></span>
+              {% trans "Home" %}
+          </a>
+      </li>
+      <li>
+          <a href="{% url "backoffice_book_author" %}">
+              <span class="glyphicon glyphicon-user"></span>
+              {% trans "Authors" %}
+          </a>
+      </li>
+      <li>
+          <a href="{% url "backoffice_book_category" %}">
+              <span class="glyphicon glyphicon-th"></span>
+              {% trans "Categories" %}
+          </a>
+      </li>
+      <li>
+          <a href="{% url "backoffice_book_status" %}">
+              <span class="glyphicon glyphicon-ok-circle"></span>
+              {% trans "Statuses" %}
+          </a>
+      </li>
+      <li>
+          <a href="{% url "backoffice_book_book" %}">
+              <span class="glyphicon glyphicon-book"></span>
+              {% trans "Books" %}
+          </a>
+      </li>
   </ul>
+
   <ul class="nav nav-sidebar">
-      <li><a href="{% url "backoffice_finance_purchase" %}">Purchases</a></li>
-    <li><a href="">Sells</a></li>
-  </ul-->
+      <li>
+        <a href="{% url "backoffice_finance_purchase" %}">
+            <span class="glyphicon glyphicon-circle-arrow-down"></span>
+            {% trans "Purchases" %}
+        </a>
+      </li>
+      <li>
+        <a href="#">
+            <span class="glyphicon glyphicon-circle-arrow-up"></span>
+            {% trans "Sells" %}
+        </a>
+      </li>
+  </ul>
 </div>

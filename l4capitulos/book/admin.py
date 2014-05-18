@@ -8,9 +8,8 @@ __author__ = "Ariel Gerardo Rios (ariel.gerardo.rios@gmail.com)"
 
 
 from django.contrib import admin
-from django.utils.translation import ugettext as _
 
-from .models import Author, Book
+from .models import Author, Book, Category, Status
 
 
 class AuthorAdmin(admin.ModelAdmin):
@@ -25,5 +24,17 @@ class BookAdmin(admin.ModelAdmin):
     list_display_links = ('title', 'editorial')
 
 
+class CategoryAdmin(admin.ModelAdmin):
+    fields = ('name', )
+    list_display = ('name', )
+
+
+class StatusAdmin(admin.ModelAdmin):
+    fields = ('name', )
+    list_display = ('name', )
+
+
 admin.site.register(Author, AuthorAdmin)
 admin.site.register(Book, BookAdmin)
+admin.site.register(Category, CategoryAdmin)
+admin.site.register(Status, StatusAdmin)

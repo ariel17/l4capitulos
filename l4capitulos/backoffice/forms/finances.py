@@ -14,7 +14,7 @@ from crispy_forms.bootstrap import FormActions
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Layout, Fieldset, ButtonHolder, Submit, Button, Div, Field
 
-from finance.models import Purchase
+from finance.models import Purchase, Item
 
 
 class PurchaseForm(forms.ModelForm):
@@ -92,3 +92,32 @@ class PurchaseSearchForm(forms.Form):
 
     class Meta:
         model = Purchase
+
+
+class ItemForm(forms.ModelForm):
+
+    def __init__(self, *args, **kwargs):
+        super(ItemForm, self).__init__(*args, **kwargs)
+        self.helper = FormHelper()
+        self.helper.layout = Layout(
+            Fieldset(
+                'Item information',
+                'book',
+                'quantity',
+            ),
+            ButtonHolder(
+                Button('cancel', _('Cancel'), css_class='btn btn-default'),
+
+                Submit('save_and_close', _('Save and close'),
+                       css_class='button white'),
+
+                Submit('save_and_new', _('Save and new'),
+                       css_class='button white'),
+
+                Submit('save', _('Save'), css_class='button white'),
+            )
+        )
+
+    class Meta:
+        model = Item
+        exclude = ['purchase']

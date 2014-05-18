@@ -1,0 +1,50 @@
+{% extends "backoffice/base.html" %}
+{% load i18n crispy_forms_tags %}
+
+{% block "title" %}{% trans "Statuses" %}{% endblock %}
+
+{% block "content" %}
+<h1 class="page-header">{% trans "Statuses" %}</h1>
+
+    <div class="row">
+        <div class="col-md-12 padded-12">
+            <a type="button" class="btn btn-default btn-sm" href="{% url "backoffice_book_status_add" %}">
+                <span class="glyphicon glyphicon-plus"></span> {% trans "Add status" %}
+            </a>
+        </div>
+    </div>
+    
+    {% if statuses %}
+        <div class="table-responsive">
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>{% trans "Name" %}</th>
+                <th>{% trans "Actions" %}</th>
+              </tr>
+            </thead>
+            <tbody>
+                {% for status in statuses %}
+                    <tr>
+                        <td>{{ status.pk }}</td>
+                        <td>{{ status.name }}</td>
+                        <td>
+                            <a type="button" class="btn btn-default btn-xs" href="{% url "backoffice_book_book" %}?status={{ status.name|urlencode }}">
+                                <span class="glyphicon glyphicon-search"></span> {% trans "Books" %}
+                            </a>
+                            <a type="button" class="btn btn-default btn-xs" href="{% url "backoffice_book_status_edit" status.pk %}">
+                                <span class="glyphicon glyphicon-pencil"></span> {% trans "Edit" %}
+                            </a>
+                            <a type="button" class="btn btn-default btn-xs" href="{% url "backoffice_book_status_delete" status.pk %}">
+                                <span class="glyphicon glyphicon-remove"></span> {% trans "Delete" %}
+                            </a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+          </table>
+        </div>
+    {% endif %}        
+
+{% endblock "content" %}    

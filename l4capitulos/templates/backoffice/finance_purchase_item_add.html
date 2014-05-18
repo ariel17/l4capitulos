@@ -1,14 +1,14 @@
 {% extends "backoffice/base.html" %}
 {% load i18n crispy_forms_tags %}
 
-{% block "title" %}{% trans "Add a book" %}{% endblock %}
+{% block "title" %}{% trans "Add an item" %}{% endblock %}
 
 {% block "content" %}
-<h1 class="page-header">{% trans "New book" %}</h1>
+<h1 class="page-header">{% trans "New item" %}</h1>
 
 {% if saved %}
     <div class="alert alert-success">
-        {% trans "Congratulations! A new book has been added :)" %}
+        {% trans "A new item has been added :)" %}
     </div>
 {% endif %}
 

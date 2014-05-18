@@ -14,7 +14,7 @@ from crispy_forms.bootstrap import FormActions
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Layout, Fieldset, ButtonHolder, Submit, Button, Div, Field, HTML
 
-from book.models import Author, Book
+from book.models import Author, Book, Category, Status
 
 
 class AuthorForm(forms.ModelForm):
@@ -80,6 +80,60 @@ class AuthorSearchForm(forms.Form):
         model = Author
 
 
+class CategoryForm(forms.ModelForm):
+
+    def __init__(self, *args, **kwargs):
+        super(CategoryForm, self).__init__(*args, **kwargs)
+        self.helper = FormHelper()
+        self.helper.layout = Layout(
+            Fieldset(
+                'Category description',
+                'name',
+            ),
+            ButtonHolder(
+                Button('cancel', _('Cancel'), css_class='btn btn-default'),
+
+                Submit('save_and_close', _('Save and close'),
+                       css_class='button white'),
+
+                Submit('save_and_new', _('Save and new'),
+                       css_class='button white'),
+
+                Submit('save', _('Save'), css_class='button white'),
+            )
+        )
+
+    class Meta:
+        model = Category
+
+
+class StatusForm(forms.ModelForm):
+
+    def __init__(self, *args, **kwargs):
+        super(StatusForm, self).__init__(*args, **kwargs)
+        self.helper = FormHelper()
+        self.helper.layout = Layout(
+            Fieldset(
+                'Status description',
+                'name',
+            ),
+            ButtonHolder(
+                Button('cancel', _('Cancel'), css_class='btn btn-default'),
+
+                Submit('save_and_close', _('Save and close'),
+                       css_class='button white'),
+
+                Submit('save_and_new', _('Save and new'),
+                       css_class='button white'),
+
+                Submit('save', _('Save'), css_class='button white'),
+            )
+        )
+
+    class Meta:
+        model = Status
+
+
 class BookForm(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
@@ -91,6 +145,8 @@ class BookForm(forms.ModelForm):
                 'title',
                 'authors',
                 'summary',
+                'category',
+                'status',
             ),
             Fieldset(
                 'Publication information',
@@ -155,6 +211,16 @@ class BookSearchForm(forms.Form):
         required=False,
     )
 
+    category = forms.CharField(
+        widget=forms.TextInput(attrs={"placeholder": _("Category")}),
+        required=False,
+    )
+
+    status = forms.CharField(
+        widget=forms.TextInput(attrs={"placeholder": _("Status")}),
+        required=False,
+    )
+
     def __init__(self, *args, **kwargs):
         super(BookSearchForm, self).__init__(*args, **kwargs)
         self.helper = FormHelper()
@@ -166,6 +232,8 @@ class BookSearchForm(forms.Form):
                 Field("isbn"),
                 Field("added_from"),
                 Field("added_to"),
+                Field("category"),
+                Field("status"),
                 css_class="row group-padding-12"
             ),
 

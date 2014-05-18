@@ -13,9 +13,6 @@ from django.contrib import admin
 admin.autodiscover()
 
 urlpatterns = patterns('',
-    # Examples:
-    # url(r'^$', 'l4capitulos.views.home', name='home'),
-    # url(r'^blog/', include('blog.urls')),
 
     url(r'^admin/', include(admin.site.urls)),
 
@@ -27,13 +24,43 @@ urlpatterns = patterns('',
     url(r'^backoffice/book/author/add/$', 'backoffice.views.book_author_add',
         name='backoffice_book_author_add'),
 
-    url(r'^backoffice/book/author/edit/(?P<author_id>\d+)/$',
+    url(r'^backoffice/book/author/(?P<author_id>\d+)/edit/$',
         'backoffice.views.book_author_edit',
         name='backoffice_book_author_edit'),
 
-    url(r'^backoffice/book/author/delete/(?P<author_id>\d+)/$',
+    url(r'^backoffice/book/author/(?P<author_id>\d+)/delete/$',
         'backoffice.views.book_author_delete',
         name='backoffice_book_author_delete'),
+
+    url(r'^backoffice/book/category/$', 'backoffice.views.book_category',
+        name='backoffice_book_category'),
+
+    url(r'^backoffice/book/category/add/$',
+        'backoffice.views.book_category_add',
+        name='backoffice_book_category_add'),
+
+    url(r'^backoffice/book/category/(?P<category_id>\d+)/edit/$',
+        'backoffice.views.book_category_edit',
+        name='backoffice_book_category_edit'),
+
+    url(r'^backoffice/book/category/(?P<category_id>\d+)/delete/$',
+        'backoffice.views.book_category_delete',
+        name='backoffice_book_category_delete'),
+
+    url(r'^backoffice/book/status/$', 'backoffice.views.book_status',
+        name='backoffice_book_status'),
+
+    url(r'^backoffice/book/status/add/$',
+        'backoffice.views.book_status_add',
+        name='backoffice_book_status_add'),
+
+    url(r'^backoffice/book/status/(?P<status_id>\d+)/edit/$',
+        'backoffice.views.book_status_edit',
+        name='backoffice_book_status_edit'),
+
+    url(r'^backoffice/book/status/(?P<status_id>\d+)/delete/$',
+        'backoffice.views.book_status_delete',
+        name='backoffice_book_status_delete'),
 
     url(r'^backoffice/book/book/$', 'backoffice.views.book_book',
         name='backoffice_book_book'),
@@ -41,10 +68,10 @@ urlpatterns = patterns('',
     url(r'^backoffice/book/book/add/$', 'backoffice.views.book_book_add',
         name='backoffice_book_book_add'),
 
-    url(r'^backoffice/book/book/edit/(?P<book_id>\d+)/$',
+    url(r'^backoffice/book/book/(?P<book_id>\d+)/edit/$',
         'backoffice.views.book_book_edit', name='backoffice_book_book_edit'),
 
-    url(r'^backoffice/book/book/delete/(?P<book_id>\d+)/$',
+    url(r'^backoffice/book/book/(?P<book_id>\d+)/delete/$',
         'backoffice.views.book_book_delete',
         name='backoffice_book_book_delete'),
 
@@ -55,11 +82,23 @@ urlpatterns = patterns('',
         'backoffice.views.finance_purchase_add',
         name='backoffice_finance_purchase_add'),
 
-    url(r'^backoffice/finance/purchase/edit/(?P<purchase_id>\d+)/$',
+    url(r'^backoffice/finance/purchase/(?P<purchase_id>\d+)/edit/$',
         'backoffice.views.finance_purchase_edit',
         name='backoffice_finance_purchase_edit'),
 
-    url(r'^backoffice/finance/purchase/(?P<purchase_id>\d+)/$',
+    url(r'^backoffice/finance/purchase/(?P<purchase_id>\d+)/delete/$',
         'backoffice.views.finance_purchase_delete',
         name='backoffice_finance_purchase_delete'),
+
+    url(r'^backoffice/finance/purchase/(?P<purchase_id>\d+)/item/add/$',
+        'backoffice.views.finance_item_add',
+        name='backoffice_finance_item_add'),
+
+    url(r'^backoffice/finance/purchase/(?P<purchase_id>\d+)/item/'
+        '(?P<item_id>\d+)/edit/$', 'backoffice.views.finance_item_edit',
+        name='backoffice_finance_item_edit'),
+
+    url(r'^backoffice/finance/purchase/(?P<purchase_id>\d+)/delete/'
+        '(?P<item_id>\d+)/edit/$', 'backoffice.views.finance_item_delete',
+        name='backoffice_finance_item_delete'),
 )

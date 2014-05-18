@@ -102,7 +102,39 @@ class BookManager(models.Manager):
             if editorial:
                 books = books.filter(editorial__icontains=editorial)
 
+        if 'category' in kwargs:
+            category = kwargs['category'].strip()
+            if category:
+                books = books.filter(category__name__icontains=category)
+
+        if 'status' in kwargs:
+            status = kwargs['status'].strip()
+            if status:
+                books = books.filter(status__name__icontains=status)
+
         return books
+
+
+class Category(models.Model):
+    """
+    A book category for classifition.
+    """
+    name = models.CharField(
+        _('Name'),
+        max_length=50,
+        help_text=_('The category name.')
+    )
+
+
+class Status(models.Model):
+    """
+    A book status.
+    """
+    name = models.CharField(
+        _('Name'),
+        max_length=100,
+        help_text=_('The status name.')
+    )
 
 
 class Book(models.Model):
@@ -152,6 +184,16 @@ class Book(models.Model):
         auto_now=True,
         blank=True,
         null=True,
+    )
+
+    category = models.ForeignKey(
+        Category,
+        null=True
+    )
+
+    status = models.ForeignKey(
+        Status,
+        null=True
     )
 
     objects = BookManager()

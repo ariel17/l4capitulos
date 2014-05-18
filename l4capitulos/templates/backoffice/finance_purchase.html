@@ -29,6 +29,7 @@
                 <th>#</th>
                 <th>{% trans "Date" %}</th>
                 <th>{% trans "Price" %}</th>
+                <th>{% trans "Total units" %}</th>
                 <th>{% trans "Actions" %}</th>
               </tr>
             </thead>
@@ -38,6 +39,7 @@
                         <td>{{ purchase.pk }}</td>
                         <td>{{ purchase.date }}</td>
                         <td>{{ purchase.price }}</td>
+                        <td>{{ purchase.get_total_units }}</td>
                         <td>
                             <a type="button" class="btn btn-default btn-xs" href="{% url "backoffice_finance_purchase_edit" purchase.pk %}">
                                 <span class="glyphicon glyphicon-pencil"></span> Edit
