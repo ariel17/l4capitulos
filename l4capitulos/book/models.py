@@ -125,6 +125,9 @@ class Category(models.Model):
         help_text=_('The category name.')
     )
 
+    def __unicode__(self):
+        return unicode(self.name)
+
 
 class Status(models.Model):
     """
@@ -135,6 +138,9 @@ class Status(models.Model):
         max_length=100,
         help_text=_('The status name.')
     )
+
+    def __unicode__(self):
+        return unicode(self.name)
 
 
 class Book(models.Model):

@@ -10,12 +10,6 @@
         {% endblocktrans %}
     </h1>
 
-    {% if saved %}
-        <div class="alert alert-success">
-            {% trans "The category information has been updated :)" %}
-        </div>
-    {% endif %}
-
     {% crispy form %}
 
 {% endblock "content" %}    

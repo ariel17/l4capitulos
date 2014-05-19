@@ -112,3 +112,12 @@ CRISPY_TEMPLATE_PACK = 'bootstrap3'
 
 # Default settings for Backoffice
 BACKOFFICE_PROFILE_DEFAULT_LAST_ACTIVITY_ITEMS = 10
+
+
+from django.contrib.messages import constants as messages
+MESSAGE_TAGS = {
+    messages.INFO: 'info',
+    messages.SUCCESS: 'success',
+    messages.WARNING: 'warning',
+    messages.ERROR: 'danger',
+}

@@ -5,7 +5,7 @@
 
 {% block "content" %}
 <h1 class="page-header">{% trans "Search authors" %}</h1>
-    
+
     {% crispy form %}
 
     <div class="row">
@@ -29,6 +29,7 @@
                 <th>#</th>
                 <th>{% trans "First name" %}</th>
                 <th>{% trans "Last name" %}</th>
+                <th>{% trans "Books" %}</th>
                 <th>{% trans "Actions" %}</th>
               </tr>
             </thead>
@@ -38,6 +39,7 @@
                         <td>{{ author.pk }}</td>
                         <td>{{ author.first_name }}</td>
                         <td>{{ author.last_name }}</td>
+                        <td>{{ author.book_set.all.count }}</td>
                         <td>
                             <a type="button" class="btn btn-default btn-xs" href="{% url "backoffice_book_book" %}?authors={{ author.last_name|urlencode }}">
                                 <span class="glyphicon glyphicon-search"></span> {% trans "Books" %}

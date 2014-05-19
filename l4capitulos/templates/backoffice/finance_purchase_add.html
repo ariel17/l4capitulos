@@ -6,12 +6,6 @@
 {% block "content" %}
     <h1 class="page-header">{% trans "New purchase" %}</h1>
     
-    {% if saved %}
-        <div class="alert alert-success">
-            {% trans "A new purchase has been added :)" %}
-        </div>
-    {% endif %}
-    
     {% crispy form %}
     
     {% if purchase %}
