@@ -18,14 +18,6 @@ from book.models import Author, Book, Category, Status
 from finance.models import Purchase, Item
 
 
-MESSAGE_TAGS = {
-    messages.INFO: 'info',
-    messages.SUCCESS: 'success',
-    messages.WARNING: 'warning',
-    messages.ERROR: 'danger',
-}
-
-
 def home(request):
     """
     The home page.
@@ -130,7 +122,7 @@ def book_author_delete(request, author_id):
 
     if request.method == 'POST':
         author.delete()
-        messages.info(request, _('Author deleted.'))
+        messages.warning(request, _('Author deleted.'))
         return redirect('backoffice_book_author')
 
     return render(request, 'backoffice/commons_delete.html', {
@@ -216,11 +208,11 @@ def book_category_delete(request, category_id):
     """
     TODO
     """
-    category = get_object_or_404(Book, pk=category_id)
+    category = get_object_or_404(Category, pk=category_id)
 
     if request.method == 'POST':
         category.delete()
-        messages.info(request, _('Category deleted.'))
+        messages.warning(request, _('Category deleted.'))
         return redirect('backoffice_book_category')
 
     return render(request, 'backoffice/commons_delete.html', {
@@ -309,7 +301,7 @@ def book_status_delete(request, status_id):
 
     if request.method == 'POST':
         status.delete()
-        messages.info(request, _('Status deleted.'))
+        messages.warning(request, _('Status deleted.'))
         return redirect('backoffice_book_status')
 
     return render(request, 'backoffice/commons_delete.html', {
@@ -408,7 +400,7 @@ def book_book_delete(request, book_id):
 
     if request.method == 'POST':
         book.delete()
-        messages.info(request, _('Book deleted.'))
+        messages.warning(request, _('Book deleted.'))
         return redirect('backoffice_book_book')
 
     return render(request, 'backoffice/commons_delete.html', {
@@ -514,7 +506,7 @@ def finance_purchase_delete(request, purchase_id):
 
     if request.method == 'POST':
         purchase.delete()
-        messages.info(request, _('Purchase deleted.'))
+        messages.warning(request, _('Purchase deleted.'))
         return redirect('backoffice_finance_purchase')
 
     return render(request, 'backoffice/commons_delete.html', {
@@ -603,7 +595,7 @@ def finance_item_delete(request, purchase_id, item_id):
 
     if request.method == 'POST':
         item.delete()
-        messages.info(request, _('Item deleted.'))
+        messages.warning(request, _('Item deleted.'))
         return redirect('backoffice_finance_purchase', purchase_id=purchase_id)
 
     return render(request, 'backoffice/commons_delete.html', {
