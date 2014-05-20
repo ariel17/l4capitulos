@@ -28,7 +28,7 @@
                 {% for category in categories %}
                     <tr>
                         <td>{{ category.pk }}</td>
-                        <td>{{ category.name }}</td>
+                        <td>{{ category.get_full_name }}</td>
                         <td>
                             <a type="button" class="btn btn-default btn-xs" href="{% url "backoffice_book_book" %}?category={{ category.name|urlencode }}">
                                 <span class="glyphicon glyphicon-search"></span> {% trans "Books" %}

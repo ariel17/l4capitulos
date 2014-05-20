@@ -58,9 +58,9 @@
     <!-- Placed at the end of the document so the pages load faster -->
     <script src="{% static "js/jquery.min.js" %}"></script>
     <script src="{% static "js/bootstrap.min.js" %}"></script>
-    <script src="../../assets/js/docs.min.js"></script>
+    <script src="{% static "js/common.js" %}"></script>
 
-    {% block "footer_script" %}
-    {% endblock "footer_script" %}
+    {% block "footer" %}
+    {% endblock "footer" %}
   </body>
 </html>

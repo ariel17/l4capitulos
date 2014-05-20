@@ -24,7 +24,7 @@ class AuthorForm(forms.ModelForm):
         self.helper = FormHelper()
         self.helper.layout = Layout(
             Fieldset(
-                'Author information',
+                _('Author information'),
                 'first_name',
                 'last_name',
             ),
@@ -87,8 +87,12 @@ class CategoryForm(forms.ModelForm):
         self.helper = FormHelper()
         self.helper.layout = Layout(
             Fieldset(
-                'Category description',
+                _('Category description'),
                 'name',
+            ),
+            Fieldset(
+                _('Child of'),
+                'parent',
             ),
             ButtonHolder(
                 Button('cancel', _('Cancel'), css_class='btn btn-default'),
@@ -114,7 +118,7 @@ class StatusForm(forms.ModelForm):
         self.helper = FormHelper()
         self.helper.layout = Layout(
             Fieldset(
-                'Status description',
+                _('Status description'),
                 'name',
             ),
             ButtonHolder(
@@ -141,7 +145,7 @@ class BookForm(forms.ModelForm):
         self.helper = FormHelper()
         self.helper.layout = Layout(
             Fieldset(
-                'Book description',
+                _('Book description'),
                 'title',
                 'authors',
                 'summary',
@@ -149,7 +153,7 @@ class BookForm(forms.ModelForm):
                 'status',
             ),
             Fieldset(
-                'Publication information',
+                _('Publication information'),
                 'isbn',
                 'published_at',
                 'editorial',

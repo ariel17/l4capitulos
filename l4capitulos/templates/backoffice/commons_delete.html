@@ -4,14 +4,26 @@
 {% block "title" %}{% trans "Deleting {{ model }}" %}{% endblock %}
 
 {% block "content" %}
-<h1 class="page-header">
-    {% blocktrans %}
-        Deleting instance of {{ model }}
-    {% endblocktrans %}
-</h1>
-
-<h2>The {{ model }} <i>{{ obj }}</i> will be deleted. Are you sure?</h2>
-
-{% crispy form %}
+    <h1 class="page-header">
+        {% blocktrans %}
+            Deleting {{ model }}
+        {% endblocktrans %}
+    </h1>
     
+    <div class="alert alert-danger">
+        <strong>{% trans "Caution:" %}</strong>
+        {% blocktrans with model=model obj=obj %}
+            The {{ model }} <i>{{ obj }}</i> will be deleted. Are you sure?
+        {% endblocktrans %}
+    </div>
+    
+    {% crispy form %}
 {% endblock "content" %}    
+
+{% block "footer" %}
+    <script type="text/javascript">
+        $(function() {
+            set_goback("#button-id-no");
+        });
+    </script>
+{% endblock %}

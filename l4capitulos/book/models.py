@@ -119,14 +119,28 @@ class Category(models.Model):
     """
     A book category for classifition.
     """
+    parent = models.ForeignKey(
+        "self",
+        null=True
+    )
+
     name = models.CharField(
         _('Name'),
         max_length=50,
         help_text=_('The category name.')
     )
 
+    def get_full_name(self):
+        """
+        Returns the full category name with parent's names, separated by ">".
+        """
+        if self.parent is None:
+            return self.name
+
+        return "%s > %s" % (self.parent.get_full_name(), self.name)
+
     def __unicode__(self):
-        return unicode(self.name)
+        return unicode(self.get_full_name())
 
 
 class Status(models.Model):
