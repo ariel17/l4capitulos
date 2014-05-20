@@ -7,8 +7,11 @@ Description: Model definitions about books and related data.
 __author__ = "Ariel Gerardo Rios (ariel.gerardo.rios@gmail.com)"
 
 
+from django.conf import settings
 from django.db import models
 from django.utils.translation import ugettext as _
+
+from common.models import ImageModel
 
 
 class AuthorManager(models.Manager):
@@ -220,3 +223,25 @@ class Book(models.Model):
 
     def __unicode__(self):
         return unicode(self.title)
+
+
+class BookImage(ImageModel):
+    """
+    A book picture or image.
+    """
+    book = models.ForeignKey(Book)
+
+    image = models.ImageField(
+        _(u"Mixture image"),
+        upload_to=ImageModel.normalize_filename(settings.BOOK_IMAGES_PATH),
+        default=settings.IMAGES_DEFAULT,
+    )
+
+    primary = models.BooleanField(
+        _(u"Is primary"),
+        help_text=u"The image is the one that better describes the book.",
+        default=False,
+    )
+
+    def __unicode__(self):
+        return u"picture#%d@book#%d" % (self.pk, self.book.pk)

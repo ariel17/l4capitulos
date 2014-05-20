@@ -53,6 +53,7 @@ THIRD_PARTY_APPS = (
 PROJECT_APPS = (
     'backoffice',
     'book',
+    'common',
     'finance',
 )
 
@@ -121,3 +122,12 @@ MESSAGE_TAGS = {
     messages.WARNING: 'warning',
     messages.ERROR: 'danger',
 }
+
+
+# Common application configuration
+IMAGES_ROOT = "img"
+IMAGES_DEFAULT = os.path.join(IMAGES_ROOT, 'no-img.png')
+
+
+# Book application configuration
+BOOK_IMAGES_PATH = os.path.join(IMAGES_ROOT, 'book')

@@ -10,14 +10,14 @@ __author__ = "Ariel Gerardo Rios (ariel.gerardo.rios@gmail.com)"
 from django import forms
 from django.utils.translation import ugettext as _
 
-from crispy_forms.bootstrap import FormActions
 from crispy_forms.helper import FormHelper
-from crispy_forms.layout import Layout, Fieldset, ButtonHolder, Submit, Button, Div, Field, HTML
+from crispy_forms.layout import Layout, Fieldset, Div, Field
 
 from book.models import Author, Book, Category, Status
+from .commons import AddEditFormMixin, SearchFormMixin
 
 
-class AuthorForm(forms.ModelForm):
+class AuthorForm(forms.ModelForm, AddEditFormMixin):
 
     def __init__(self, *args, **kwargs):
         super(AuthorForm, self).__init__(*args, **kwargs)
@@ -28,24 +28,14 @@ class AuthorForm(forms.ModelForm):
                 'first_name',
                 'last_name',
             ),
-            ButtonHolder(
-                Button('cancel', _('Cancel'), css_class='btn btn-default'),
-
-                Submit('save_and_close', _('Save and close'),
-                       css_class='button white'),
-
-                Submit('save_and_new', _('Save and new'),
-                       css_class='button white'),
-
-                Submit('save', _('Save'), css_class='button white'),
-            )
+            self.get_button_holder()
         )
 
     class Meta:
         model = Author
 
 
-class AuthorSearchForm(forms.Form):
+class AuthorSearchForm(forms.Form, SearchFormMixin):
 
     first_name = forms.CharField(
         widget=forms.TextInput(attrs={"placeholder": _("First name")}),
@@ -68,19 +58,14 @@ class AuthorSearchForm(forms.Form):
                 Field("last_name"),
                 css_class="row group-padding-12"
             ),
-
-            ButtonHolder(
-                FormActions(
-                    Submit('search', _('Search')),
-                )
-            ),
+            self.get_button_holder()
         )
 
     class Meta:
         model = Author
 
 
-class CategoryForm(forms.ModelForm):
+class CategoryForm(forms.ModelForm, AddEditFormMixin):
 
     def __init__(self, *args, **kwargs):
         super(CategoryForm, self).__init__(*args, **kwargs)
@@ -94,24 +79,14 @@ class CategoryForm(forms.ModelForm):
                 _('Child of'),
                 'parent',
             ),
-            ButtonHolder(
-                Button('cancel', _('Cancel'), css_class='btn btn-default'),
-
-                Submit('save_and_close', _('Save and close'),
-                       css_class='button white'),
-
-                Submit('save_and_new', _('Save and new'),
-                       css_class='button white'),
-
-                Submit('save', _('Save'), css_class='button white'),
-            )
+            self.get_button_holder()
         )
 
     class Meta:
         model = Category
 
 
-class StatusForm(forms.ModelForm):
+class StatusForm(forms.ModelForm, AddEditFormMixin):
 
     def __init__(self, *args, **kwargs):
         super(StatusForm, self).__init__(*args, **kwargs)
@@ -121,24 +96,14 @@ class StatusForm(forms.ModelForm):
                 _('Status description'),
                 'name',
             ),
-            ButtonHolder(
-                Button('cancel', _('Cancel'), css_class='btn btn-default'),
-
-                Submit('save_and_close', _('Save and close'),
-                       css_class='button white'),
-
-                Submit('save_and_new', _('Save and new'),
-                       css_class='button white'),
-
-                Submit('save', _('Save'), css_class='button white'),
-            )
+            self.get_button_holder()
         )
 
     class Meta:
         model = Status
 
 
-class BookForm(forms.ModelForm):
+class BookForm(forms.ModelForm, AddEditFormMixin):
 
     def __init__(self, *args, **kwargs):
         super(BookForm, self).__init__(*args, **kwargs)
@@ -158,26 +123,14 @@ class BookForm(forms.ModelForm):
                 'published_at',
                 'editorial',
             ),
-            ButtonHolder(
-                FormActions(
-                    Button('cancel', _('Cancel'), css_class='btn btn-default'),
-
-                    Submit('save_and_close', _('Save and close'),
-                           css_class='button white'),
-
-                    Submit('save_and_new', _('Save and new'),
-                           css_class='button white'),
-
-                    Submit('save', _('Save'), css_class='button white'),
-                )
-            )
+            self.get_button_holder()
         )
 
     class Meta:
         model = Book
 
 
-class BookSearchForm(forms.Form):
+class BookSearchForm(forms.Form, SearchFormMixin):
 
     title = forms.CharField(
         widget=forms.TextInput(attrs={"placeholder": _("Title")}),
@@ -248,12 +201,7 @@ class BookSearchForm(forms.Form):
                 Field("authors"),
                 css_class="row group-padding-12"
             ),
-
-            ButtonHolder(
-                FormActions(
-                    Submit('search', _('Search')),
-                )
-            ),
+            self.get_button_holder()
         )
 
     class Meta:
