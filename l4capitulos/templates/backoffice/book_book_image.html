@@ -1,0 +1,42 @@
+{% load i18n thumbnail %}
+<div class="table-responsive">
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>{% trans "Preview" %}</th>
+        <th>{% trans "Is primary" %}</th>
+        <th>{% trans "URL" %}</th>
+        <th>{% trans "Actions" %}</th>
+      </tr>
+    </thead>
+    <tbody>
+        {% for image in images %}
+            <tr>
+                <td>{{ image.pk }}</td>
+                <td>
+                    {% thumbnail image.image "100x100" as im %}
+                        <img src="{{ MEDIA_URL }}{{ im.url }}" />
+                    {% endthumbnail %}
+                </td>
+                <td>
+                    {% if image.primary %}
+                        <span class="glyphicon glyphicon-ok"></span></td>
+                    {% else %}
+                        <span class="glyphicon glyphicon-remove"></span></td>
+                    {% endif %}
+                <td><a href="{{ MEDIA_URL }}{{ image.image }}">{{ MEDIA_URL }}{{ image.image.url }}</a></td>
+                <td>
+                    <a type="button" class="btn btn-default btn-xs" href="{% url "backoffice_book_image_edit" book.pk image.pk %}">
+                        <span class="glyphicon glyphicon-pencil"></span> {% trans "Edit" %}
+                    </a>
+                    <a type="button" class="btn btn-default btn-xs" href="{% url "backoffice_book_image_delete" book.pk image.pk %}">
+                        <span class="glyphicon glyphicon-trash"></span> {% trans "Delete" %}
+                    </a>
+                </td>
+            </tr>
+        {% endfor %}
+    </tbody>
+  </table>
+</div>
+

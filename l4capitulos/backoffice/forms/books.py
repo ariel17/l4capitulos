@@ -8,17 +8,21 @@ __author__ = "Ariel Gerardo Rios (ariel.gerardo.rios@gmail.com)"
 
 
 from django import forms
+from django.core.urlresolvers import reverse
+from django.template.loader import render_to_string
 from django.utils.translation import ugettext as _
 
 from crispy_forms.helper import FormHelper
-from crispy_forms.layout import Layout, Fieldset, Div, Field
+from crispy_forms.layout import Layout, Fieldset, Div, Field, HTML
 
-from book.models import Author, Book, Category, Status
+from book.models import Author, Book, Category, Status, BookImage
 from .commons import AddEditFormMixin, SearchFormMixin
 
 
 class AuthorForm(forms.ModelForm, AddEditFormMixin):
-
+    """
+    TODO
+    """
     def __init__(self, *args, **kwargs):
         super(AuthorForm, self).__init__(*args, **kwargs)
         self.helper = FormHelper()
@@ -36,7 +40,9 @@ class AuthorForm(forms.ModelForm, AddEditFormMixin):
 
 
 class AuthorSearchForm(forms.Form, SearchFormMixin):
-
+    """
+    TODO
+    """
     first_name = forms.CharField(
         widget=forms.TextInput(attrs={"placeholder": _("First name")}),
         required=False,
@@ -66,7 +72,9 @@ class AuthorSearchForm(forms.Form, SearchFormMixin):
 
 
 class CategoryForm(forms.ModelForm, AddEditFormMixin):
-
+    """
+    TODO
+    """
     def __init__(self, *args, **kwargs):
         super(CategoryForm, self).__init__(*args, **kwargs)
         self.helper = FormHelper()
@@ -87,7 +95,9 @@ class CategoryForm(forms.ModelForm, AddEditFormMixin):
 
 
 class StatusForm(forms.ModelForm, AddEditFormMixin):
-
+    """
+    TODO
+    """
     def __init__(self, *args, **kwargs):
         super(StatusForm, self).__init__(*args, **kwargs)
         self.helper = FormHelper()
@@ -104,7 +114,9 @@ class StatusForm(forms.ModelForm, AddEditFormMixin):
 
 
 class BookForm(forms.ModelForm, AddEditFormMixin):
-
+    """
+    TODO
+    """
     def __init__(self, *args, **kwargs):
         super(BookForm, self).__init__(*args, **kwargs)
         self.helper = FormHelper()
@@ -122,7 +134,30 @@ class BookForm(forms.ModelForm, AddEditFormMixin):
                 'isbn',
                 'published_at',
                 'editorial',
-            ),
+            )
+        )
+
+        if self.instance.pk:
+            self.helper.layout.append(
+                Layout(
+                    HTML(render_to_string(
+                        "backoffice/commons_add_button.html", {
+                            'url': reverse(
+                                'backoffice_book_image_add',
+                                args=(self.instance.pk,)
+                            ),
+                            'text': _('Add images'),
+                        })),
+                    Fieldset(
+                        _("Images for this book"),
+                        HTML(render_to_string(
+                            "backoffice/book_book_image.html", {
+                                "images": self.instance.bookimage_set.all(),
+                                "book": self.instance,
+                            })))
+                ))
+
+        self.helper.layout.append(
             self.get_button_holder()
         )
 
@@ -131,7 +166,9 @@ class BookForm(forms.ModelForm, AddEditFormMixin):
 
 
 class BookSearchForm(forms.Form, SearchFormMixin):
-
+    """
+    TODO
+    """
     title = forms.CharField(
         widget=forms.TextInput(attrs={"placeholder": _("Title")}),
         required=False,
@@ -206,3 +243,24 @@ class BookSearchForm(forms.Form, SearchFormMixin):
 
     class Meta:
         model = Book
+
+
+class BookImageForm(forms.ModelForm, AddEditFormMixin):
+    """
+    TODO
+    """
+    def __init__(self, *args, **kwargs):
+        super(BookImageForm, self).__init__(*args, **kwargs)
+        self.helper = FormHelper()
+        self.helper.layout = Layout(
+            Fieldset(
+                _('Image'),
+                'image',
+                'primary',
+            ),
+            self.get_button_holder()
+        )
+
+    class Meta:
+        model = BookImage
+        exclude = ['book']

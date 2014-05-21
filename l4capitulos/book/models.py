@@ -232,7 +232,7 @@ class BookImage(ImageModel):
     book = models.ForeignKey(Book)
 
     image = models.ImageField(
-        _(u"Mixture image"),
+        _(u"Book image"),
         upload_to=ImageModel.normalize_filename(settings.BOOK_IMAGES_PATH),
         default=settings.IMAGES_DEFAULT,
     )

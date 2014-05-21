@@ -7,10 +7,14 @@ Description: The URL dispatcher for project.
 __author__ = "Ariel Gerardo Rios (ariel.gerardo.rios@gmail.com)"
 
 
+from django.conf import settings
 from django.conf.urls import patterns, include, url
 
 from django.contrib import admin
+
+
 admin.autodiscover()
+
 
 urlpatterns = patterns('',
 
@@ -75,6 +79,18 @@ urlpatterns = patterns('',
         'backoffice.views.book_book_delete',
         name='backoffice_book_book_delete'),
 
+    url(r'^backoffice/book/book/(?P<book_id>\d+)/image/add/',
+        'backoffice.views.book_image_add',
+        name='backoffice_book_image_add'),
+
+    url(r'^backoffice/book/book/(?P<book_id>\d+)/image/(?P<image_id>\d+)/'
+        'edit/$', 'backoffice.views.book_image_edit',
+        name='backoffice_book_image_edit'),
+
+    url(r'^backoffice/book/book/(?P<book_id>\d+)/image/(?P<image_id>\d+)/'
+        'delete/$', 'backoffice.views.book_image_delete',
+        name='backoffice_book_image_delete'),
+
     url(r'^backoffice/finance/purchase/$', 'backoffice.views.finance_purchase',
         name='backoffice_finance_purchase'),
 
@@ -102,3 +118,11 @@ urlpatterns = patterns('',
         '(?P<item_id>\d+)/edit/$', 'backoffice.views.finance_item_delete',
         name='backoffice_finance_item_delete'),
 )
+
+
+if settings.DEBUG:
+    urlpatterns += patterns('',
+        (r'^media/(?P<path>.*)$', 'django.views.static.serve', {
+            'document_root': settings.MEDIA_ROOT
+        }),
+    )

@@ -42,10 +42,10 @@
                         <td>{{ purchase.get_total_units }}</td>
                         <td>
                             <a type="button" class="btn btn-default btn-xs" href="{% url "backoffice_finance_purchase_edit" purchase.pk %}">
-                                <span class="glyphicon glyphicon-pencil"></span> Edit
+                                <span class="glyphicon glyphicon-pencil"></span> {% trans "Edit" %}
                             </a>
                             <a type="button" class="btn btn-default btn-xs" href="{% url "backoffice_finance_purchase_delete" purchase.pk %}">
-                                <span class="glyphicon glyphicon-remove"></span> Delete
+                                <span class="glyphicon glyphicon-trash"></span> {% trans "Delete" %}
                             </a>
                         </td>
                     </tr>

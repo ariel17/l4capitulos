@@ -11,7 +11,8 @@
     <div class="row">
         <div class="col-md-12 padded-12">
             <a type="button" class="btn btn-default btn-sm" href="{% url "backoffice_book_author_add" %}">
-                <span class="glyphicon glyphicon-plus"></span> {% trans "Add author" %}
+                <span class="glyphicon glyphicon-plus"></span>
+                {% trans "Add author" %}
             </a>
         </div>
     </div>
@@ -48,7 +49,7 @@
                                 <span class="glyphicon glyphicon-pencil"></span> {% trans "Edit" %}
                             </a>
                             <a type="button" class="btn btn-default btn-xs" href="{% url "backoffice_book_author_delete" author.pk %}">
-                                <span class="glyphicon glyphicon-remove"></span> {% trans "Delete" %}
+                                <span class="glyphicon glyphicon-trash"></span> {% trans "Delete" %}
                             </a>
                         </td>
                     </tr>

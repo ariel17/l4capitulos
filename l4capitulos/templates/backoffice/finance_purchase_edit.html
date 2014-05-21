@@ -40,10 +40,10 @@
                         <td>{{ item.quantity }}</td>
                         <td>
                             <a type="button" class="btn btn-default btn-xs" href="{% url "backoffice_finance_item_edit" purchase.pk item.pk %}">
-                                <span class="glyphicon glyphicon-pencil"></span> Edit
+                                <span class="glyphicon glyphicon-pencil"></span> {% trans "Edit" %}
                             </a>
                             <a type="button" class="btn btn-default btn-xs" href="{% url "backoffice_finance_item_delete" purchase.pk item.pk %}">
-                                <span class="glyphicon glyphicon-remove"></span> Delete
+                                <span class="glyphicon glyphicon-trash"></span> {% trans "Delete" %}
                             </a>
                         </td>
                     </tr>

@@ -11,10 +11,10 @@ from django.contrib import messages
 from django.shortcuts import render, get_object_or_404, redirect
 from django.utils.translation import ugettext as _
 
-from .forms.books import BookForm, BookSearchForm, AuthorForm, AuthorSearchForm, CategoryForm, StatusForm
+from .forms.books import BookForm, BookSearchForm, AuthorForm, AuthorSearchForm, CategoryForm, StatusForm, BookImageForm
 from .forms.commons import DeleteForm
 from .forms.finances import PurchaseForm, PurchaseSearchForm, ItemForm
-from book.models import Author, Book, Category, Status
+from book.models import Author, Book, Category, Status, BookImage
 from finance.models import Purchase, Item
 
 
@@ -409,6 +409,54 @@ def book_book_delete(request, book_id):
         'form': DeleteForm(),
         'section': 'book_book',
     })
+
+
+def book_image_add(request, book_id):
+    """
+    TODO
+    """
+    book = get_object_or_404(Book, pk=book_id)
+    image = BookImage(book=book)
+
+    if request.method == 'POST':
+        form = BookImageForm(request.POST, request.FILES, instance=image)
+        if form.is_valid():
+            image = form.save()
+            messages.info(request, _("Image #%d added :)") % image.pk)
+
+            if 'save' in request.POST:
+                return redirect('backoffice_book_book_edit', book_id=book.pk)
+
+            if 'save_and_edit' in request.POST:
+                return redirect(
+                    'backoffice_book_image_edit', book_id=book.pk,
+                    image_id=image.pk
+                )
+
+            if 'save_and_new' in request.POST:
+                return redirect('backoffice_book_image_add', book_id=book.pk)
+    else:
+        form = BookImageForm(instance=image)
+
+    return render(request, 'backoffice/book_image_add.html', {
+        'book': book,
+        'form': form,
+        'section': 'book_book',
+    })
+
+
+def book_image_edit(request, book_id, image_id):
+    """
+    TODO
+    """
+    pass
+
+
+def book_image_delete(request, book_id, image_id):
+    """
+    TODO
+    """
+    pass
 
 
 def finance_purchase(request):

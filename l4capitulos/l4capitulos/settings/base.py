@@ -46,8 +46,9 @@ DJANGO_APPS = (
 )
 
 THIRD_PARTY_APPS = (
-    'south',
     'crispy_forms',
+    'sorl.thumbnail',
+    'south',
 )
 
 PROJECT_APPS = (
@@ -107,6 +108,12 @@ STATICFILES_DIRS = (
 )
 
 
+# See: https://docs.djangoproject.com/en/dev/ref/settings/#std:setting-MEDIA_ROOT
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+# See: https://docs.djangoproject.com/en/dev/ref/settings/#std:setting-MEDIA_URL
+MEDIA_URL = '/media/'
+
+
 # Crispy forms configuration
 CRISPY_TEMPLATE_PACK = 'bootstrap3'
 
@@ -131,3 +138,8 @@ IMAGES_DEFAULT = os.path.join(IMAGES_ROOT, 'no-img.png')
 
 # Book application configuration
 BOOK_IMAGES_PATH = os.path.join(IMAGES_ROOT, 'book')
+
+
+# Base sorl thumbnail configuration
+THUMBNAIL_KEY_PREFIX = 'sorl-thumbnail-l4capitulos'
+THUMBNAIL_PREFIX = os.path.join(IMAGES_ROOT, 'cache/')
