@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-05-21 20:18+0000\n"
+"POT-Creation-Date: 2014-05-21 20:39+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -187,14 +187,13 @@ msgstr ""
 msgid "Cancel"
 msgstr ""
 
-#: backoffice/forms/commons.py:29 backoffice/forms/finances.py:34
-#: backoffice/forms/finances.py:111
-msgid "Save and close"
-msgstr ""
-
-#: backoffice/forms/commons.py:32 backoffice/forms/finances.py:37
+#: backoffice/forms/commons.py:29 backoffice/forms/finances.py:37
 #: backoffice/forms/finances.py:114
 msgid "Save and new"
+msgstr ""
+
+#: backoffice/forms/commons.py:32
+msgid "Save and edit"
 msgstr ""
 
 #: backoffice/forms/commons.py:35 backoffice/forms/finances.py:40
@@ -212,6 +211,10 @@ msgstr ""
 
 #: backoffice/forms/commons.py:62
 msgid "Yes"
+msgstr ""
+
+#: backoffice/forms/finances.py:34 backoffice/forms/finances.py:111
+msgid "Save and close"
 msgstr ""
 
 #: backoffice/forms/finances.py:59

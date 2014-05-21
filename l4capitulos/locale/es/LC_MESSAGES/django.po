@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-05-21 20:18+0000\n"
+"POT-Creation-Date: 2014-05-21 20:39+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -188,15 +188,14 @@ msgstr "Imagen"
 msgid "Cancel"
 msgstr "Cancelar"
 
-#: backoffice/forms/commons.py:29 backoffice/forms/finances.py:34
-#: backoffice/forms/finances.py:111
-msgid "Save and close"
-msgstr "Guardar y cerrar"
-
-#: backoffice/forms/commons.py:32 backoffice/forms/finances.py:37
+#: backoffice/forms/commons.py:29 backoffice/forms/finances.py:37
 #: backoffice/forms/finances.py:114
 msgid "Save and new"
 msgstr "Guardar y nuevo"
+
+#: backoffice/forms/commons.py:32
+msgid "Save and edit"
+msgstr "Guardar y editar"
 
 #: backoffice/forms/commons.py:35 backoffice/forms/finances.py:40
 #: backoffice/forms/finances.py:117
@@ -214,6 +213,10 @@ msgstr "No"
 #: backoffice/forms/commons.py:62
 msgid "Yes"
 msgstr "Sí"
+
+#: backoffice/forms/finances.py:34 backoffice/forms/finances.py:111
+msgid "Save and close"
+msgstr "Guardar y cerrar"
 
 #: backoffice/forms/finances.py:59
 msgid "Price from"
@@ -281,7 +284,8 @@ msgstr "Resumen"
 
 #: book/models.py:202
 msgid "Book summary about its content and why should buy it."
-msgstr "Resumen del libro acerca de lo que contiene y por qué debería comprarlo."
+msgstr ""
+"Resumen del libro acerca de lo que contiene y por qué debería comprarlo."
 
 #: book/models.py:206
 msgid "Added at"

@@ -26,10 +26,10 @@ class AddEditFormMixin(object):
         return ButtonHolder(
             Button('cancel', _('Cancel'), css_class='btn btn-default'),
 
-            Submit('save_and_close', _('Save and close'),
+            Submit('save_and_new', _('Save and new'),
                    css_class='button white'),
 
-            Submit('save_and_new', _('Save and new'),
+            Submit('save_and_edit', _('Save and edit'),
                    css_class='button white'),
 
             Submit('save', _('Save'), css_class='button white'),
