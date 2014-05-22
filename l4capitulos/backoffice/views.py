@@ -8,6 +8,7 @@ __author__ = "Ariel Gerardo Rios (ariel.gerardo.rios@gmail.com)"
 
 
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, get_object_or_404, redirect
 from django.utils.translation import ugettext as _
 
@@ -18,6 +19,7 @@ from book.models import Author, Book, Category, Status, BookImage
 from finance.models import Purchase, Item
 
 
+@login_required
 def home(request):
     """
     The home page.
@@ -30,6 +32,7 @@ def home(request):
     })
 
 
+@login_required
 def book_author(request):
     """
     TODO
@@ -51,6 +54,7 @@ def book_author(request):
     })
 
 
+@login_required
 def book_author_add(request):
     """
     TODO
@@ -81,6 +85,7 @@ def book_author_add(request):
     })
 
 
+@login_required
 def book_author_edit(request, author_id):
     """
     TODO
@@ -114,6 +119,7 @@ def book_author_edit(request, author_id):
     })
 
 
+@login_required
 def book_author_delete(request, author_id):
     """
     TODO
@@ -127,12 +133,13 @@ def book_author_delete(request, author_id):
 
     return render(request, 'backoffice/commons_delete.html', {
         'obj': author,
-        'model': author.__class__.__name__,
+        'model': _('Author'),
         'form': DeleteForm(),
         'section': 'book_author',
     })
 
 
+@login_required
 def book_category(request):
     """
     TODO
@@ -143,6 +150,7 @@ def book_category(request):
     })
 
 
+@login_required
 def book_category_add(request):
     """
     TODO
@@ -173,6 +181,7 @@ def book_category_add(request):
     })
 
 
+@login_required
 def book_category_edit(request, category_id):
     """
     TODO
@@ -204,6 +213,7 @@ def book_category_edit(request, category_id):
     })
 
 
+@login_required
 def book_category_delete(request, category_id):
     """
     TODO
@@ -217,12 +227,13 @@ def book_category_delete(request, category_id):
 
     return render(request, 'backoffice/commons_delete.html', {
         'obj': category,
-        'model': category.__class__.__name__,
+        'model': _('Category'),
         'form': DeleteForm(),
         'section': 'book_category',
     })
 
 
+@login_required
 def book_status(request):
     """
     TODO
@@ -233,6 +244,7 @@ def book_status(request):
     })
 
 
+@login_required
 def book_status_add(request):
     """
     TODO
@@ -261,6 +273,7 @@ def book_status_add(request):
     })
 
 
+@login_required
 def book_status_edit(request, status_id):
     """
     TODO
@@ -293,6 +306,7 @@ def book_status_edit(request, status_id):
     })
 
 
+@login_required
 def book_status_delete(request, status_id):
     """
     TODO
@@ -306,12 +320,13 @@ def book_status_delete(request, status_id):
 
     return render(request, 'backoffice/commons_delete.html', {
         'obj': status,
-        'model': status.__class__.__name__,
+        'model': _('Status'),
         'form': DeleteForm(),
         'section': 'book_status',
     })
 
 
+@login_required
 def book_book(request):
     """
     TODO
@@ -333,6 +348,7 @@ def book_book(request):
     })
 
 
+@login_required
 def book_book_add(request):
     """
     TODO
@@ -361,6 +377,7 @@ def book_book_add(request):
     })
 
 
+@login_required
 def book_book_edit(request, book_id):
     """
     TODO
@@ -392,6 +409,7 @@ def book_book_edit(request, book_id):
     })
 
 
+@login_required
 def book_book_delete(request, book_id):
     """
     TODO
@@ -405,12 +423,13 @@ def book_book_delete(request, book_id):
 
     return render(request, 'backoffice/commons_delete.html', {
         'obj': book,
-        'model': book.__class__.__name__,
+        'model': _('Book'),
         'form': DeleteForm(),
         'section': 'book_book',
     })
 
 
+@login_required
 def book_image_add(request, book_id):
     """
     TODO
@@ -445,20 +464,63 @@ def book_image_add(request, book_id):
     })
 
 
+@login_required
 def book_image_edit(request, book_id, image_id):
     """
     TODO
     """
-    pass
+    book = get_object_or_404(Book, pk=book_id)
+    image = get_object_or_404(BookImage, pk=image_id)
+
+    if request.method == 'POST':
+        form = BookImageForm(request.POST, request.FILES, instance=image)
+        if form.is_valid():
+            image = form.save()
+            messages.info(request, _("Image #%d updated :)") % image.pk)
+
+            if 'save' in request.POST:
+                return redirect('backoffice_book_book_edit', book_id=book.pk)
+
+            if 'save_and_edit' in request.POST:
+                return redirect(
+                    'backoffice_book_image_edit', book_id=book.pk,
+                    image_id=image.pk
+                )
+
+            if 'save_and_new' in request.POST:
+                return redirect('backoffice_book_image_add', book_id=book.pk)
+    else:
+        form = BookImageForm(instance=image)
+
+    return render(request, 'backoffice/book_image_edit.html', {
+        'book': book,
+        'form': form,
+        'section': 'book_book',
+    })
 
 
+@login_required
 def book_image_delete(request, book_id, image_id):
     """
     TODO
     """
-    pass
+    _ = get_object_or_404(Book, pk=book_id)
+    image = get_object_or_404(BookImage, pk=image_id)
+
+    if request.method == 'POST':
+        image.delete()
+        messages.warning(request, _('Image deleted.'))
+        return redirect('backoffice_book_book_edit', book_id=book_id)
+
+    return render(request, 'backoffice/commons_delete.html', {
+        'obj': image,
+        'model': _('Book image'),
+        'form': DeleteForm(),
+        'section': 'book_book',
+    })
 
 
+@login_required
 def finance_purchase(request):
     """
     TODO
@@ -480,6 +542,7 @@ def finance_purchase(request):
     })
 
 
+@login_required
 def finance_purchase_add(request):
     """
     TODO
@@ -514,6 +577,7 @@ def finance_purchase_add(request):
     })
 
 
+@login_required
 def finance_purchase_edit(request, purchase_id):
     """
     TODO
@@ -546,6 +610,7 @@ def finance_purchase_edit(request, purchase_id):
     })
 
 
+@login_required
 def finance_purchase_delete(request, purchase_id):
     """
     TODO
@@ -559,12 +624,13 @@ def finance_purchase_delete(request, purchase_id):
 
     return render(request, 'backoffice/commons_delete.html', {
         'obj': purchase,
-        'model': purchase.__class__.__name__,
+        'model': _('Purchase'),
         'form': DeleteForm(),
         'section': 'finance_purchase',
     })
 
 
+@login_required
 def finance_item_add(request, purchase_id):
     """
     TODO
@@ -599,6 +665,7 @@ def finance_item_add(request, purchase_id):
     })
 
 
+@login_required
 def finance_item_edit(request, purchase_id, item_id):
     """
     TODO
@@ -634,6 +701,7 @@ def finance_item_edit(request, purchase_id, item_id):
     })
 
 
+@login_required
 def finance_item_delete(request, purchase_id, item_id):
     """
     TODO
@@ -648,7 +716,7 @@ def finance_item_delete(request, purchase_id, item_id):
 
     return render(request, 'backoffice/commons_delete.html', {
         'obj': item,
-        'model': item.__class__.__name__,
+        'model': _('Purchase item'),
         'form': DeleteForm(),
         'section': 'finance_purchase',
     })

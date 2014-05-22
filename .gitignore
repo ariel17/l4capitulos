@@ -21,3 +21,6 @@ db.*
 
 # Compiled translations
 *.po
+
+# Cached files
+CACHE

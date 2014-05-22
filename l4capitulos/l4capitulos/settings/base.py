@@ -52,6 +52,7 @@ THIRD_PARTY_APPS = (
 )
 
 PROJECT_APPS = (
+    'account',
     'backoffice',
     'book',
     'common',
@@ -73,6 +74,9 @@ ROOT_URLCONF = 'l4capitulos.urls'
 
 WSGI_APPLICATION = 'l4capitulos.wsgi.application'
 
+LOGIN_URL = '/account/login/'
+
+LOGIN_REDIRECT_URL = '/backoffice/home/'
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.6/topics/i18n/
@@ -143,3 +147,5 @@ BOOK_IMAGES_PATH = os.path.join(IMAGES_ROOT, 'book')
 # Base sorl thumbnail configuration
 THUMBNAIL_KEY_PREFIX = 'sorl-thumbnail-l4capitulos'
 THUMBNAIL_PREFIX = os.path.join(IMAGES_ROOT, 'cache/')
+
+

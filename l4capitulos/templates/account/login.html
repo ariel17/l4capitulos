@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% load staticfiles i18n crispy_forms_tags %}
+
+{% block "title" %}
+    {% trans "Backoffice" %}
+{% endblock "title" %}
+
+{% block "title-sufix" %}
+    - {% trans "Login" %}
+{% endblock "title-sufix" %}
+
+{% block "head" %}
+    <!-- Bootstrap core CSS -->
+    <link href="{% static "css/login.css" %}" rel="stylesheet">
+{% endblock "head" %}
+
+{% block "body" %}
+
+    <div class="container">
+
+        {% crispy form %}
+
+    </div> <!-- /container -->
+{% endblock "body" %}

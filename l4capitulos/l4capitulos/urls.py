@@ -20,6 +20,9 @@ urlpatterns = patterns('',
 
     url(r'^admin/', include(admin.site.urls)),
 
+    url(r'^account/login/$', 'account.views.account_login',
+        name='account_login'),
+
     url(r'^backoffice/$', 'backoffice.views.home', name='backoffice_home'),
 
     url(r'^backoffice/book/author/$', 'backoffice.views.book_author',
