@@ -4,3 +4,4 @@ django-crispy-forms==1.4.0
 Pillow==2.4.0
 sorl-thumbnail==11.12.1b
 python-memcached==1.53
+Fabric==1.8.3
