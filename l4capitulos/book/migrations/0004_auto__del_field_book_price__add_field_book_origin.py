@@ -7,6 +7,10 @@ from django.db import models
 
 class Migration(SchemaMigration):
 
+    depends_on = (
+        ("finance", "0001_initial"),
+    )
+
     def forwards(self, orm):
         # Deleting field 'Book.price'
         db.delete_column(u'book_book', 'price')
