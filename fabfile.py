@@ -208,8 +208,6 @@ def deploy():
             (release_dir_manage, env.settings))
         run('%s compilemessages --settings=%s' %
             (release_dir_manage, env.settings))
-        run('%s update_currencies --settings=%s' %
-            (release_dir_manage, env.settings))
 
     if exists(REMOTE_RELEASE_CURRENT):
         run('rm %s' % REMOTE_RELEASE_CURRENT)
