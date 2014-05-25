@@ -58,8 +58,9 @@ INSTALLED_APPS += ('gunicorn',)
 ########## END INSTALLED APPS
 
 
-MEDIA_URL = 'https://www.poppurri.com.ar/media/'
-STATIC_URL = 'https://www.poppurri.com.ar/static/'
+MEDIA_URL = '/4capitulos/media/'
+
+STATIC_URL = '/4capitulos/static/'
 
 
 # Sentry client configuration
