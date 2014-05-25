@@ -110,28 +110,69 @@ urlpatterns = patterns('',
         name='backoffice_finance_purchase_delete'),
 
     url(r'^backoffice/finance/purchase/(?P<purchase_id>\d+)/item/add/$',
-        'backoffice.views.finance_item_add',
-        name='backoffice_finance_item_add'),
+        'backoffice.views.finance_purchase_item_add',
+        name='backoffice_finance_purchase_item_add'),
 
     url(r'^backoffice/finance/purchase/(?P<purchase_id>\d+)/item/'
-        '(?P<item_id>\d+)/edit/$', 'backoffice.views.finance_item_edit',
-        name='backoffice_finance_item_edit'),
+        '(?P<item_id>\d+)/edit/$', 'backoffice.views.finance_purchase_item_edit',
+        name='backoffice_finance_purchase_item_edit'),
 
     url(r'^backoffice/finance/purchase/(?P<purchase_id>\d+)/item/'
-        '(?P<item_id>\d+)/delete/$', 'backoffice.views.finance_item_delete',
-        name='backoffice_finance_item_delete'),
+        '(?P<item_id>\d+)/delete/$', 'backoffice.views.finance_purchase_item_delete',
+        name='backoffice_finance_purchase_item_delete'),
 
     url(r'^backoffice/finance/purchase/(?P<purchase_id>\d+)/cost/add/$',
-        'backoffice.views.finance_cost_add',
-        name='backoffice_finance_cost_add'),
+        'backoffice.views.finance_purchase_cost_add',
+        name='backoffice_finance_purchase_cost_add'),
 
     url(r'^backoffice/finance/purchase/(?P<purchase_id>\d+)/cost/'
-        '(?P<cost_id>\d+)/edit/$', 'backoffice.views.finance_cost_edit',
-        name='backoffice_finance_cost_edit'),
+        '(?P<cost_id>\d+)/edit/$', 'backoffice.views.finance_purchase_cost_edit',
+        name='backoffice_finance_purchase_cost_edit'),
 
     url(r'^backoffice/finance/purchase/(?P<purchase_id>\d+)/cost/'
-        '(?P<cost_id>\d+)/delete/$', 'backoffice.views.finance_cost_delete',
-        name='backoffice_finance_cost_delete'),
+        '(?P<cost_id>\d+)/delete/$', 'backoffice.views.finance_purchase_cost_delete',
+        name='backoffice_finance_purchase_cost_delete'),
+
+    url(r'^backoffice/finance/sell/$', 'backoffice.views.finance_sell',
+        name='backoffice_finance_sell'),
+
+    url(r'^backoffice/finance/sell/add/$',
+        'backoffice.views.finance_sell_add',
+        name='backoffice_finance_sell_add'),
+
+    url(r'^backoffice/finance/sell/(?P<sell_id>\d+)/edit/$',
+        'backoffice.views.finance_sell_edit',
+        name='backoffice_finance_sell_edit'),
+
+    url(r'^backoffice/finance/sell/(?P<sell_id>\d+)/delete/$',
+        'backoffice.views.finance_sell_delete',
+        name='backoffice_finance_sell_delete'),
+
+    url(r'^backoffice/finance/sell/(?P<sell_id>\d+)/item/add/$',
+        'backoffice.views.finance_sell_item_add',
+        name='backoffice_finance_sell_item_add'),
+
+    url(r'^backoffice/finance/sell/(?P<sell_id>\d+)/item/'
+        '(?P<item_id>\d+)/edit/$', 'backoffice.views.finance_sell_item_edit',
+        name='backoffice_finance_sell_item_edit'),
+
+    url(r'^backoffice/finance/sell/(?P<sell_id>\d+)/item/'
+        '(?P<item_id>\d+)/delete/$',
+        'backoffice.views.finance_sell_item_delete',
+        name='backoffice_finance_sell_item_delete'),
+
+    url(r'^backoffice/finance/sell/(?P<sell_id>\d+)/cost/add/$',
+        'backoffice.views.finance_sell_cost_add',
+        name='backoffice_finance_sell_cost_add'),
+
+    url(r'^backoffice/finance/sell/(?P<sell_id>\d+)/cost/'
+        '(?P<cost_id>\d+)/edit/$', 'backoffice.views.finance_sell_cost_edit',
+        name='backoffice_finance_sell_cost_edit'),
+
+    url(r'^backoffice/finance/sell/(?P<sell_id>\d+)/cost/'
+        '(?P<cost_id>\d+)/delete/$',
+        'backoffice.views.finance_sell_cost_delete',
+        name='backoffice_finance_sell_cost_delete'),
 )
 
 

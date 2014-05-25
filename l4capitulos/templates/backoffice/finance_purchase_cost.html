@@ -16,10 +16,10 @@
                 <td>{{ cost.date }}</td>
                 <td>{{ cost.price }}</td>
                 <td>
-                    <a type="button" class="btn btn-default btn-xs" href="{% url "backoffice_finance_cost_edit" purchase.pk cost.pk %}">
+                    <a type="button" class="btn btn-default btn-xs" href="{% url "backoffice_finance_purchase_cost_edit" purchase.pk cost.pk %}">
                         <span class="glyphicon glyphicon-pencil"></span> {% trans "Edit" %}
                     </a>
-                    <a type="button" class="btn btn-default btn-xs" href="{% url "backoffice_finance_cost_delete" purchase.pk cost.pk %}">
+                    <a type="button" class="btn btn-default btn-xs" href="{% url "backoffice_finance_purchase_cost_delete" purchase.pk cost.pk %}">
                         <span class="glyphicon glyphicon-trash"></span> {% trans "Delete" %}
                     </a>
                 </td>

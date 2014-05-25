@@ -39,7 +39,7 @@ class PurchaseForm(forms.ModelForm, AddEditFormMixin):
                     HTML(render_to_string(
                         "backoffice/commons_add_button.html", {
                             'url': reverse(
-                                'backoffice_finance_item_add',
+                                'backoffice_finance_purchase_item_add',
                                 args=(self.instance.pk,)
                             ),
                             'text': _('Add items'),
@@ -54,7 +54,7 @@ class PurchaseForm(forms.ModelForm, AddEditFormMixin):
                     HTML(render_to_string(
                         "backoffice/commons_add_button.html", {
                             'url': reverse(
-                                'backoffice_finance_cost_add',
+                                'backoffice_finance_purchase_cost_add',
                                 args=(self.instance.pk,)
                             ),
                             'text': _('Add costs'),

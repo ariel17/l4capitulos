@@ -124,6 +124,7 @@ class Category(models.Model):
     """
     parent = models.ForeignKey(
         "self",
+        blank=True,
         null=True
     )
 
@@ -170,7 +171,10 @@ class Book(models.Model):
         help_text=_("The book's title.")
     )
 
-    authors = models.ManyToManyField(Author)
+    authors = models.ManyToManyField(
+        Author,
+        null=True,
+    )
 
     isbn = models.CharField(
         _('ISBN'),
@@ -211,11 +215,13 @@ class Book(models.Model):
 
     category = models.ForeignKey(
         Category,
+        blank=True,
         null=True
     )
 
     status = models.ForeignKey(
         Status,
+        blank=True,
         null=True
     )
 

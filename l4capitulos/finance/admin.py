@@ -9,7 +9,7 @@ __author__ = "Ariel Gerardo Rios (ariel.gerardo.rios@gmail.com)"
 
 from django.contrib import admin
 
-from .models import Purchase, PurchaseItem, PurchaseCost
+from .models import Purchase, PurchaseItem, PurchaseCost, Sell, SellItem, SellCost
 
 
 class PurchaseAdmin(admin.ModelAdmin):
@@ -29,6 +29,26 @@ class PurchaseCostAdmin(admin.ModelAdmin):
     list_display_links = ('purchase',)
 
 
+class SellAdmin(admin.ModelAdmin):
+    fields = ('date', 'price',)
+    list_display = ('date', 'price')
+
+
+class SellItemAdmin(admin.ModelAdmin):
+    fields = ('sell', 'book', 'quantity',)
+    list_display = ('sell', 'book', 'quantity',)
+    list_display_links = ('sell', 'book')
+
+
+class SellCostAdmin(admin.ModelAdmin):
+    fields = ('sell', 'date', 'price', 'description')
+    list_display = ('sell', 'date', 'price',)
+    list_display_links = ('sell',)
+
+
 admin.site.register(Purchase, PurchaseAdmin)
 admin.site.register(PurchaseItem, PurchaseItemAdmin)
 admin.site.register(PurchaseCost, PurchaseCostAdmin)
+admin.site.register(Sell, SellAdmin)
+admin.site.register(SellItem, SellItemAdmin)
+admin.site.register(SellCost, SellCostAdmin)

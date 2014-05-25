@@ -20,10 +20,10 @@
                 </td>
                 <td>{{ item.quantity }}</td>
                 <td>
-                    <a type="button" class="btn btn-default btn-xs" href="{% url "backoffice_finance_item_edit" purchase.pk item.pk %}">
+                    <a type="button" class="btn btn-default btn-xs" href="{% url "backoffice_finance_purchase_item_edit" purchase.pk item.pk %}">
                         <span class="glyphicon glyphicon-pencil"></span> {% trans "Edit" %}
                     </a>
-                    <a type="button" class="btn btn-default btn-xs" href="{% url "backoffice_finance_item_delete" purchase.pk item.pk %}">
+                    <a type="button" class="btn btn-default btn-xs" href="{% url "backoffice_finance_purchase_item_delete" purchase.pk item.pk %}">
                         <span class="glyphicon glyphicon-trash"></span> {% trans "Delete" %}
                     </a>
                 </td>

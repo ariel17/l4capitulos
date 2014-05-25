@@ -631,7 +631,7 @@ def finance_purchase_delete(request, purchase_id):
 
 
 @login_required
-def finance_item_add(request, purchase_id):
+def finance_purchase_item_add(request, purchase_id):
     """
     TODO
     """
@@ -649,11 +649,11 @@ def finance_item_add(request, purchase_id):
                                 purchase_id=purchase_id)
 
             if 'save_and_edit' in request.POST:
-                return redirect('backoffice_finance_item_edit',
+                return redirect('backoffice_finance_purchase_item_edit',
                                 purchase_id=purchase_id, item_id=item.pk)
 
             elif 'save_and_new' in request.POST:
-                return redirect('backoffice_finance_item_add',
+                return redirect('backoffice_finance_purchase_item_add',
                                 purchase_id=purchase_id, item_id=item.pk)
     else:
         form = PurchaseItemForm(instance=item)
@@ -666,7 +666,7 @@ def finance_item_add(request, purchase_id):
 
 
 @login_required
-def finance_item_edit(request, purchase_id, item_id):
+def finance_purchase_item_edit(request, purchase_id, item_id):
     """
     TODO
     """
@@ -684,11 +684,11 @@ def finance_item_edit(request, purchase_id, item_id):
                                 purchase_id=purchase_id)
 
             if 'save_and_edit' in request.POST:
-                return redirect('backoffice_finance_item_edit',
+                return redirect('backoffice_finance_purchase_item_edit',
                                 purchase_id=purchase_id, item_id=item_id)
 
             elif 'save_and_new' in request.POST:
-                return redirect('backoffice_finance_item_add',
+                return redirect('backoffice_finance_purchase_item_add',
                                 purchase_id=purchase_id, item_id=item_id)
     else:
         form = PurchaseItemForm(instance=item)
@@ -702,7 +702,7 @@ def finance_item_edit(request, purchase_id, item_id):
 
 
 @login_required
-def finance_item_delete(request, purchase_id, item_id):
+def finance_purchase_item_delete(request, purchase_id, item_id):
     """
     TODO
     """
@@ -723,7 +723,7 @@ def finance_item_delete(request, purchase_id, item_id):
 
 
 @login_required
-def finance_cost_add(request, purchase_id):
+def finance_purchase_cost_add(request, purchase_id):
     """
     TODO
     """
@@ -741,11 +741,11 @@ def finance_cost_add(request, purchase_id):
                                 purchase_id=purchase_id)
 
             if 'save_and_edit' in request.POST:
-                return redirect('backoffice_finance_cost_edit',
+                return redirect('backoffice_finance_purchase_cost_edit',
                                 purchase_id=purchase_id, cost_id=cost.pk)
 
             elif 'save_and_new' in request.POST:
-                return redirect('backoffice_finance_cost_add',
+                return redirect('backoffice_finance_purchase_cost_add',
                                 purchase_id=purchase_id, cost_id=cost.pk)
     else:
         form = PurchaseCostForm(instance=cost)
@@ -758,7 +758,7 @@ def finance_cost_add(request, purchase_id):
 
 
 @login_required
-def finance_cost_edit(request, purchase_id, cost_id):
+def finance_purchase_cost_edit(request, purchase_id, cost_id):
     """
     TODO
     """
@@ -776,11 +776,11 @@ def finance_cost_edit(request, purchase_id, cost_id):
                                 purchase_id=purchase_id)
 
             if 'save_and_edit' in request.POST:
-                return redirect('backoffice_finance_cost_edit',
+                return redirect('backoffice_finance_purchase_cost_edit',
                                 purchase_id=purchase_id, cost_id=cost_id)
 
             elif 'save_and_new' in request.POST:
-                return redirect('backoffice_finance_cost_add',
+                return redirect('backoffice_finance_purchase_cost_add',
                                 purchase_id=purchase_id, cost_id=cost_id)
     else:
         form = PurchaseCostForm(instance=cost)
@@ -794,7 +794,7 @@ def finance_cost_edit(request, purchase_id, cost_id):
 
 
 @login_required
-def finance_cost_delete(request, purchase_id, cost_id):
+def finance_purchase_cost_delete(request, purchase_id, cost_id):
     """
     TODO
     """
@@ -811,4 +811,300 @@ def finance_cost_delete(request, purchase_id, cost_id):
         'model': _('Purchase cost'),
         'form': DeleteForm(),
         'section': 'finance_purchase',
+    })
+
+
+###########################################
+
+@login_required
+def finance_sell(request):
+    """
+    TODO
+    """
+    form = PurchaseSearchForm(request.GET)
+
+    if len(request.GET.keys()):
+        if form.is_valid():
+            purchases = Purchase.objects.search(**form.cleaned_data)
+        else:
+            purchases = []
+    else:
+        purchases = []
+
+    return render(request, 'backoffice/finance_sell.html', {
+        'form': form,
+        'purchases': purchases,
+        'section': 'finance_sell',
+    })
+
+
+@login_required
+def finance_sell_add(request):
+    """
+    TODO
+    """
+    purchase = None
+
+    if request.method == 'POST':
+        form = PurchaseForm(request.POST)
+        if form.is_valid():
+            purchase = form.save()
+            messages.info(
+                request, _("Purchase for '%s' added :)") % purchase.date
+            )
+
+            if 'save' in request.POST:
+                return redirect('backoffice_finance_sell')
+
+            if 'save_and_edit' in request.POST:
+                return redirect('backoffice_finance_sell_edit',
+                                purchase_id=purchase.pk)
+
+            elif 'save_and_new' in request.POST:
+                return redirect('backoffice_finance_sell_add')
+
+    else:
+        form = PurchaseForm()
+
+    return render(request, 'backoffice/finance_sell_add.html', {
+        'form': form,
+        'purchase': purchase,
+        'section': 'finance_sell',
+    })
+
+
+@login_required
+def finance_sell_edit(request, purchase_id):
+    """
+    TODO
+    """
+    purchase = get_object_or_404(Purchase, pk=purchase_id)
+
+    if request.method == 'POST':
+        form = PurchaseForm(request.POST, instance=purchase)
+        if form.is_valid():
+            form.save()
+            messages.info(request, _('Purchase updated :)'))
+
+            if 'save' in request.POST:
+                return redirect('backoffice_finance_sell')
+
+            if 'save_and_edit' in request.POST:
+                return redirect('backoffice_finance_sell_edit',
+                                purchase_id=purchase.pk)
+
+            elif 'save_and_new' in request.POST:
+                return redirect('backoffice_finance_sell_add')
+
+    else:
+        form = PurchaseForm(instance=purchase)
+
+    return render(request, 'backoffice/finance_sell_edit.html', {
+        'form': form,
+        'purchase': purchase,
+        'section': 'finance_sell',
+    })
+
+
+@login_required
+def finance_sell_delete(request, purchase_id):
+    """
+    TODO
+    """
+    purchase = get_object_or_404(Purchase, pk=purchase_id)
+
+    if request.method == 'POST':
+        purchase.delete()
+        messages.warning(request, _('Purchase deleted.'))
+        return redirect('backoffice_finance_sell')
+
+    return render(request, 'backoffice/commons_delete.html', {
+        'obj': purchase,
+        'model': _('Purchase'),
+        'form': DeleteForm(),
+        'section': 'finance_sell',
+    })
+
+
+@login_required
+def finance_sell_item_add(request, purchase_id):
+    """
+    TODO
+    """
+    purchase = get_object_or_404(Purchase, pk=purchase_id)
+    item = PurchaseItem(purchase=purchase)
+
+    if request.method == 'POST':
+        form = PurchaseItemForm(request.POST, instance=item)
+        if form.is_valid():
+            item = form.save()
+            messages.info(request, _("Purchase item %d added :)") % item.pk)
+
+            if 'save' in request.POST:
+                return redirect('backoffice_finance_sell_edit',
+                                purchase_id=purchase_id)
+
+            if 'save_and_edit' in request.POST:
+                return redirect('backoffice_finance_sell_item_edit',
+                                purchase_id=purchase_id, item_id=item.pk)
+
+            elif 'save_and_new' in request.POST:
+                return redirect('backoffice_finance_sell_item_add',
+                                purchase_id=purchase_id, item_id=item.pk)
+    else:
+        form = PurchaseItemForm(instance=item)
+
+    return render(request, 'backoffice/finance_sell_item_add.html', {
+        'form': form,
+        'purchase': purchase,
+        'section': 'finance_sell',
+    })
+
+
+@login_required
+def finance_sell_item_edit(request, purchase_id, item_id):
+    """
+    TODO
+    """
+    purchase = get_object_or_404(Purchase, pk=purchase_id)
+    item = get_object_or_404(PurchaseItem, pk=item_id)
+
+    if request.method == 'POST':
+        form = PurchaseItemForm(request.POST, instance=item)
+        if form.is_valid():
+            form.save()
+            messages.info(request, _('Purchase item updated :)'))
+
+            if 'save' in request.POST:
+                return redirect('backoffice_finance_sell_edit',
+                                purchase_id=purchase_id)
+
+            if 'save_and_edit' in request.POST:
+                return redirect('backoffice_finance_sell_item_edit',
+                                purchase_id=purchase_id, item_id=item_id)
+
+            elif 'save_and_new' in request.POST:
+                return redirect('backoffice_finance_sell_item_add',
+                                purchase_id=purchase_id, item_id=item_id)
+    else:
+        form = PurchaseItemForm(instance=item)
+
+    return render(request, 'backoffice/finance_sell_item_edit.html', {
+        'form': form,
+        'purchase': purchase,
+        'item': item,
+        'section': 'finance_sell',
+    })
+
+
+@login_required
+def finance_sell_item_delete(request, purchase_id, item_id):
+    """
+    TODO
+    """
+    get_object_or_404(Purchase, pk=purchase_id)
+    item = get_object_or_404(PurchaseItem, pk=item_id)
+
+    if request.method == 'POST':
+        item.delete()
+        messages.warning(request, _('Purchase item deleted.'))
+        return redirect('backoffice_finance_sell_edit', purchase_id)
+
+    return render(request, 'backoffice/commons_delete.html', {
+        'obj': item,
+        'model': _('Purchase item'),
+        'form': DeleteForm(),
+        'section': 'finance_sell',
+    })
+
+
+@login_required
+def finance_sell_cost_add(request, purchase_id):
+    """
+    TODO
+    """
+    purchase = get_object_or_404(Purchase, pk=purchase_id)
+    cost = PurchaseCost(purchase=purchase)
+
+    if request.method == 'POST':
+        form = PurchaseCostForm(request.POST, instance=cost)
+        if form.is_valid():
+            item = form.save()
+            messages.info(request, _("Purchase cost %d added :)") % item.pk)
+
+            if 'save' in request.POST:
+                return redirect('backoffice_finance_sell_edit',
+                                purchase_id=purchase_id)
+
+            if 'save_and_edit' in request.POST:
+                return redirect('backoffice_finance_sell_cost_edit',
+                                purchase_id=purchase_id, cost_id=cost.pk)
+
+            elif 'save_and_new' in request.POST:
+                return redirect('backoffice_finance_sell_cost_add',
+                                purchase_id=purchase_id, cost_id=cost.pk)
+    else:
+        form = PurchaseCostForm(instance=cost)
+
+    return render(request, 'backoffice/finance_sell_cost_add.html', {
+        'form': form,
+        'purchase': purchase,
+        'section': 'finance_sell',
+    })
+
+
+@login_required
+def finance_sell_cost_edit(request, purchase_id, cost_id):
+    """
+    TODO
+    """
+    purchase = get_object_or_404(Purchase, pk=purchase_id)
+    cost = get_object_or_404(PurchaseCost, pk=cost_id)
+
+    if request.method == 'POST':
+        form = PurchaseCostForm(request.POST, instance=cost)
+        if form.is_valid():
+            form.save()
+            messages.info(request, _('Purchase cost updated :)'))
+
+            if 'save' in request.POST:
+                return redirect('backoffice_finance_sell_edit',
+                                purchase_id=purchase_id)
+
+            if 'save_and_edit' in request.POST:
+                return redirect('backoffice_finance_sell_cost_edit',
+                                purchase_id=purchase_id, cost_id=cost_id)
+
+            elif 'save_and_new' in request.POST:
+                return redirect('backoffice_finance_sell_cost_add',
+                                purchase_id=purchase_id, cost_id=cost_id)
+    else:
+        form = PurchaseCostForm(instance=cost)
+
+    return render(request, 'backoffice/finance_sell_cost_edit.html', {
+        'form': form,
+        'purchase': purchase,
+        'cost': cost,
+        'section': 'finance_sell',
+    })
+
+
+@login_required
+def finance_sell_cost_delete(request, purchase_id, cost_id):
+    """
+    TODO
+    """
+    get_object_or_404(Purchase, pk=purchase_id)
+    cost = get_object_or_404(PurchaseCost, pk=cost_id)
+
+    if request.method == 'POST':
+        cost.delete()
+        messages.warning(request, _('Purchase cost deleted.'))
+        return redirect('backoffice_finance_sell_edit', purchase_id)
+
+    return render(request, 'backoffice/commons_delete.html', {
+        'obj': cost,
+        'model': _('Purchase cost'),
+        'form': DeleteForm(),
+        'section': 'finance_sell',
     })
