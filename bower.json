@@ -16,12 +16,12 @@
   ],
   "install": {
     "path": {
-      "css": "l4capitulos/assets/css",
-      "js": "l4capitulos/assets/js",
-      "map": "l4capitulos/assets/js",
-      "eot": "l4capitulos/assets/fonts",
-      "ttf": "l4capitulos/assets/fonts",
-      "svg": "l4capitulos/assets/fonts"
+      "css": "l4capitulos/static/css",
+      "js": "l4capitulos/static/js",
+      "map": "l4capitulos/static/js",
+      "eot": "l4capitulos/static/fonts",
+      "ttf": "l4capitulos/static/fonts",
+      "svg": "l4capitulos/static/fonts"
     },
     "sources": {
       "bootstrap": [

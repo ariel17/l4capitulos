@@ -156,4 +156,7 @@ BOOK_IMAGES_PATH = os.path.join(IMAGES_ROOT, 'book')
 THUMBNAIL_KEY_PREFIX = 'sorl-thumbnail-l4capitulos'
 THUMBNAIL_PREFIX = os.path.join(IMAGES_ROOT, 'cache/')
 
-
+########## SECRET CONFIGURATION
+# See: https://docs.djangoproject.com/en/dev/ref/settings/#secret-key
+SECRET_KEY = get_env_setting('SECRET_KEY')
+########## END SECRET CONFIGURATION

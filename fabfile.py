@@ -140,6 +140,10 @@ def create_env():
     """
     Creates a new environment and installs required dependencies.
     """
+    run('npm install -s')  # NodeJS dependencies
+    run('bower install -F ')  # Bower dependencies
+    run('bower-installer')  # Bower dependencies locator into assets
+
     prepare_source(env.git_branch)
 
     run('mkdir -p %s' % REMOTE_ENV)
