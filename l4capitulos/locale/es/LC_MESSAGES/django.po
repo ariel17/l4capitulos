@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-05-21 20:39+0000\n"
+"POT-Creation-Date: 2014-05-25 07:02+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,6 +18,18 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
+#: account/forms.py:33
+msgid "Backoffice! u.u"
+msgstr "Traslaoficina"
+
+#: account/forms.py:37
+msgid "Sign in"
+msgstr "Entrar"
+
+#: account/forms.py:53
+msgid "Username or password invalid."
+msgstr "Usuario o contraseña inválida"
+
 #: backoffice/models.py:25
 msgid "Last activity items"
 msgstr "Ítems de últimas acitividad"
@@ -26,88 +38,142 @@ msgstr "Ítems de últimas acitividad"
 msgid "How many last activity items to show."
 msgstr "Cuántos items de última actividad a mostrar"
 
-#: backoffice/views.py:63
+#: backoffice/views.py:67
 #, python-format
 msgid "Author '%s' added :)"
 msgstr "Autor '%s' agregado :)"
 
-#: backoffice/views.py:95
+#: backoffice/views.py:100
 msgid "Author updated :)"
 msgstr "Autor actualizado :)"
 
-#: backoffice/views.py:125
+#: backoffice/views.py:131
 msgid "Author deleted."
 msgstr "Author borrado."
 
-#: backoffice/views.py:155
+#: backoffice/views.py:136
+msgid "Author"
+msgstr "Autores"
+
+#: backoffice/views.py:163
 #, python-format
 msgid "Category '%s' added :)"
 msgstr "Categoría '%s' agregada :)"
 
-#: backoffice/views.py:186
+#: backoffice/views.py:195
 msgid "Category updated :)"
 msgstr "Categoría actualizada :)"
 
-#: backoffice/views.py:215
+#: backoffice/views.py:225
 msgid "Category deleted."
 msgstr "Categoría borrada."
 
-#: backoffice/views.py:244
+#: backoffice/views.py:230 backoffice/forms/books.py:209
+msgid "Category"
+msgstr "Categoría"
+
+#: backoffice/views.py:256
 #, python-format
 msgid "Status '%s' added :)"
 msgstr "Estado '%s' agregado :)"
 
-#: backoffice/views.py:274
+#: backoffice/views.py:287
 msgid "Status updated :)"
 msgstr "Estado actualizado :)"
 
-#: backoffice/views.py:304
+#: backoffice/views.py:318
 msgid "Status deleted."
 msgstr "Estado borrado."
 
-#: backoffice/views.py:344
+#: backoffice/views.py:323 backoffice/forms/books.py:214
+msgid "Status"
+msgstr "Estado"
+
+#: backoffice/views.py:360
 #, python-format
 msgid "Book '%s' added :)"
 msgstr "Libro '%s' agregado :)"
 
-#: backoffice/views.py:374
+#: backoffice/views.py:391
 msgid "Book updated :)"
 msgstr "Libro actualizado :)"
 
-#: backoffice/views.py:403
+#: backoffice/views.py:421
 msgid "Book deleted."
 msgstr "Libro borrado."
 
-#: backoffice/views.py:425
+#: backoffice/views.py:426 templates/backoffice/finance_purchase_item.html:7
+msgid "Book"
+msgstr "Libros"
+
+#: backoffice/views.py:444
 #, python-format
 msgid "Image #%d added :)"
 msgstr "Imagen #%d agregada :)"
 
-#: backoffice/views.py:494
+#: backoffice/views.py:479
+#, python-format
+msgid "Image #%d updated :)"
+msgstr "Imagen #%d agregada :)"
+
+#: backoffice/views.py:512
+msgid "Image deleted."
+msgstr "Ítem borrado."
+
+#: backoffice/views.py:517 book/models.py:235
+msgid "Book image"
+msgstr "Imagen del libro"
+
+#: backoffice/views.py:557
 #, python-format
 msgid "Purchase for '%s' added :)"
 msgstr "Compra para '%s' agregada :)"
 
-#: backoffice/views.py:527
+#: backoffice/views.py:591
 msgid "Purchase updated :)"
 msgstr "Compra actualizada :)"
 
-#: backoffice/views.py:557
+#: backoffice/views.py:622
 msgid "Purchase deleted."
 msgstr "Compra borrada."
 
-#: backoffice/views.py:579
+#: backoffice/views.py:627
+msgid "Purchase"
+msgstr "Compra"
+
+#: backoffice/views.py:645
 #, python-format
-msgid "Item %d added :)"
-msgstr "Ítem %d agregado :)"
+msgid "Purchase item %d added :)"
+msgstr "Ítem de comra %d agregado :)"
 
-#: backoffice/views.py:613
-msgid "Item updated :)"
-msgstr "Ítem actualizado :)"
+#: backoffice/views.py:680
+msgid "Purchase item updated :)"
+msgstr "Ítem de compra actualizado :)"
 
-#: backoffice/views.py:646
-msgid "Item deleted."
-msgstr "Ítem borrado."
+#: backoffice/views.py:714
+msgid "Purchase item deleted."
+msgstr "Ítem de compra borrado."
+
+#: backoffice/views.py:719
+msgid "Purchase item"
+msgstr "Ítem de compra"
+
+#: backoffice/views.py:737
+#, python-format
+msgid "Purchase cost %d added :)"
+msgstr "Costo de compra %d agregado :)"
+
+#: backoffice/views.py:772
+msgid "Purchase cost updated :)"
+msgstr "Costo de compra actualizado :)"
+
+#: backoffice/views.py:806
+msgid "Purchase cost deleted."
+msgstr "Costo de compra borrado."
+
+#: backoffice/views.py:811
+msgid "Purchase cost"
+msgstr "Costo de compra"
 
 #: backoffice/forms/books.py:31
 msgid "Author information"
@@ -171,25 +237,17 @@ msgstr "Número ISBN"
 msgid "Editorial's name"
 msgstr "Nombre de la editorial"
 
-#: backoffice/forms/books.py:209
-msgid "Category"
-msgstr "Categoría"
-
-#: backoffice/forms/books.py:214
-msgid "Status"
-msgstr "Estado"
-
 #: backoffice/forms/books.py:257
 msgid "Image"
 msgstr "Imagen"
 
-#: backoffice/forms/commons.py:27 backoffice/forms/finances.py:32
-#: backoffice/forms/finances.py:109
+#: backoffice/forms/commons.py:27 backoffice/forms/finances.py:140
+#: backoffice/forms/finances.py:170
 msgid "Cancel"
 msgstr "Cancelar"
 
-#: backoffice/forms/commons.py:29 backoffice/forms/finances.py:37
-#: backoffice/forms/finances.py:114
+#: backoffice/forms/commons.py:29 backoffice/forms/finances.py:145
+#: backoffice/forms/finances.py:175
 msgid "Save and new"
 msgstr "Guardar y nuevo"
 
@@ -197,12 +255,12 @@ msgstr "Guardar y nuevo"
 msgid "Save and edit"
 msgstr "Guardar y editar"
 
-#: backoffice/forms/commons.py:35 backoffice/forms/finances.py:40
-#: backoffice/forms/finances.py:117
+#: backoffice/forms/commons.py:35 backoffice/forms/finances.py:148
+#: backoffice/forms/finances.py:178
 msgid "Save"
 msgstr "Guardar"
 
-#: backoffice/forms/commons.py:49 backoffice/forms/finances.py:88
+#: backoffice/forms/commons.py:49 backoffice/forms/finances.py:119
 msgid "Search"
 msgstr "Buscar"
 
@@ -214,17 +272,33 @@ msgstr "No"
 msgid "Yes"
 msgstr "Sí"
 
-#: backoffice/forms/finances.py:34 backoffice/forms/finances.py:111
-msgid "Save and close"
-msgstr "Guardar y cerrar"
+#: backoffice/forms/finances.py:45
+msgid "Add items"
+msgstr "Agregar un ítem"
 
-#: backoffice/forms/finances.py:59
+#: backoffice/forms/finances.py:48
+msgid "Items for this purchase"
+msgstr "Buscar compras"
+
+#: backoffice/forms/finances.py:60
+msgid "Add costs"
+msgstr "Agregar estado"
+
+#: backoffice/forms/finances.py:63
+msgid "Costs for this purchase"
+msgstr ""
+
+#: backoffice/forms/finances.py:90
 msgid "Price from"
 msgstr "Precio desde"
 
-#: backoffice/forms/finances.py:64
+#: backoffice/forms/finances.py:95
 msgid "Price to"
 msgstr "Precio hasta"
+
+#: backoffice/forms/finances.py:142 backoffice/forms/finances.py:172
+msgid "Save and close"
+msgstr "Guardar y cerrar"
 
 #: book/models.py:49
 msgid "The author's first name."
@@ -291,15 +365,11 @@ msgstr ""
 msgid "Added at"
 msgstr "Agregado en"
 
-#: book/models.py:235
-msgid "Book image"
-msgstr "Imagen del libro"
-
 #: book/models.py:241 templates/backoffice/book_book_image.html:8
 msgid "Is primary"
 msgstr "Es primaria"
 
-#: finance/models.py:45
+#: finance/models.py:45 finance/models.py:104
 msgid "Purchased at"
 msgstr "Comprado en"
 
@@ -307,7 +377,9 @@ msgstr "Comprado en"
 msgid "The pucharse operation date."
 msgstr "La fecha de la operación de compra."
 
-#: finance/models.py:50 templates/backoffice/finance_purchase.html:31
+#: finance/models.py:50 finance/models.py:109
+#: templates/backoffice/finance_purchase.html:31
+#: templates/backoffice/finance_purchase_cost.html:8
 #: templates/backoffice/inventory.html:40
 msgid "Price"
 msgstr "Precio"
@@ -316,7 +388,7 @@ msgstr "Precio"
 msgid "The purchase price."
 msgstr "El precio de la compra."
 
-#: finance/models.py:86 templates/backoffice/finance_purchase_edit.html:27
+#: finance/models.py:86 templates/backoffice/finance_purchase_item.html:8
 #: templates/backoffice/inventory.html:39
 msgid "Quantity"
 msgstr "Cantidad"
@@ -325,17 +397,33 @@ msgstr "Cantidad"
 msgid "How many items came in the purchase."
 msgstr "Cuántos ítems vinieron en la compra."
 
-#: l4capitulos/settings/base.py:87
+#: finance/models.py:105
+msgid "The cost operation date."
+msgstr "La fecha de la operación de compra."
+
+#: finance/models.py:112
+msgid "The cost price."
+msgstr "El precio de la compra."
+
+#: finance/models.py:118
+msgid "The origin description for the cost."
+msgstr "La description del origen del costo."
+
+#: l4capitulos/settings/base.py:99
 msgid "Spanish"
 msgstr "Español"
 
-#: l4capitulos/settings/base.py:88
+#: l4capitulos/settings/base.py:100
 msgid "English"
 msgstr "Inglés"
 
-#: templates/backoffice/base.html:12
+#: templates/account/login.html:5 templates/backoffice/base.html:5
 msgid "Backoffice"
 msgstr "Traslaoficina"
+
+#: templates/account/login.html:9
+msgid "Login"
+msgstr "Ingresar"
 
 #: templates/backoffice/book_author.html:7
 msgid "Search authors"
@@ -374,7 +462,8 @@ msgstr "Libros"
 #: templates/backoffice/book_category.html:24
 #: templates/backoffice/book_status.html:24
 #: templates/backoffice/finance_purchase.html:33
-#: templates/backoffice/finance_purchase_edit.html:28
+#: templates/backoffice/finance_purchase_cost.html:9
+#: templates/backoffice/finance_purchase_item.html:9
 msgid "Actions"
 msgstr "Acciones"
 
@@ -383,7 +472,8 @@ msgstr "Acciones"
 #: templates/backoffice/book_category.html:37
 #: templates/backoffice/book_status.html:37
 #: templates/backoffice/finance_purchase.html:45
-#: templates/backoffice/finance_purchase_edit.html:43
+#: templates/backoffice/finance_purchase_cost.html:20
+#: templates/backoffice/finance_purchase_item.html:24
 msgid "Edit"
 msgstr "Editar"
 
@@ -392,7 +482,8 @@ msgstr "Editar"
 #: templates/backoffice/book_category.html:40
 #: templates/backoffice/book_status.html:40
 #: templates/backoffice/finance_purchase.html:48
-#: templates/backoffice/finance_purchase_edit.html:46
+#: templates/backoffice/finance_purchase_cost.html:23
+#: templates/backoffice/finance_purchase_item.html:27
 msgid "Delete"
 msgstr "Borrar"
 
@@ -473,7 +564,7 @@ msgid "Add category"
 msgstr "Agregar categoría"
 
 #: templates/backoffice/book_category_add.html:4
-msgid "Add an category"
+msgid "Add a category"
 msgstr "Agregar una categoría"
 
 #: templates/backoffice/book_category_add.html:7
@@ -592,6 +683,7 @@ msgstr ""
 "            "
 
 #: templates/backoffice/finance_purchase.html:30
+#: templates/backoffice/finance_purchase_cost.html:7
 msgid "Date"
 msgstr "Fecha"
 
@@ -607,10 +699,21 @@ msgstr "Agregar una compra"
 msgid "New purchase"
 msgstr "Nueva compra"
 
-#: templates/backoffice/finance_purchase_add.html:15
-#: templates/backoffice/finance_purchase_edit.html:14
-msgid "Add item"
-msgstr "Agregar un ítem"
+#: templates/backoffice/finance_purchase_cost_add.html:4
+msgid "Add a cost"
+msgstr "Agregar un libro"
+
+#: templates/backoffice/finance_purchase_cost_add.html:7
+msgid "New cost"
+msgstr "Nuevo estado"
+
+#: templates/backoffice/finance_purchase_cost_edit.html:4
+msgid "Edit a cost"
+msgstr "Editar un libro"
+
+#: templates/backoffice/finance_purchase_cost_edit.html:7
+msgid "Edit cost"
+msgstr "Editar libro"
 
 #: templates/backoffice/finance_purchase_edit.html:4
 msgid "Edit a purchase"
@@ -619,14 +722,6 @@ msgstr "Editar una compra"
 #: templates/backoffice/finance_purchase_edit.html:7
 msgid "Edit purchase"
 msgstr "Editar compra"
-
-#: templates/backoffice/finance_purchase_edit.html:20
-msgid "Items"
-msgstr "Ítems"
-
-#: templates/backoffice/finance_purchase_edit.html:26
-msgid "Book"
-msgstr "Libros"
 
 #: templates/backoffice/finance_purchase_item_add.html:4
 msgid "Add an item"
@@ -683,18 +778,30 @@ msgstr "Libros vendidos"
 msgid "Book inventory"
 msgstr "Inventario de libros"
 
-#: templates/backoffice/navbar.html:15
-msgid "Profile"
-msgstr "Perfil"
-
-#: templates/backoffice/navbar.html:16
+#: templates/backoffice/navbar.html:9
 msgid "Help"
 msgstr "Ayuda"
 
-#: templates/backoffice/navbar.html:17
+#: templates/backoffice/navbar.html:11
+msgid "Profile"
+msgstr "Perfil"
+
+#: templates/backoffice/navbar.html:12
 msgid "Log in / log out"
 msgstr "Entrar / salir"
 
 #: templates/backoffice/sidebar.html:46
 msgid "Sells"
 msgstr "Ventas"
+
+#~ msgid "price"
+#~ msgstr "Precio"
+
+#~ msgid "Item %d added :)"
+#~ msgstr "Ítem %d agregado :)"
+
+#~ msgid "Item updated :)"
+#~ msgstr "Ítem actualizado :)"
+
+#~ msgid "Items"
+#~ msgstr "Ítems"
