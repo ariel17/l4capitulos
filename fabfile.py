@@ -44,6 +44,9 @@ REMOTE_REQUIREMENTS_PRODUCTION = path.join(
 REMOTE_REQUIREMENTS_DEVELOPMENT = path.join(
     REMOTE_SOURCE_CLONE, 'requirements', 'development.txt')
 
+REMOTE_NODEJS_REQUIREMENTS = path.join(REMOTE_SOURCE_CLONE, 'package.json')
+REMOTE_BOWER_REQUIREMENTS = path.join(REMOTE_SOURCE_CLONE, 'bower.json')
+
 GIT_REPOSITORY_URL = 'git@github.com:ariel17/l4capitulos.git'
 GIT_BRANCH_PRODUCTION = 'master'
 GIT_BRANCH_DEVELOPMENT = 'develop'
@@ -140,11 +143,12 @@ def create_env():
     """
     Creates a new environment and installs required dependencies.
     """
-    run('npm install -s')  # NodeJS dependencies
-    run('bower install -F ')  # Bower dependencies
-    run('bower-installer')  # Bower dependencies locator into assets
-
     prepare_source(env.git_branch)
+
+    with cd(REMOTE_SOURCE_CLONE):
+        run('npm install -s')  # NodeJS dependencies
+        run('./node_modules/bower/bin/bower install -F ')
+        run('./node_modules/bower-installer/bower-installer.js')
 
     run('mkdir -p %s' % REMOTE_ENV)
 
