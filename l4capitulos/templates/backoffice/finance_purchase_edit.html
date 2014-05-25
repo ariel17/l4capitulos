@@ -8,49 +8,4 @@
     
     {% crispy form %}
 
-    <div class="row">
-        <div class="col-md-12 padded-12">
-            <a type="button" class="btn btn-default btn-sm" href="{% url "backoffice_finance_item_add" purchase.pk %}">
-                <span class="glyphicon glyphicon-plus"></span> {% trans "Add item" %}
-            </a>
-        </div>
-    </div>
-    
-    {% if purchase %}
-        <h2 class="sub-header">{% trans "Items" %}</h2>
-        <div class="table-responsive">
-          <table class="table table-striped">
-            <thead>
-              <tr>
-                <th>#</th>
-                <th>{% trans "Book" %}</th>
-                <th>{% trans "Quantity" %}</th>
-                <th>{% trans "Actions" %}</th>
-              </tr>
-            </thead>
-            <tbody>
-                {% for item in purchase.item_set.all %}
-                    <tr>
-                        <td>{{ item.pk }}</td>
-                        <td>
-                            <a href="{% url "backoffice_book_book_edit" item.book.pk %}">
-                                {{ item.book.title }}
-                            </a>
-                        </td>
-                        <td>{{ item.quantity }}</td>
-                        <td>
-                            <a type="button" class="btn btn-default btn-xs" href="{% url "backoffice_finance_item_edit" purchase.pk item.pk %}">
-                                <span class="glyphicon glyphicon-pencil"></span> {% trans "Edit" %}
-                            </a>
-                            <a type="button" class="btn btn-default btn-xs" href="{% url "backoffice_finance_item_delete" purchase.pk item.pk %}">
-                                <span class="glyphicon glyphicon-trash"></span> {% trans "Delete" %}
-                            </a>
-                        </td>
-                    </tr>
-                {% endfor %}
-            </tbody>
-          </table>
-        </div>
-    {% endif %}        
-    
 {% endblock "content" %}    

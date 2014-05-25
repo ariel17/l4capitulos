@@ -58,10 +58,6 @@ INSTALLED_APPS += ('gunicorn',)
 ########## END INSTALLED APPS
 
 
-MEDIA_URL = 'https://www.poppurri.com.ar/media/'
-STATIC_URL = 'https://www.poppurri.com.ar/static/'
-
-
 # Sentry client configuration
 RAVEN_CONFIG = {
     'dsn': 'http://9f46b93862b2433e862151a904acaa8b:bb5759ac2e794d93a1c83b785924797a@sentry.ariel17.com.ar/10',

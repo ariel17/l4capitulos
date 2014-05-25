@@ -52,12 +52,15 @@ INSTALLED_APPS += ('gunicorn',)
 ########## END INSTALLED APPS
 
 
+<<<<<<< HEAD
 # Sentry client configuration
 RAVEN_CONFIG = {
     'dsn': 'http://ca12a551a6d24cd68ae2fd7ff8cdf402:'
     '15ff77ecb7734f9bac1b8b614c03de31@sentry.ariel17.com.ar/8',
 }
 
+=======
+>>>>>>> b2ad452... Add cost CRUD operations in backoffice.
 # Sentry client configuration
 RAVEN_CONFIG = {
     'dsn': 'http://ca12a551a6d24cd68ae2fd7ff8cdf402:'

@@ -8,16 +8,19 @@ __author__ = "Ariel Gerardo Rios (ariel.gerardo.rios@gmail.com)"
 
 
 from django import forms
+from django.core.urlresolvers import reverse
+from django.template.loader import render_to_string
 from django.utils.translation import ugettext as _
 
 from crispy_forms.bootstrap import FormActions
 from crispy_forms.helper import FormHelper
-from crispy_forms.layout import Layout, Fieldset, ButtonHolder, Submit, Button, Div, Field
+from crispy_forms.layout import Layout, Fieldset, ButtonHolder, Submit, Button, Div, Field, HTML
 
-from finance.models import Purchase, Item
+from .commons import AddEditFormMixin, SearchFormMixin
+from finance.models import Purchase, PurchaseItem, PurchaseCost
 
 
-class PurchaseForm(forms.ModelForm):
+class PurchaseForm(forms.ModelForm, AddEditFormMixin):
 
     def __init__(self, *args, **kwargs):
         super(PurchaseForm, self).__init__(*args, **kwargs)
@@ -28,17 +31,45 @@ class PurchaseForm(forms.ModelForm):
                 'date',
                 'price',
             ),
-            ButtonHolder(
-                Button('cancel', _('Cancel'), css_class='btn btn-default'),
+        )
 
-                Submit('save_and_close', _('Save and close'),
-                       css_class='button white'),
+        if self.instance.pk:
+            self.helper.layout.append(
+                Layout(
+                    HTML(render_to_string(
+                        "backoffice/commons_add_button.html", {
+                            'url': reverse(
+                                'backoffice_finance_item_add',
+                                args=(self.instance.pk,)
+                            ),
+                            'text': _('Add items'),
+                        })),
+                    Fieldset(
+                        _("Items for this purchase"),
+                        HTML(render_to_string(
+                            "backoffice/finance_purchase_item.html", {
+                                "items": self.instance.purchaseitem_set.all(),
+                                "purchase": self.instance,
+                            }))),
+                    HTML(render_to_string(
+                        "backoffice/commons_add_button.html", {
+                            'url': reverse(
+                                'backoffice_finance_cost_add',
+                                args=(self.instance.pk,)
+                            ),
+                            'text': _('Add costs'),
+                        })),
+                    Fieldset(
+                        _("Costs for this purchase"),
+                        HTML(render_to_string(
+                            "backoffice/finance_purchase_cost.html", {
+                                "costs": self.instance.purchasecost_set.all(),
+                                "purchase": self.instance,
+                            })))
+                ))
 
-                Submit('save_and_new', _('Save and new'),
-                       css_class='button white'),
-
-                Submit('save', _('Save'), css_class='button white'),
-            )
+        self.helper.layout.append(
+            self.get_button_holder()
         )
 
     class Meta:
@@ -94,14 +125,14 @@ class PurchaseSearchForm(forms.Form):
         model = Purchase
 
 
-class ItemForm(forms.ModelForm):
+class PurchaseItemForm(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
-        super(ItemForm, self).__init__(*args, **kwargs)
+        super(PurchaseItemForm, self).__init__(*args, **kwargs)
         self.helper = FormHelper()
         self.helper.layout = Layout(
             Fieldset(
-                'Item information',
+                'Puchase item information',
                 'book',
                 'quantity',
             ),
@@ -119,5 +150,35 @@ class ItemForm(forms.ModelForm):
         )
 
     class Meta:
-        model = Item
+        model = PurchaseItem
+        exclude = ['purchase']
+
+
+class PurchaseCostForm(forms.ModelForm):
+
+    def __init__(self, *args, **kwargs):
+        super(PurchaseCostForm, self).__init__(*args, **kwargs)
+        self.helper = FormHelper()
+        self.helper.layout = Layout(
+            Fieldset(
+                'Puchase cost information',
+                'date',
+                'price',
+                'description',
+            ),
+            ButtonHolder(
+                Button('cancel', _('Cancel'), css_class='btn btn-default'),
+
+                Submit('save_and_close', _('Save and close'),
+                       css_class='button white'),
+
+                Submit('save_and_new', _('Save and new'),
+                       css_class='button white'),
+
+                Submit('save', _('Save'), css_class='button white'),
+            )
+        )
+
+    class Meta:
+        model = PurchaseCost
         exclude = ['purchase']

@@ -117,9 +117,21 @@ urlpatterns = patterns('',
         '(?P<item_id>\d+)/edit/$', 'backoffice.views.finance_item_edit',
         name='backoffice_finance_item_edit'),
 
-    url(r'^backoffice/finance/purchase/(?P<purchase_id>\d+)/delete/'
-        '(?P<item_id>\d+)/edit/$', 'backoffice.views.finance_item_delete',
+    url(r'^backoffice/finance/purchase/(?P<purchase_id>\d+)/item/'
+        '(?P<item_id>\d+)/delete/$', 'backoffice.views.finance_item_delete',
         name='backoffice_finance_item_delete'),
+
+    url(r'^backoffice/finance/purchase/(?P<purchase_id>\d+)/cost/add/$',
+        'backoffice.views.finance_cost_add',
+        name='backoffice_finance_cost_add'),
+
+    url(r'^backoffice/finance/purchase/(?P<purchase_id>\d+)/cost/'
+        '(?P<cost_id>\d+)/edit/$', 'backoffice.views.finance_cost_edit',
+        name='backoffice_finance_cost_edit'),
+
+    url(r'^backoffice/finance/purchase/(?P<purchase_id>\d+)/cost/'
+        '(?P<cost_id>\d+)/delete/$', 'backoffice.views.finance_cost_delete',
+        name='backoffice_finance_cost_delete'),
 )
 
 

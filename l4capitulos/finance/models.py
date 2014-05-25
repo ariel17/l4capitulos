@@ -71,10 +71,10 @@ class Purchase(models.Model):
         """
         Counts the total units through all items.
         """
-        return sum([i.quantity for i in self.item_set.all()])
+        return sum([i.quantity for i in self.purchaseitem_set.all()])
 
 
-class Item(models.Model):
+class PurchaseItem(models.Model):
     """
     An unit in a purchase.
     """
@@ -89,6 +89,36 @@ class Item(models.Model):
     )
 
     def __unicode__(self):
-        return u"Item#%d@Purchase#%d: q=%d" % (
+        return u"PurchaseItem#%d@Purchase#%d: q=%d" % (
             self.pk, self.purchase.pk, self.quantity
+        )
+
+
+class PurchaseCost(models.Model):
+    """
+    An unit in a purchase.
+    """
+    purchase = models.ForeignKey(Purchase)
+
+    date = models.DateField(
+        _('Purchased at'),
+        help_text=_('The cost operation date.')
+    )
+
+    price = models.DecimalField(
+        _('Price'),
+        max_digits=10,
+        decimal_places=2,
+        help_text=_('The cost price.')
+    )
+
+    description = models.TextField(
+        blank=True,
+        null=True,
+        help_text=_('The origin description for the cost.')
+    )
+
+    def __unicode__(self):
+        return u"PurchaseCost#%d@Purchase#%d: p=%s" % (
+            self.pk, self.purchase.pk, self.price
         )

@@ -8,14 +8,4 @@
     
     {% crispy form %}
     
-    {% if purchase %}
-        <div class="row">
-            <div class="col-md-12 padded-12">
-                <a type="button" class="btn btn-default btn-sm" href="{% url "backoffice_finance_item_add" purchase.pk %}">
-                    <span class="glyphicon glyphicon-plus"></span> {% trans "Add item" %}
-                </a>
-            </div>
-        </div>
-    {% endif %}        
-        
 {% endblock "content" %}    
