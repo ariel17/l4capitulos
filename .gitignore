@@ -20,7 +20,7 @@ static
 db.*
 
 # Compiled translations
-*.po
+*.mo
 
 # Cached files
 CACHE
