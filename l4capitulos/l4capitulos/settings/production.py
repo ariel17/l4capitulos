@@ -52,9 +52,9 @@ INSTALLED_APPS += ('gunicorn',)
 ########## END INSTALLED APPS
 
 
-MEDIA_URL = '/4capitulos/media/'
+MEDIA_URL = '/media/'
 
-STATIC_URL = '/4capitulos/static/'
+STATIC_URL = '/static/'
 
 
 # Sentry client configuration
