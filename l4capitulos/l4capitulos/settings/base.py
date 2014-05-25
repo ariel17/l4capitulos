@@ -57,6 +57,7 @@ DJANGO_APPS = (
 
 THIRD_PARTY_APPS = (
     'crispy_forms',
+    'raven.contrib.django.raven_compat',
     'sorl.thumbnail',
     'south',
 )

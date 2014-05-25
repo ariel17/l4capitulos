@@ -30,3 +30,13 @@ CACHES = {
 
 
 THUMBNAIL_DEBUG = True
+
+
+# Sentry client configuration
+RAVEN_CONFIG = {
+    'dsn': 'http://7ab53ea775ce4a25abf4fff81189ba93:'
+    'e4319772508648e0b206ff863d85d411@sentry.ariel17.com.ar/9',
+}
+
+
+# vim: ai ts=4 sts=4 et sw=4 ft=python
