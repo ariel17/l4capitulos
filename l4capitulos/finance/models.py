@@ -121,7 +121,7 @@ class Purchase(Operation):
         """
         Returns the price by item invidually.
         """
-        total_quantity = sum([i.quantity for i in self.item_set.all()])
+        total_quantity = sum([i.quantity for i in self.purchaseitem_set.all()])
         return self.price / total_quantity
 
     def get_total_units(self):
@@ -129,6 +129,18 @@ class Purchase(Operation):
         Counts the total units through all items.
         """
         return sum([i.quantity for i in self.purchaseitem_set.all()])
+
+    def get_total_cost(self):
+        """
+        Returns the summatory of all costs on this purchase.
+        """
+        return sum([c.price for c in self.purchasecost_set.all()])
+
+    def get_full_price(self):
+        """
+        Returns the summatory of purchase price with all costs.
+        """
+        return self.price + self.get_total_cost()
 
 
 class PurchaseItem(Item):
@@ -169,6 +181,18 @@ class Sell(Operation):
         Counts the total units through all items.
         """
         return sum([i.quantity for i in self.sellitem_set.all()])
+
+    def get_total_cost(self):
+        """
+        Returns the summatory of all costs on this sell.
+        """
+        return sum([c.price for c in self.sellcost_set.all()])
+
+    def get_net_price(self):
+        """
+        Returns the sell price minus the summatory of all costs.
+        """
+        return self.price - self.get_total_cost()
 
 
 class SellItem(Item):
