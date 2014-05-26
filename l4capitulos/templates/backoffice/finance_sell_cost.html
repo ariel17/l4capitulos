@@ -1,0 +1,30 @@
+{% load i18n thumbnail %}
+<div class="table-responsive">
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>{% trans "Date" %}</th>
+        <th>{% trans "Price" %}</th>
+        <th>{% trans "Actions" %}</th>
+      </tr>
+    </thead>
+    <tbody>
+        {% for cost in costs %}
+            <tr>
+                <td>{{ cost.pk }}</td>
+                <td>{{ cost.date }}</td>
+                <td>{{ cost.price }}</td>
+                <td>
+                    <a type="button" class="btn btn-default btn-xs" href="{% url "backoffice_finance_sell_cost_edit" sell.pk cost.pk %}">
+                        <span class="glyphicon glyphicon-pencil"></span> {% trans "Edit" %}
+                    </a>
+                    <a type="button" class="btn btn-default btn-xs" href="{% url "backoffice_finance_sell_cost_delete" sell.pk cost.pk %}">
+                        <span class="glyphicon glyphicon-trash"></span> {% trans "Delete" %}
+                    </a>
+                </td>
+            </tr>
+        {% endfor %}
+    </tbody>
+  </table>
+</div>

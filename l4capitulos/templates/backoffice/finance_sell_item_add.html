@@ -1,0 +1,11 @@
+{% extends "backoffice/base_add_edit.html" %}
+{% load i18n crispy_forms_tags %}
+
+{% block "title-sufix" %}{% trans "Add an item" %}{% endblock %}
+
+{% block "content" %}
+<h1 class="page-header">{% trans "New item" %}</h1>
+
+{% crispy form %}
+    
+{% endblock "content" %}    

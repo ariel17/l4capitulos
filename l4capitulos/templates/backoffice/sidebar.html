@@ -41,7 +41,7 @@
         </a>
       </li>
       <li {% if section == 'finance_sell' %}class="active"{% endif %}>
-        <a href="#">
+        <a href="{% url "backoffice_finance_sell" %}">
             <span class="glyphicon glyphicon-circle-arrow-up"></span>
             {% trans "Sells" %}
         </a>

@@ -1,0 +1,57 @@
+{% extends "backoffice/base.html" %}
+{% load i18n crispy_forms_tags %}
+
+{% block "title-sufix" %}{% trans "Sells" %}{% endblock %}
+
+{% block "content" %}
+<h1 class="page-header">{% trans "Search sells" %}</h1>
+    
+    {% crispy form %}
+
+    <div class="row">
+        <div class="col-md-12 padded-12">
+            <a type="button" class="btn btn-default btn-sm" href="{% url "backoffice_finance_sell_add" %}">
+                <span class="glyphicon glyphicon-plus"></span> {% trans "Add sell" %}
+            </a>
+        </div>
+    </div>
+
+    {% if sells %}
+        <h2 class="sub-header">
+            {% blocktrans with count=sells.count %}
+                Search results <small>{{ count }} sell(s)</small>
+            {% endblocktrans %}
+        </h2>
+        <div class="table-responsive">
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>{% trans "Date" %}</th>
+                <th>{% trans "Price" %}</th>
+                <th>{% trans "Total units" %}</th>
+                <th>{% trans "Actions" %}</th>
+              </tr>
+            </thead>
+            <tbody>
+                {% for sell in sells %}
+                    <tr>
+                        <td>{{ sell.pk }}</td>
+                        <td>{{ sell.date }}</td>
+                        <td>{{ sell.price }}</td>
+                        <td>{{ sell.get_total_units }}</td>
+                        <td>
+                            <a type="button" class="btn btn-default btn-xs" href="{% url "backoffice_finance_sell_edit" sell.pk %}">
+                                <span class="glyphicon glyphicon-pencil"></span> {% trans "Edit" %}
+                            </a>
+                            <a type="button" class="btn btn-default btn-xs" href="{% url "backoffice_finance_sell_delete" sell.pk %}">
+                                <span class="glyphicon glyphicon-trash"></span> {% trans "Delete" %}
+                            </a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+          </table>
+        </div>
+    {% endif %}        
+{% endblock "content" %}    
