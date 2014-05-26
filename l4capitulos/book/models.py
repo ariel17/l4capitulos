@@ -252,3 +252,19 @@ class BookImage(ImageModel):
 
     def __unicode__(self):
         return u"picture#%d@book#%d" % (self.pk, self.book.pk)
+
+
+class Availability(models.Model):
+    """
+    TODO
+    """
+    book = models.ForeignKey(
+        Book,
+        unique=True
+    )
+
+    quantity = models.PositiveIntegerField(
+        _('Quantity'),
+        default=0,
+        help_text=_('How many items of this book are available.')
+    )

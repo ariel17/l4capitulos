@@ -98,7 +98,9 @@ def book_author_edit(request, author_id):
         form = AuthorForm(request.POST, instance=author)
         if form.is_valid():
             form.save()
-            messages.info(request, _('Author updated :)'))
+            messages.info(
+                request, _("Author '%s' updated :)") % author.get_full_name()
+            )
 
             if 'save' in request.POST:
                 return redirect('backoffice_book_author')
@@ -146,7 +148,7 @@ def book_category(request):
     TODO
     """
     return render(request, 'backoffice/book_category.html', {
-        'categories': Category.objects.all(),
+        'categories': Category.objects.all().order_by('pk'),
         'section': 'book_category',
     })
 
@@ -193,7 +195,9 @@ def book_category_edit(request, category_id):
         form = CategoryForm(request.POST, instance=category)
         if form.is_valid():
             category = form.save()
-            messages.info(request, _('Category updated :)'))
+            messages.info(
+                request, _("Category '%s' updated :)") % category.name
+            )
 
             if 'save' in request.POST:
                 return redirect('backoffice_book_category')
@@ -240,7 +244,7 @@ def book_status(request):
     TODO
     """
     return render(request, 'backoffice/book_status.html', {
-        'statuses': Status.objects.all(),
+        'statuses': Status.objects.all().order_by('pk'),
         'section': 'book_status',
     })
 
@@ -285,7 +289,9 @@ def book_status_edit(request, status_id):
         form = StatusForm(request.POST, instance=status)
         if form.is_valid():
             form.save()
-            messages.info(request, _('Status updated :)'))
+            messages.info(
+                request, _("Status '%s' updated :)") % status.name
+            )
 
             if 'save' in request.POST:
                 return redirect('backoffice_book_status')
@@ -389,7 +395,9 @@ def book_book_edit(request, book_id):
         form = BookForm(request.POST, instance=book)
         if form.is_valid():
             book = form.save()
-            messages.info(request, _('Book updated :)'))
+            messages.info(
+                request, _("Book '%s' updated :)") % book.title
+            )
 
             if 'save' in request.POST:
                 return redirect('backoffice_book_book')
@@ -589,7 +597,9 @@ def finance_purchase_edit(request, purchase_id):
         form = PurchaseForm(request.POST, instance=purchase)
         if form.is_valid():
             form.save()
-            messages.info(request, _('Purchase updated :)'))
+            messages.info(
+                request, _("Purchase for '%s' updated :)") % purchase.date
+            )
 
             if 'save' in request.POST:
                 return redirect('backoffice_finance_purchase')
@@ -883,7 +893,9 @@ def finance_sell_edit(request, sell_id):
         form = SellForm(request.POST, instance=sell)
         if form.is_valid():
             form.save()
-            messages.info(request, _('Purchase updated :)'))
+            messages.info(
+                request, _("Sell for '%s' updated :)") % sell.date
+            )
 
             if 'save' in request.POST:
                 return redirect('backoffice_finance_sell')

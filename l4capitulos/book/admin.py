@@ -9,7 +9,7 @@ __author__ = "Ariel Gerardo Rios (ariel.gerardo.rios@gmail.com)"
 
 from django.contrib import admin
 
-from .models import Author, Book, Category, Status
+from .models import Author, Book, Category, Status, Availability
 
 
 class AuthorAdmin(admin.ModelAdmin):
@@ -34,7 +34,14 @@ class StatusAdmin(admin.ModelAdmin):
     list_display = ('name', )
 
 
+class AvailabilityAdmin(admin.ModelAdmin):
+    fields = ('book', 'quantity')
+    list_display = ('book', 'quantity')
+    list_display_links = ('book',)
+
+
 admin.site.register(Author, AuthorAdmin)
 admin.site.register(Book, BookAdmin)
 admin.site.register(Category, CategoryAdmin)
 admin.site.register(Status, StatusAdmin)
+admin.site.register(Availability, AvailabilityAdmin)
