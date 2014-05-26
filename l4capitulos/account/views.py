@@ -29,3 +29,10 @@ def account_login(request):
     return render(request, 'account/login.html', {
         'form': form,
     })
+
+
+def account_logout(request):
+    """
+    TODO
+    """
+    pass

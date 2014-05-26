@@ -64,5 +64,4 @@ RAVEN_CONFIG = {
     '15ff77ecb7734f9bac1b8b614c03de31@sentry.ariel17.com.ar/8',
 }
 
-
 # vim: ai ts=4 sts=4 et sw=4 ft=python
