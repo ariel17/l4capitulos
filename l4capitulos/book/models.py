@@ -173,6 +173,7 @@ class Book(models.Model):
 
     authors = models.ManyToManyField(
         Author,
+        blank=True,
         null=True,
     )
 
