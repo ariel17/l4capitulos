@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-05-26 03:37+0000\n"
+"POT-Creation-Date: 2014-05-27 21:10+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -44,9 +44,9 @@ msgid "Author '%s' added :)"
 msgstr "Autor '%s' agregado :)"
 
 #: backoffice/views.py:102
-#, fuzzy, python-format
+#, python-format
 msgid "Author '%s' updated :)"
-msgstr "Autor actualizado :)"
+msgstr "Autor '%s' actualizado :)"
 
 #: backoffice/views.py:134
 msgid "Author deleted."
@@ -62,9 +62,9 @@ msgid "Category '%s' added :)"
 msgstr "Categoría '%s' agregada :)"
 
 #: backoffice/views.py:199
-#, fuzzy, python-format
+#, python-format
 msgid "Category '%s' updated :)"
-msgstr "Categoría actualizada :)"
+msgstr "Categoría '%s' actualizada :)"
 
 #: backoffice/views.py:230
 msgid "Category deleted."
@@ -80,9 +80,9 @@ msgid "Status '%s' added :)"
 msgstr "Estado '%s' agregado :)"
 
 #: backoffice/views.py:293
-#, fuzzy, python-format
+#, python-format
 msgid "Status '%s' updated :)"
-msgstr "Estado actualizado :)"
+msgstr "Estado '%s' actualizado :)"
 
 #: backoffice/views.py:325
 msgid "Status deleted."
@@ -98,9 +98,9 @@ msgid "Book '%s' added :)"
 msgstr "Libro '%s' agregado :)"
 
 #: backoffice/views.py:399
-#, fuzzy, python-format
+#, python-format
 msgid "Book '%s' updated :)"
-msgstr "Libro actualizado :)"
+msgstr "Libro '%s' actualizado :)"
 
 #: backoffice/views.py:430
 msgid "Book deleted."
@@ -135,9 +135,9 @@ msgid "Purchase for '%s' added :)"
 msgstr "Compra para '%s' agregada :)"
 
 #: backoffice/views.py:601
-#, fuzzy, python-format
+#, python-format
 msgid "Purchase for '%s' updated :)"
-msgstr "Compra para '%s' agregada :)"
+msgstr "Compra para '%s' actualizada :)"
 
 #: backoffice/views.py:633
 msgid "Purchase deleted."
@@ -187,9 +187,9 @@ msgid "Sell for '%s' added :)"
 msgstr "Compra para '%s' agregada :)"
 
 #: backoffice/views.py:897
-#, fuzzy, python-format
+#, python-format
 msgid "Sell for '%s' updated :)"
-msgstr "Compra para '%s' agregada :)"
+msgstr "Compra para '%s' actualizada :)"
 
 #: backoffice/views.py:929
 msgid "Sell deleted."
@@ -275,9 +275,10 @@ msgstr "Agregar imágenes"
 msgid "Images for this book"
 msgstr "Imágenes para este libro"
 
-#: backoffice/forms/books.py:173 book/models.py:169
+#: backoffice/forms/books.py:173 book/models.py:169 finance/models.py:97
 #: templates/backoffice/book_author_edit.html:22
 #: templates/backoffice/book_book.html:30
+#: templates/backoffice/finance_purchase_cost.html:9
 #: templates/backoffice/inventory.html:38
 msgid "Title"
 msgstr "Título"
@@ -331,55 +332,55 @@ msgstr "Sí"
 msgid "Purchase information"
 msgstr "Información de compra"
 
-#: backoffice/forms/finances.py:44 backoffice/forms/finances.py:183
+#: backoffice/forms/finances.py:45 backoffice/forms/finances.py:186
 msgid "Add items"
 msgstr "Agregar un ítem"
 
-#: backoffice/forms/finances.py:47
+#: backoffice/forms/finances.py:48
 msgid "Items for this purchase"
 msgstr "Ítems en esta compra"
 
-#: backoffice/forms/finances.py:59 backoffice/forms/finances.py:198
+#: backoffice/forms/finances.py:60 backoffice/forms/finances.py:201
 msgid "Add costs"
 msgstr "Agregar costos"
 
-#: backoffice/forms/finances.py:62
+#: backoffice/forms/finances.py:63
 msgid "Costs for this purchase"
 msgstr "Costos para esta compra"
 
-#: backoffice/forms/finances.py:89 backoffice/forms/finances.py:228
+#: backoffice/forms/finances.py:90 backoffice/forms/finances.py:231
 msgid "Price from"
 msgstr "Precio desde"
 
-#: backoffice/forms/finances.py:94 backoffice/forms/finances.py:233
+#: backoffice/forms/finances.py:95 backoffice/forms/finances.py:236
 msgid "Price to"
 msgstr "Precio hasta"
 
-#: backoffice/forms/finances.py:129
+#: backoffice/forms/finances.py:131
 msgid "Puchase item information"
 msgstr "Información de ítem de compra"
 
-#: backoffice/forms/finances.py:148
+#: backoffice/forms/finances.py:150
 msgid "Puchase cost information"
 msgstr "Información de costo de compra"
 
-#: backoffice/forms/finances.py:168
+#: backoffice/forms/finances.py:171
 msgid "Sell information"
 msgstr "Información de venta"
 
-#: backoffice/forms/finances.py:186
+#: backoffice/forms/finances.py:189
 msgid "Items for this sell"
 msgstr "Ítems en esta venta"
 
-#: backoffice/forms/finances.py:201
+#: backoffice/forms/finances.py:204
 msgid "Costs for this sell"
 msgstr "Costos en esta venta"
 
-#: backoffice/forms/finances.py:268
+#: backoffice/forms/finances.py:271
 msgid "Sell item information"
 msgstr "Información del ítem de venta"
 
-#: backoffice/forms/finances.py:287
+#: backoffice/forms/finances.py:290
 msgid "Sell cost information"
 msgstr "Información del costo de venta"
 
@@ -452,7 +453,7 @@ msgstr "Agregado en"
 msgid "Is primary"
 msgstr "Es primaria"
 
-#: book/models.py:267 finance/models.py:68
+#: book/models.py:267 finance/models.py:71
 #: templates/backoffice/finance_purchase_item.html:8
 #: templates/backoffice/finance_sell_item.html:8
 #: templates/backoffice/inventory.html:39
@@ -460,50 +461,61 @@ msgid "Quantity"
 msgstr "Cantidad"
 
 #: book/models.py:269
-#, fuzzy
 msgid "How many items of this book are available."
-msgstr "Cuántos ítems involucrados en la operación."
+msgstr "Cuántos ítems de este libro están disponibles."
 
-#: finance/models.py:44
+#: finance/models.py:47
 msgid "Operation at"
 msgstr "Operación hecha en"
 
-#: finance/models.py:45
+#: finance/models.py:48
 msgid "The operation date."
 msgstr "La fecha de la operación."
 
-#: finance/models.py:49 finance/models.py:87
-#: templates/backoffice/finance_purchase.html:31
+#: finance/models.py:52 finance/models.py:90
+#: templates/backoffice/finance_purchase.html:32
 #: templates/backoffice/finance_purchase_cost.html:8
-#: templates/backoffice/finance_sell.html:31
+#: templates/backoffice/finance_sell.html:32
 #: templates/backoffice/finance_sell_cost.html:8
 #: templates/backoffice/inventory.html:40
 msgid "Price"
 msgstr "Precio"
 
-#: finance/models.py:52
+#: finance/models.py:55
 msgid "The operation price."
 msgstr "El precio de la operación."
 
-#: finance/models.py:70
+#: finance/models.py:73
 msgid "How many items came in the operation."
 msgstr "Cuántos ítems involucrados en la operación."
 
-#: finance/models.py:82
+#: finance/models.py:85
 msgid "Purchased at"
 msgstr "Comprado en"
 
-#: finance/models.py:83
+#: finance/models.py:86
 msgid "The cost operation date."
 msgstr "La fecha de la operación de compra."
 
-#: finance/models.py:90
+#: finance/models.py:93
 msgid "The cost price."
 msgstr "El precio de la compra."
 
-#: finance/models.py:96
+#: finance/models.py:101
+msgid "The title or short description for this cost."
+msgstr "El título o descripción corta para este costo."
+
+#: finance/models.py:107
 msgid "The origin description for the cost."
 msgstr "La description del origen del costo."
+
+#: finance/models.py:119 templates/backoffice/finance_purchase.html:50
+msgid "Invoice"
+msgstr "Comprobante"
+
+#: finance/models.py:123
+msgid "The associated invoice to this purchase."
+msgstr "El comprobante asociado a esta compra."
 
 #: l4capitulos/settings/base.py:99
 msgid "Spanish"
@@ -557,10 +569,10 @@ msgstr "Libros"
 #: templates/backoffice/book_book_image.html:10
 #: templates/backoffice/book_category.html:24
 #: templates/backoffice/book_status.html:24
-#: templates/backoffice/finance_purchase.html:33
-#: templates/backoffice/finance_purchase_cost.html:9
+#: templates/backoffice/finance_purchase.html:35
+#: templates/backoffice/finance_purchase_cost.html:10
 #: templates/backoffice/finance_purchase_item.html:9
-#: templates/backoffice/finance_sell.html:33
+#: templates/backoffice/finance_sell.html:35
 #: templates/backoffice/finance_sell_cost.html:9
 #: templates/backoffice/finance_sell_item.html:9
 msgid "Actions"
@@ -570,10 +582,10 @@ msgstr "Acciones"
 #: templates/backoffice/book_book_image.html:31
 #: templates/backoffice/book_category.html:37
 #: templates/backoffice/book_status.html:37
-#: templates/backoffice/finance_purchase.html:45
-#: templates/backoffice/finance_purchase_cost.html:20
+#: templates/backoffice/finance_purchase.html:54
+#: templates/backoffice/finance_purchase_cost.html:22
 #: templates/backoffice/finance_purchase_item.html:24
-#: templates/backoffice/finance_sell.html:45
+#: templates/backoffice/finance_sell.html:49
 #: templates/backoffice/finance_sell_cost.html:20
 #: templates/backoffice/finance_sell_item.html:24
 msgid "Edit"
@@ -583,10 +595,10 @@ msgstr "Editar"
 #: templates/backoffice/book_book_image.html:34
 #: templates/backoffice/book_category.html:40
 #: templates/backoffice/book_status.html:40
-#: templates/backoffice/finance_purchase.html:48
-#: templates/backoffice/finance_purchase_cost.html:23
+#: templates/backoffice/finance_purchase.html:57
+#: templates/backoffice/finance_purchase_cost.html:25
 #: templates/backoffice/finance_purchase_item.html:27
-#: templates/backoffice/finance_sell.html:48
+#: templates/backoffice/finance_sell.html:52
 #: templates/backoffice/finance_sell_cost.html:23
 #: templates/backoffice/finance_sell_item.html:27
 msgid "Delete"
@@ -794,10 +806,19 @@ msgstr ""
 msgid "Date"
 msgstr "Fecha"
 
-#: templates/backoffice/finance_purchase.html:32
-#: templates/backoffice/finance_sell.html:32
+#: templates/backoffice/finance_purchase.html:31
+#: templates/backoffice/finance_sell.html:31
 msgid "Total units"
 msgstr "Unidades totales"
+
+#: templates/backoffice/finance_purchase.html:33
+#: templates/backoffice/finance_sell.html:33
+msgid "Total cost"
+msgstr "Costo total"
+
+#: templates/backoffice/finance_purchase.html:34
+msgid "Full price"
+msgstr "Precio completo"
 
 #: templates/backoffice/finance_purchase_add.html:4
 msgid "Add a purchase"
@@ -880,6 +901,10 @@ msgstr ""
 "small>\n"
 "            "
 
+#: templates/backoffice/finance_sell.html:34
+msgid "Net price"
+msgstr "Precio neto"
+
 #: templates/backoffice/finance_sell_add.html:4
 msgid "Add a sell"
 msgstr "Agregar una compra"
@@ -958,9 +983,6 @@ msgstr "Entrar / salir"
 
 #~ msgid "The purchase price."
 #~ msgstr "El precio de la compra."
-
-#~ msgid "price"
-#~ msgstr "Precio"
 
 #~ msgid "Items"
 #~ msgstr "Ítems"

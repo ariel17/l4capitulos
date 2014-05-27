@@ -29,6 +29,7 @@ class PurchaseForm(forms.ModelForm, AddEditFormMixin):
                 _('Purchase information'),
                 'date',
                 'price',
+                'invoice'
             ),
         )
 
@@ -117,6 +118,7 @@ class PurchaseSearchForm(forms.Form, SearchFormMixin):
 
     class Meta:
         model = Purchase
+        exclude = ['invoice']
 
 
 class PurchaseItemForm(forms.ModelForm, AddEditFormMixin):

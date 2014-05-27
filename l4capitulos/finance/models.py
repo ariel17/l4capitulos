@@ -7,8 +7,11 @@ Description: Model definitions for finances management.
 __author__ = "Ariel Gerardo Rios (ariel.gerardo.rios@gmail.com)"
 
 
+from django.conf import settings
 from django.db import models
 from django.utils.translation import ugettext as _
+
+from common.models import FileModel
 
 
 class OperationManager(models.Manager):
@@ -112,6 +115,14 @@ class Purchase(Operation):
     """
     Registers the a bulk book purchase.
     """
+    invoice = models.FileField(
+        _('Invoice'),
+        upload_to=FileModel.normalize_filename(settings.FINANCE_INVOICE_PATH),
+        blank=True,
+        null=True,
+        help_text=_('The associated invoice to this purchase.')
+    )
+
     def __unicode__(self):
         return u"Purchase#%d@%s at $ %s" % (
             self.pk, self.date, self.price
