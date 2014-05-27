@@ -559,7 +559,7 @@ def finance_purchase_add(request):
     purchase = None
 
     if request.method == 'POST':
-        form = PurchaseForm(request.POST, request.FILE)
+        form = PurchaseForm(request.POST, request.FILES)
         if form.is_valid():
             purchase = form.save()
             messages.info(
