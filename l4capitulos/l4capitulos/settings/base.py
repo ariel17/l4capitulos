@@ -144,12 +144,15 @@ MESSAGE_TAGS = {
 
 
 # Common application configuration
-IMAGES_ROOT = "img"
+IMAGES_ROOT = 'img'
 IMAGES_DEFAULT = os.path.join(IMAGES_ROOT, 'no-img.png')
 
 
 # Book application configuration
 BOOK_IMAGES_PATH = os.path.join(IMAGES_ROOT, 'book')
+
+# Finance application configuration
+FINANCE_INVOICE_PATH = 'invoice'
 
 
 # Base sorl thumbnail configuration

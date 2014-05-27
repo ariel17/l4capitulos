@@ -13,19 +13,10 @@ from uuid import uuid4
 from django.db import models
 
 
-class ImageModel(models.Model):
+class FileModel(models.Model):
     """
     TODO
     """
-    @property
-    def image(self):
-        """
-        TODO
-        """
-        msg = u"%r must implement an ImageField named 'image'" % \
-            (self.__class__, )
-        raise NotImplementedError(msg)
-
     @staticmethod
     def normalize_filename(path):
         """

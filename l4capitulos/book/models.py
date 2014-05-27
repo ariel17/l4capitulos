@@ -11,7 +11,7 @@ from django.conf import settings
 from django.db import models
 from django.utils.translation import ugettext as _
 
-from common.models import ImageModel
+from common.models import FileModel
 
 
 class AuthorManager(models.Manager):
@@ -232,7 +232,7 @@ class Book(models.Model):
         return unicode(self.title)
 
 
-class BookImage(ImageModel):
+class BookImage(FileModel):
     """
     A book picture or image.
     """
@@ -240,7 +240,7 @@ class BookImage(ImageModel):
 
     image = models.ImageField(
         _(u"Book image"),
-        upload_to=ImageModel.normalize_filename(settings.BOOK_IMAGES_PATH),
+        upload_to=FileModel.normalize_filename(settings.BOOK_IMAGES_PATH),
         default=settings.IMAGES_DEFAULT,
     )
 
