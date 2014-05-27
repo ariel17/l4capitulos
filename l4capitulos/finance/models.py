@@ -90,6 +90,14 @@ class Cost(models.Model):
         help_text=_('The cost price.')
     )
 
+    title = models.CharField(
+        _('Title'),
+        max_length=100,
+        blank=True,
+        null=True,
+        help_text=_('The title or short description for this cost.')
+    )
+
     description = models.TextField(
         blank=True,
         null=True,

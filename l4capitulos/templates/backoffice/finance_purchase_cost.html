@@ -6,6 +6,7 @@
         <th>#</th>
         <th>{% trans "Date" %}</th>
         <th>{% trans "Price" %}</th>
+        <th>{% trans "Title" %}</th>
         <th>{% trans "Actions" %}</th>
       </tr>
     </thead>
@@ -15,6 +16,7 @@
                 <td>{{ cost.pk }}</td>
                 <td>{{ cost.date }}</td>
                 <td>{{ cost.price }}</td>
+                <td>{{ cost.title }}</td>
                 <td>
                     <a type="button" class="btn btn-default btn-xs" href="{% url "backoffice_finance_purchase_cost_edit" purchase.pk cost.pk %}">
                         <span class="glyphicon glyphicon-pencil"></span> {% trans "Edit" %}

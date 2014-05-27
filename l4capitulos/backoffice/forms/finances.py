@@ -147,6 +147,7 @@ class PurchaseCostForm(forms.ModelForm, AddEditFormMixin):
             Fieldset(
                 _('Puchase cost information'),
                 'date',
+                'title',
                 'price',
                 'description',
             ),
@@ -286,6 +287,7 @@ class SellCostForm(forms.ModelForm, AddEditFormMixin):
             Fieldset(
                 _('Sell cost information'),
                 'date',
+                'title',
                 'price',
                 'description',
             ),
