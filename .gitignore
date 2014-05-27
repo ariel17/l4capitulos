@@ -16,6 +16,9 @@ node_modules
 # Collected static content
 static
 
+# Uploaded media content
+media
+
 # local database
 db.*
 
