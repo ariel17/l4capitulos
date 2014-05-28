@@ -31,7 +31,8 @@ class PurchaseTestCase(TestCase):
             PurchaseItem.objects.create(
                 purchase=self._purchase,
                 book=book,
-                quantity=1
+                quantity=1,
+                price=Decimal('1.00')
             )
 
             PurchaseCost.objects.create(
@@ -43,14 +44,19 @@ class PurchaseTestCase(TestCase):
     def test_get_total_units(self):
         self.assertEquals(10, self._purchase.get_total_units())
 
-    def test_get_unit_price(self):
-        self.assertEquals(Decimal('10.00'), self._purchase.get_unit_price())
-
     def test_get_total_cost(self):
         self.assertEquals(Decimal('10.00'), self._purchase.get_total_cost())
 
     def test_get_full_price(self):
         self.assertEquals(Decimal('110.00'), self._purchase.get_full_price())
+
+    def test_get_total_price_with_price(self):
+        self.assertEquals(Decimal('100.00'), self._purchase.get_total_price())
+
+    def test_get_total_price_without_price(self):
+        self._purchase.price = Decimal('0')
+        self._purchase.save()
+        self.assertEquals(Decimal('10.00'), self._purchase.get_total_price())
 
 
 class SellTestCase(TestCase):
@@ -68,7 +74,8 @@ class SellTestCase(TestCase):
             SellItem.objects.create(
                 sell=self._sell,
                 book=book,
-                quantity=1
+                quantity=1,
+                price=Decimal('1.00')
             )
 
             SellCost.objects.create(
@@ -85,3 +92,11 @@ class SellTestCase(TestCase):
 
     def test_get_net_price(self):
         self.assertEquals(Decimal('90.00'), self._sell.get_net_price())
+
+    def test_get_total_price_with_price(self):
+        self.assertEquals(Decimal('100.00'), self._sell.get_total_price())
+
+    def test_get_total_price_without_price(self):
+        self._sell.price = Decimal('0')
+        self._sell.save()
+        self.assertEquals(Decimal('10.00'), self._sell.get_total_price())
