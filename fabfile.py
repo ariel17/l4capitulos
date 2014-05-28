@@ -148,6 +148,7 @@ def create_env():
     with cd(REMOTE_SOURCE_CLONE):
         run('npm install -s')  # NodeJS dependencies
         run('./node_modules/bower/bin/bower install -F --config.interactive=false')
+        run('ln -s %s %s' % (REMOTE_STORAGE_STATIC, './static'))
         run('./node_modules/bower-installer/bower-installer.js')
 
     run('mkdir -p %s' % REMOTE_ENV)
