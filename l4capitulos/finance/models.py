@@ -81,6 +81,14 @@ class Item(models.Model):
         help_text=_('How many items came in the operation.')
     )
 
+    price = models.DecimalField(
+        _('Price'),
+        max_digits=10,
+        decimal_places=2,
+        default=0,
+        help_text=_('The item price.')
+    )
+
     class Meta:
         abstract = True
 
