@@ -182,7 +182,7 @@ def deploy():
                                                REMOTE_SOURCE_TMP))
         with settings(warn_only=True):
             for d in ['media', 'static']:
-                tmp_dir = path.join(REMOTE_SOURCE_TMP, env.application, d)
+                tmp_dir = path.join(REMOTE_SOURCE_TMP, APPLICATION, d)
                 run('rm -rf %s' % tmp_dir)
 
     now = datetime.now().strftime(DATETIME_FORMAT)
@@ -190,7 +190,7 @@ def deploy():
     run('mkdir -p %s' % release_dir)
 
     tmp_bin = path.join(REMOTE_SOURCE_TMP, 'bin')
-    tmp_sources = path.join(REMOTE_SOURCE_CLONE, APPLICATION, '*')
+    tmp_sources = path.join(REMOTE_SOURCE_TMP, APPLICATION, '*')
     run('cp -r %s %s %s' % (tmp_sources, tmp_bin, release_dir))
 
     release_env_dir = path.join(release_dir, 'env')
