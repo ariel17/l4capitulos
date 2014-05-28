@@ -28,7 +28,7 @@ REMOTE_ENV_CURRENT_DEACTIVATE = path.join(REMOTE_ENV_CURRENT, 'bin',
 
 REMOTE_STORAGE = path.join('$HOME', 'storage')
 REMOTE_STORAGE_MEDIA = path.join(REMOTE_STORAGE, 'media')
-REMOTE_STORAGE_STATIC = path.join(REMOTE_STORAGE, 'assets')
+REMOTE_STORAGE_STATIC = path.join(REMOTE_STORAGE, 'static')
 
 REMOTE_RELEASE = path.join('$HOME', 'releases')
 REMOTE_RELEASE_CURRENT = path.join(REMOTE_RELEASE, 'current')
@@ -145,11 +145,6 @@ def create_env():
     """
     prepare_source(env.git_branch)
 
-    with cd(REMOTE_SOURCE_CLONE):
-        run('npm install -s')  # NodeJS dependencies
-        run('./node_modules/bower/bin/bower install -F --config.interactive=false')
-        run('./node_modules/bower-installer/bower-installer.js')
-
     run('mkdir -p %s' % REMOTE_ENV)
 
     now = datetime.now().strftime(DATETIME_FORMAT)
@@ -181,8 +176,8 @@ def deploy():
         run('git archive %s | tar -x -C %s' % (env.git_branch,
                                                REMOTE_SOURCE_TMP))
         with settings(warn_only=True):
-            for d in ['media', 'assets']:
-                tmp_dir = path.join(REMOTE_SOURCE_TMP, env.application, d)
+            for d in ['media', 'static']:
+                tmp_dir = path.join(REMOTE_SOURCE_TMP, APPLICATION, d)
                 run('rm -rf %s' % tmp_dir)
 
     now = datetime.now().strftime(DATETIME_FORMAT)
@@ -190,7 +185,7 @@ def deploy():
     run('mkdir -p %s' % release_dir)
 
     tmp_bin = path.join(REMOTE_SOURCE_TMP, 'bin')
-    tmp_sources = path.join(REMOTE_SOURCE_CLONE, APPLICATION, '*')
+    tmp_sources = path.join(REMOTE_SOURCE_TMP, APPLICATION, '*')
     run('cp -r %s %s %s' % (tmp_sources, tmp_bin, release_dir))
 
     release_env_dir = path.join(release_dir, 'env')
@@ -200,7 +195,7 @@ def deploy():
         release_media_dir = path.join(release_dir, 'media')
         run('mkdir -p %s' % REMOTE_STORAGE_MEDIA)
 
-        release_static_dir = path.join(release_dir, 'assets')
+        release_static_dir = path.join(release_dir, 'static')
         run('mkdir -p %s' % REMOTE_STORAGE_STATIC)
 
     run('ln -s %s %s' % (REMOTE_STORAGE_MEDIA, release_media_dir))
