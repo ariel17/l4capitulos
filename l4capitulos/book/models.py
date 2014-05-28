@@ -72,55 +72,6 @@ class Author(models.Model):
         return full_name
 
 
-class BookManager(models.Manager):
-    """
-    Custom manager for book model instances.
-    """
-    def search(self, *args, **kwargs):
-        """
-        Searches a book in filtering by indicated parameters.
-        """
-        books = self.all()
-
-        if 'title' in kwargs:
-            title = kwargs['title'].strip()
-            if title:
-                books = books.filter(title__icontains=title)
-
-        if 'authors' in kwargs:
-            for author in kwargs['authors'].split(' '):
-                author = author.strip()
-                if author:
-                    books = books.filter(authors__last_name__icontains=author)
-
-        if 'isbn' in kwargs:
-            isbn = kwargs['isbn'].strip()
-            if isbn:
-                books = books.filter(isbn__icontains=isbn)
-
-        # added_from
-        # added_to
-        # published_from
-        # published_to
-
-        if 'editorial' in kwargs:
-            editorial = kwargs['editorial'].strip()
-            if editorial:
-                books = books.filter(editorial__icontains=editorial)
-
-        if 'category' in kwargs:
-            category = kwargs['category'].strip()
-            if category:
-                books = books.filter(category__name__icontains=category)
-
-        if 'status' in kwargs:
-            status = kwargs['status'].strip()
-            if status:
-                books = books.filter(status__name__icontains=status)
-
-        return books
-
-
 class Category(models.Model):
     """
     A book category for classifition.
@@ -170,6 +121,71 @@ class Status(models.Model):
         return unicode(self.name)
 
 
+class Editorial(models.Model):
+    """
+    The editorial entity that publishes a book.
+    """
+    name = models.CharField(
+        _('Name'),
+        max_length=200,
+        blank=True,
+        null=True,
+        help_text=_("The editorial's name.")
+    )
+
+    class Meta:
+        ordering = ['name']
+
+
+class BookManager(models.Manager):
+    """
+    Custom manager for book model instances.
+    """
+    def search(self, *args, **kwargs):
+        """
+        Searches a book in filtering by indicated parameters.
+        """
+        books = self.all()
+
+        if 'title' in kwargs:
+            title = kwargs['title'].strip()
+            if title:
+                books = books.filter(title__icontains=title)
+
+        if 'authors' in kwargs:
+            for author in kwargs['authors'].split(' '):
+                author = author.strip()
+                if author:
+                    books = books.filter(authors__last_name__icontains=author)
+
+        if 'isbn' in kwargs:
+            isbn = kwargs['isbn'].strip()
+            if isbn:
+                books = books.filter(isbn__icontains=isbn)
+
+        # added_from
+        # added_to
+        # published_from
+        # published_to
+
+        if 'editorial' in kwargs:
+            editorial = kwargs['editorial'].strip()
+            if editorial:
+                books = books.filter(editorial__icontains=editorial)
+
+        if 'category' in kwargs:
+            category = kwargs['category'].strip()
+            if category:
+                books = books.filter(category__name__icontains=category)
+
+        if 'status' in kwargs:
+            status = kwargs['status'].strip()
+            if status:
+                books = books.filter(status__name__icontains=status)
+
+        return books
+
+
 class Book(models.Model):
     """
     The book itself.
@@ -201,12 +217,10 @@ class Book(models.Model):
         help_text=_("The publication date of the book.")
     )
 
-    editorial = models.CharField(
-        _('Editorial'),
-        max_length=100,
+    editorial = models.ForeignKey(
+        Editorial,
         blank=True,
         null=True,
-        help_text=_("The editorial that printed and released the book.")
     )
 
     summary = models.TextField(
