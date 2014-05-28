@@ -69,6 +69,7 @@ class Operation(models.Model):
     objects = OperationManager()
 
     class Meta:
+        ordering = ['date', 'title']
         abstract = True
 
 
