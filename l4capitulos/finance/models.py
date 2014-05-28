@@ -60,6 +60,9 @@ class Operation(models.Model):
         _('Price'),
         max_digits=10,
         decimal_places=2,
+        blank=True,
+        null=True,
+        default=0,
         help_text=_('The operation price.')
     )
 
@@ -98,7 +101,7 @@ class Cost(models.Model):
     Registers a cost in an operation.
     """
     date = models.DateField(
-        _('Purchased at'),
+        _('Created at'),
         help_text=_('The cost operation date.')
     )
 
@@ -144,12 +147,13 @@ class Purchase(Operation):
             self.pk, self.date, self.price
         )
 
-    def get_unit_price(self):
+    def get_total_price(self):
         """
-        Returns the price by item invidually.
+        Returns the total price of all items.
         """
-        total_quantity = sum([i.quantity for i in self.purchaseitem_set.all()])
-        return self.price / total_quantity
+        if self.price:
+            return self.price
+        return sum([i.quantity * i.price for i in self.purchaseitem_set.all()])
 
     def get_total_units(self):
         """
@@ -202,6 +206,11 @@ class Sell(Operation):
         return u"Sell#%d@%s at $ %s" % (
             self.pk, self.date, self.price
         )
+
+    def get_total_price(self):
+        if self.price:
+            return self.price
+        return sum([i.quantity * i.price for i in self.sellitem_set.all()])
 
     def get_total_units(self):
         """

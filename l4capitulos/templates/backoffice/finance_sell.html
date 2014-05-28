@@ -29,7 +29,7 @@
                 <th>#</th>
                 <th>{% trans "Date" %}</th>
                 <th>{% trans "Total units" %}</th>
-                <th>{% trans "Price" %}</th>
+                <th>{% trans "Total Price" %}</th>
                 <th>{% trans "Total cost" %}</th>
                 <th>{% trans "Net price" %}</th>
                 <th>{% trans "Actions" %}</th>
@@ -41,7 +41,7 @@
                         <td>{{ sell.pk }}</td>
                         <td>{{ sell.date }}</td>
                         <td>{{ sell.get_total_units }}</td>
-                        <td>{{ sell.price }}</td>
+                        <td>{{ sell.get_total_price }}</td>
                         <td>{{ sell.get_total_cost }}</td>
                         <td>{{ sell.get_net_price }}</td>
                         <td>
