@@ -143,6 +143,7 @@ class PurchaseItemForm(forms.ModelForm, AddEditFormMixin):
                 _('Puchase item information'),
                 'book',
                 'quantity',
+                'price',
             ),
             self.get_button_holder()
         )
@@ -283,6 +284,7 @@ class SellItemForm(forms.ModelForm, AddEditFormMixin):
                 _('Sell item information'),
                 'book',
                 'quantity',
+                'price',
             ),
             self.get_button_holder()
         )
