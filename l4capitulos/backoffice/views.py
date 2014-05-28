@@ -513,7 +513,7 @@ def book_image_delete(request, book_id, image_id):
     """
     TODO
     """
-    _ = get_object_or_404(Book, pk=book_id)
+    get_object_or_404(Book, pk=book_id)
     image = get_object_or_404(BookImage, pk=image_id)
 
     if request.method == 'POST':
@@ -665,7 +665,7 @@ def finance_purchase_item_add(request, purchase_id):
 
             elif 'save_and_new' in request.POST:
                 return redirect('backoffice_finance_purchase_item_add',
-                                purchase_id=purchase_id, item_id=item.pk)
+                                purchase_id=purchase_id)
     else:
         form = PurchaseItemForm(instance=item)
 
