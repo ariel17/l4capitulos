@@ -138,7 +138,7 @@ class Category(models.Model):
     )
 
     class Meta:
-        ordering = ['name', 'parent_id']
+        ordering = ['name', 'parent__id']
 
     def get_full_name(self):
         """
