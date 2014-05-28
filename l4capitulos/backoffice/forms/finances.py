@@ -28,6 +28,7 @@ class PurchaseForm(forms.ModelForm, AddEditFormMixin):
             Fieldset(
                 _('Purchase information'),
                 'date',
+                'title',
                 'price',
                 'invoice'
             ),
@@ -86,6 +87,11 @@ class PurchaseSearchForm(forms.Form, SearchFormMixin):
         required=False,
     )
 
+    title = forms.CharField(
+        widget=forms.TextInput(attrs={"placeholder": _("Title")}),
+        required=False,
+    )
+
     price_from = forms.DecimalField(
         widget=forms.TextInput(attrs={"placeholder": _("Price from")}),
         required=False,
@@ -109,10 +115,16 @@ class PurchaseSearchForm(forms.Form, SearchFormMixin):
             ),
 
             Div(
+                Field("title"),
+                css_class="row group-padding-12"
+            ),
+
+            Div(
                 Field("price_from"),
                 Field("price_to"),
                 css_class="row group-padding-12"
             ),
+
             self.get_button_holder()
         )
 

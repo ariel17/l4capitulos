@@ -48,6 +48,14 @@ class Operation(models.Model):
         help_text=_('The operation date.')
     )
 
+    title = models.CharField(
+        _('Title'),
+        max_length=100,
+        blank=True,
+        null=True,
+        help_text=_('The title or short description for this operation.')
+    )
+
     price = models.DecimalField(
         _('Price'),
         max_digits=10,
