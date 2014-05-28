@@ -57,6 +57,9 @@ class Author(models.Model):
 
     objects = AuthorManager()
 
+    class Meta:
+        ordering = ['first_name', 'last_name']
+
     def __unicode__(self):
         return unicode(self.get_full_name())
 
@@ -134,6 +137,9 @@ class Category(models.Model):
         help_text=_('The category name.')
     )
 
+    class Meta:
+        ordering = ['name', 'parent_id']
+
     def get_full_name(self):
         """
         Returns the full category name with parent's names, separated by ">".
@@ -156,6 +162,9 @@ class Status(models.Model):
         max_length=100,
         help_text=_('The status name.')
     )
+
+    class Meta:
+        ordering = ['name']
 
     def __unicode__(self):
         return unicode(self.name)
@@ -227,6 +236,9 @@ class Book(models.Model):
     )
 
     objects = BookManager()
+
+    class Meta:
+        ordering = ['title']
 
     def __unicode__(self):
         return unicode(self.title)
