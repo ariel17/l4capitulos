@@ -28,7 +28,7 @@ REMOTE_ENV_CURRENT_DEACTIVATE = path.join(REMOTE_ENV_CURRENT, 'bin',
 
 REMOTE_STORAGE = path.join('$HOME', 'storage')
 REMOTE_STORAGE_MEDIA = path.join(REMOTE_STORAGE, 'media')
-REMOTE_STORAGE_STATIC = path.join(REMOTE_STORAGE, 'assets')
+REMOTE_STORAGE_STATIC = path.join(REMOTE_STORAGE, 'static')
 
 REMOTE_RELEASE = path.join('$HOME', 'releases')
 REMOTE_RELEASE_CURRENT = path.join(REMOTE_RELEASE, 'current')
@@ -181,7 +181,7 @@ def deploy():
         run('git archive %s | tar -x -C %s' % (env.git_branch,
                                                REMOTE_SOURCE_TMP))
         with settings(warn_only=True):
-            for d in ['media', 'assets']:
+            for d in ['media', 'static']:
                 tmp_dir = path.join(REMOTE_SOURCE_TMP, env.application, d)
                 run('rm -rf %s' % tmp_dir)
 
@@ -200,7 +200,7 @@ def deploy():
         release_media_dir = path.join(release_dir, 'media')
         run('mkdir -p %s' % REMOTE_STORAGE_MEDIA)
 
-        release_static_dir = path.join(release_dir, 'assets')
+        release_static_dir = path.join(release_dir, 'static')
         run('mkdir -p %s' % REMOTE_STORAGE_STATIC)
 
     run('ln -s %s %s' % (REMOTE_STORAGE_MEDIA, release_media_dir))
