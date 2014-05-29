@@ -54,6 +54,21 @@ urlpatterns = patterns('',
         'backoffice.views.book_category_delete',
         name='backoffice_book_category_delete'),
 
+    url(r'^backoffice/book/editorial/$', 'backoffice.views.book_editorial',
+        name='backoffice_book_editorial'),
+
+    url(r'^backoffice/book/editorial/add/$',
+        'backoffice.views.book_editorial_add',
+        name='backoffice_book_editorial_add'),
+
+    url(r'^backoffice/book/editorial/(?P<editorial_id>\d+)/edit/$',
+        'backoffice.views.book_editorial_edit',
+        name='backoffice_book_editorial_edit'),
+
+    url(r'^backoffice/book/editorial/(?P<editorial_id>\d+)/delete/$',
+        'backoffice.views.book_editorial_delete',
+        name='backoffice_book_editorial_delete'),
+
     url(r'^backoffice/book/status/$', 'backoffice.views.book_status',
         name='backoffice_book_status'),
 

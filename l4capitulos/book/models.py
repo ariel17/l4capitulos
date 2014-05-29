@@ -59,6 +59,7 @@ class Author(models.Model):
 
     class Meta:
         ordering = ['first_name', 'last_name']
+        unique_together = ('first_name', 'last_name')
 
     def __unicode__(self):
         return unicode(self.get_full_name())
@@ -70,55 +71,6 @@ class Author(models.Model):
         full_name = u"%s %s" % (self.first_name, self.last_name)
         full_name.strip()
         return full_name
-
-
-class BookManager(models.Manager):
-    """
-    Custom manager for book model instances.
-    """
-    def search(self, *args, **kwargs):
-        """
-        Searches a book in filtering by indicated parameters.
-        """
-        books = self.all()
-
-        if 'title' in kwargs:
-            title = kwargs['title'].strip()
-            if title:
-                books = books.filter(title__icontains=title)
-
-        if 'authors' in kwargs:
-            for author in kwargs['authors'].split(' '):
-                author = author.strip()
-                if author:
-                    books = books.filter(authors__last_name__icontains=author)
-
-        if 'isbn' in kwargs:
-            isbn = kwargs['isbn'].strip()
-            if isbn:
-                books = books.filter(isbn__icontains=isbn)
-
-        # added_from
-        # added_to
-        # published_from
-        # published_to
-
-        if 'editorial' in kwargs:
-            editorial = kwargs['editorial'].strip()
-            if editorial:
-                books = books.filter(editorial__icontains=editorial)
-
-        if 'category' in kwargs:
-            category = kwargs['category'].strip()
-            if category:
-                books = books.filter(category__name__icontains=category)
-
-        if 'status' in kwargs:
-            status = kwargs['status'].strip()
-            if status:
-                books = books.filter(status__name__icontains=status)
-
-        return books
 
 
 class Category(models.Model):
@@ -159,6 +111,7 @@ class Status(models.Model):
     """
     name = models.CharField(
         _('Name'),
+        unique=True,
         max_length=100,
         help_text=_('The status name.')
     )
@@ -168,6 +121,92 @@ class Status(models.Model):
 
     def __unicode__(self):
         return unicode(self.name)
+
+
+class EditorialManager(models.Manager):
+    """
+    Custom manager for editorial model instances.
+    """
+    def search(self, *args, **kwargs):
+        """
+        Search for possible matchings on editorial's fields.
+        """
+        editorials = self.all()
+
+        if 'name' in kwargs:
+            name = kwargs['name'].strip()
+            if name:
+                editorials = editorials.filter(name__icontains=name)
+
+        return editorials
+
+
+class Editorial(models.Model):
+    """
+    The editorial entity that publishes a book.
+    """
+    name = models.CharField(
+        _('Name'),
+        unique=True,
+        max_length=200,
+        blank=True,
+        null=True,
+        help_text=_("The editorial's name.")
+    )
+
+    objects = EditorialManager()
+
+    class Meta:
+        ordering = ['name']
+
+
+class BookManager(models.Manager):
+    """
+    Custom manager for book model instances.
+    """
+    def search(self, *args, **kwargs):
+        """
+        Searches a book in filtering by indicated parameters.
+        """
+        books = self.all()
+
+        if 'title' in kwargs:
+            title = kwargs['title'].strip()
+            if title:
+                books = books.filter(title__icontains=title)
+
+        if 'authors' in kwargs:
+            for author in kwargs['authors'].split(' '):
+                author = author.strip()
+                if author:
+                    books = books.filter(authors__last_name__icontains=author)
+
+        if 'isbn' in kwargs:
+            isbn = kwargs['isbn'].strip()
+            if isbn:
+                books = books.filter(isbn__icontains=isbn)
+
+        # added_from
+        # added_to
+        # published_from
+        # published_to
+
+        if 'editorial' in kwargs:
+            editorial = kwargs['editorial'].strip()
+            if editorial:
+                books = books.filter(editorial__name__icontains=editorial)
+
+        if 'category' in kwargs:
+            category = kwargs['category'].strip()
+            if category:
+                books = books.filter(category__name__icontains=category)
+
+        if 'status' in kwargs:
+            status = kwargs['status'].strip()
+            if status:
+                books = books.filter(status__name__icontains=status)
+
+        return books
 
 
 class Book(models.Model):
@@ -202,11 +241,17 @@ class Book(models.Model):
     )
 
     editorial = models.CharField(
-        _('Editorial'),
-        max_length=100,
+         _('Editorial'),
+         max_length=100,
+         blank=True,
+         null=True,
+         help_text=_("The editorial that printed and released the book.")
+     )
+
+    editorial_fk = models.ForeignKey(
+        Editorial,
         blank=True,
         null=True,
-        help_text=_("The editorial that printed and released the book.")
     )
 
     summary = models.TextField(

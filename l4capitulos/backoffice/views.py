@@ -13,10 +13,10 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.utils.translation import ugettext as _
 
 
-from .forms.books import BookForm, BookSearchForm, AuthorForm, AuthorSearchForm, CategoryForm, StatusForm, BookImageForm
+from .forms.books import BookForm, BookSearchForm, AuthorForm, AuthorSearchForm, CategoryForm, StatusForm, BookImageForm, EditorialForm, EditorialSearchForm
 from .forms.commons import DeleteForm
 from .forms.finances import PurchaseForm, PurchaseSearchForm, PurchaseItemForm, PurchaseCostForm, SellForm, SellSearchForm, SellItemForm, SellCostForm
-from book.models import Author, Book, Category, Status, BookImage
+from book.models import Author, Book, Category, Status, BookImage, Editorial
 from finance.models import Purchase, PurchaseItem, PurchaseCost, Sell, SellItem, SellCost
 
 
@@ -148,7 +148,7 @@ def book_category(request):
     TODO
     """
     return render(request, 'backoffice/book_category.html', {
-        'categories': Category.objects.all().order_by('pk'),
+        'categories': Category.objects.all(),
         'section': 'book_category',
     })
 
@@ -239,12 +239,119 @@ def book_category_delete(request, category_id):
 
 
 @login_required
+def book_editorial(request):
+    """
+    TODO
+    """
+    form = EditorialSearchForm(request.GET)
+
+    if len(request.GET.keys()):
+        if form.is_valid():
+            editorials = Editorial.objects.search(**form.cleaned_data)
+        else:
+            editorials = []
+    else:
+        editorials = []
+
+    return render(request, 'backoffice/book_editorial.html', {
+        'form': form,
+        'editorials': editorials,
+        'section': 'book_editorial',
+    })
+
+
+@login_required
+def book_editorial_add(request):
+    """
+    TODO
+    """
+    if request.method == 'POST':
+        form = EditorialForm(request.POST)
+        if form.is_valid():
+            editorial = form.save()
+            messages.info(
+                request, _("Editorial '%s' added :)") % editorial.name
+            )
+
+            if 'save' in request.POST:
+                return redirect('backoffice_book_editorial')
+
+            if 'save_and_edit' in request.POST:
+                return redirect('backoffice_book_editorial_edit',
+                                editorial_id=editorial.pk)
+
+            elif 'save_and_new' in request.POST:
+                return redirect('backoffice_book_editorial_add')
+    else:
+        form = EditorialForm()
+
+    return render(request, 'backoffice/book_editorial_add.html', {
+        'form': form,
+        'section': 'book_editorial',
+    })
+
+
+@login_required
+def book_editorial_edit(request, editorial_id):
+    """
+    TODO
+    """
+    editorial = get_object_or_404(Editorial, pk=editorial_id)
+
+    if request.method == 'POST':
+        form = EditorialForm(request.POST, instance=editorial)
+        if form.is_valid():
+            editorial = form.save()
+            messages.info(
+                request, _("Editorial '%s' updated :)") % editorial.name
+            )
+
+            if 'save' in request.POST:
+                return redirect('backoffice_book_editorial')
+
+            if 'save_and_edit' in request.POST:
+                return redirect('backoffice_book_editorial_edit',
+                                editorial_id=editorial.pk)
+
+            elif 'save_and_new' in request.POST:
+                return redirect('backoffice_book_editorial_add')
+    else:
+        form = EditorialForm(instance=editorial)
+
+    return render(request, 'backoffice/book_editorial_edit.html', {
+        'form': form,
+        'editorial': editorial,
+        'section': 'book_editorial',
+    })
+
+
+@login_required
+def book_editorial_delete(request, editorial_id):
+    """
+    TODO
+    """
+    editorial = get_object_or_404(Editorial, pk=editorial_id)
+
+    if request.method == 'POST':
+        editorial.delete()
+        messages.warning(request, _('Editorial deleted.'))
+        return redirect('backoffice_book_editorial')
+
+    return render(request, 'backoffice/commons_delete.html', {
+        'obj': editorial,
+        'model': _('Editorial'),
+        'form': DeleteForm(),
+        'section': 'book_editorial',
+    })
+
+
+@login_required
 def book_status(request):
     """
     TODO
     """
     return render(request, 'backoffice/book_status.html', {
-        'statuses': Status.objects.all().order_by('pk'),
+        'statuses': Status.objects.all(),
         'section': 'book_status',
     })
 

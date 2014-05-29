@@ -29,6 +29,9 @@ CACHES = {
 }
 
 
+SECRET_KEY = "(b-5!nc)b*x--bcx-d!d@g+l!4tmp1in*gfidq)+7ta@&9tq+&"
+
+
 THUMBNAIL_DEBUG = True
 
 
