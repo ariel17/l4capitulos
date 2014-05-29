@@ -25,6 +25,12 @@
               {% trans "Statuses" %}
           </a>
       </li>
+      <li {% if section == 'book_editorial' %}class="active"{% endif %}>
+          <a href="{% url "backoffice_book_editorial" %}">
+              <span class="glyphicon glyphicon-bookmark"></span>
+              {% trans "Editorials" %}
+          </a>
+      </li>
       <li {% if section == 'book_book' %}class="active"{% endif %}>
           <a href="{% url "backoffice_book_book" %}">
               <span class="glyphicon glyphicon-book"></span>
