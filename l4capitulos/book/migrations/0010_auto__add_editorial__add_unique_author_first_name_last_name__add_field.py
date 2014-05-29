@@ -9,6 +9,8 @@ from book.models import Book, Editorial
 
 class Migration(SchemaMigration):
 
+    no_dry_run = True
+
     def forwards(self, orm):
         # Adding model 'Editorial'
         db.create_table(u'book_editorial', (
@@ -25,7 +27,7 @@ class Migration(SchemaMigration):
                       self.gf('django.db.models.fields.related.ForeignKey')(to=orm['book.Editorial'], null=True, blank=True),
                       keep_default=False)
         
-        for book in Book.objects.all():
+        for book in orm['book.Book'].objects.all():
             book.editorial_fk = Editorial.objects.get_or_create(
                 name=book.editorial
             )
