@@ -28,7 +28,7 @@ class Migration(SchemaMigration):
                       keep_default=False)
         
         for book in orm['book.Book'].objects.all():
-            book.editorial_fk = Editorial.objects.get_or_create(
+            book.editorial_fk, created = Editorial.objects.get_or_create(
                 name=book.editorial
             )
             book.save()
