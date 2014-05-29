@@ -240,15 +240,7 @@ class Book(models.Model):
         help_text=_("The publication date of the book.")
     )
 
-    editorial = models.CharField(
-         _('Editorial'),
-         max_length=100,
-         blank=True,
-         null=True,
-         help_text=_("The editorial that printed and released the book.")
-     )
-
-    editorial_fk = models.ForeignKey(
+    editorial = models.ForeignKey(
         Editorial,
         blank=True,
         null=True,
