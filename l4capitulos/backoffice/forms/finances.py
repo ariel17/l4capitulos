@@ -183,6 +183,7 @@ class SellForm(forms.ModelForm, AddEditFormMixin):
             Fieldset(
                 _('Sell information'),
                 'date',
+                'title',
                 'price',
             ),
         )
@@ -291,7 +292,7 @@ class SellItemForm(forms.ModelForm, AddEditFormMixin):
 
     class Meta:
         model = SellItem
-        exclude = ['purchase']
+        exclude = ['sell']
 
 
 class SellCostForm(forms.ModelForm, AddEditFormMixin):
