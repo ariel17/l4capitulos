@@ -29,6 +29,7 @@ def home(request):
         'books': Book.objects.all(),
         'authors': Author.objects.all(),
         'purchases': Purchase.objects.all(),
+        'sells': Sell.objects.all(),
         'section': 'home',
     })
 
