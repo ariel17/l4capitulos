@@ -15,7 +15,7 @@ from django.utils.translation import ugettext as _
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Layout, Fieldset, Div, Field, HTML
 
-from book.models import Author, Book, Category, Status, BookImage
+from book.models import Author, Book, Category, Status, BookImage, Editorial
 from .commons import AddEditFormMixin, SearchFormMixin
 
 
@@ -111,6 +111,51 @@ class StatusForm(forms.ModelForm, AddEditFormMixin):
 
     class Meta:
         model = Status
+
+
+class EditorialForm(forms.ModelForm, AddEditFormMixin):
+    """
+    TODO
+    """
+    def __init__(self, *args, **kwargs):
+        super(EditorialForm, self).__init__(*args, **kwargs)
+        self.helper = FormHelper()
+        self.helper.layout = Layout(
+            Fieldset(
+                _('Editorial information'),
+                'name',
+            ),
+            self.get_button_holder()
+        )
+
+    class Meta:
+        model = Editorial
+
+
+class EditorialSearchForm(forms.Form, SearchFormMixin):
+    """
+    TODO
+    """
+    name = forms.CharField(
+        widget=forms.TextInput(attrs={"placeholder": _("Editorial's name")}),
+        required=False,
+    )
+
+    def __init__(self, *args, **kwargs):
+        super(EditorialSearchForm, self).__init__(*args, **kwargs)
+        self.helper = FormHelper()
+        self.helper.form_method = 'get'
+        self.helper.form_class = 'form-inline'
+        self.helper.layout = Layout(
+            Div(
+                Field("name"),
+                css_class="row group-padding-12"
+            ),
+            self.get_button_holder()
+        )
+
+    class Meta:
+        model = Editorial
 
 
 class BookForm(forms.ModelForm, AddEditFormMixin):

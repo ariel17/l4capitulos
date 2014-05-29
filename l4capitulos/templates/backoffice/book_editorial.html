@@ -1,0 +1,56 @@
+{% extends "backoffice/base.html" %}
+{% load i18n crispy_forms_tags %}
+
+{% block "title-sufix" %}{% trans "Editorials" %}{% endblock %}
+
+{% block "content" %}
+<h1 class="page-header">{% trans "Search editorials" %}</h1>
+    
+    {% crispy form %}
+
+    <div class="row">
+        <div class="col-md-12 padded-12">
+            <a type="button" class="btn btn-default btn-sm" href="{% url "backoffice_book_editorial_add" %}">
+                <span class="glyphicon glyphicon-plus"></span> {% trans "Add editorial" %}
+            </a>
+        </div>
+    </div>
+
+    {% if editorials %}
+        <h2 class="sub-header">
+            {% blocktrans with count=editorials.count %}
+                Search results <small>{{ count }} editorial(s)</small>
+            {% endblocktrans %}
+        </h2>
+        <div class="table-responsive">
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>{% trans "Name" %}</th>
+                <th>{% trans "Actions" %}</th>
+              </tr>
+            </thead>
+            <tbody>
+                {% for editorial in editorials %}
+                    <tr>
+                        <td>{{ editorial.pk }}</td>
+                        <td>{{ editorial.name }}</td>
+                        <td>
+                            <a type="button" class="btn btn-default btn-xs" href="{% url "backoffice_book_book" %}?editorial={{ editorial.name|urlencode }}">
+                                <span class="glyphicon glyphicon-search"></span> {% trans "Books" %}
+                            </a>
+                            <a type="button" class="btn btn-default btn-xs" href="{% url "backoffice_book_editorial_edit" editorial.pk %}">
+                                <span class="glyphicon glyphicon-pencil"></span> {% trans "Edit" %}
+                            </a>
+                            <a type="button" class="btn btn-default btn-xs" href="{% url "backoffice_book_editorial_delete" editorial.pk %}">
+                                <span class="glyphicon glyphicon-remove"></span> {% trans "Delete" %}
+                            </a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+          </table>
+        </div>
+    {% endif %}        
+{% endblock "content" %}    

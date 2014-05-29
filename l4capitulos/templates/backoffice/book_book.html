@@ -48,10 +48,10 @@
                         <td>{{ book.editorial }}</td>
                         <td>
                             <a type="button" class="btn btn-default btn-xs" href="{% url "backoffice_book_book_edit" book.pk %}">
-                                <span class="glyphicon glyphicon-pencil"></span> Edit
+                                <span class="glyphicon glyphicon-pencil"></span> {% trans "Edit" %}
                             </a>
                             <a type="button" class="btn btn-default btn-xs" href="{% url "backoffice_book_book_delete" book.pk %}">
-                                <span class="glyphicon glyphicon-remove"></span> Delete
+                                <span class="glyphicon glyphicon-remove"></span> {% trans "Delete" %}
                             </a>
                         </td>
                     </tr>

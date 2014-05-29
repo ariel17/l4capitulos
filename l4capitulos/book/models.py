@@ -59,6 +59,7 @@ class Author(models.Model):
 
     class Meta:
         ordering = ['first_name', 'last_name']
+        unique_together = ('first_name', 'last_name')
 
     def __unicode__(self):
         return unicode(self.get_full_name())
@@ -110,6 +111,7 @@ class Status(models.Model):
     """
     name = models.CharField(
         _('Name'),
+        unique=True,
         max_length=100,
         help_text=_('The status name.')
     )
@@ -121,17 +123,38 @@ class Status(models.Model):
         return unicode(self.name)
 
 
+class EditorialManager(models.Manager):
+    """
+    Custom manager for editorial model instances.
+    """
+    def search(self, *args, **kwargs):
+        """
+        Search for possible matchings on editorial's fields.
+        """
+        editorials = self.all()
+
+        if 'name' in kwargs:
+            name = kwargs['name'].strip()
+            if name:
+                editorials = editorials.filter(name__icontains=name)
+
+        return editorials
+
+
 class Editorial(models.Model):
     """
     The editorial entity that publishes a book.
     """
     name = models.CharField(
         _('Name'),
+        unique=True,
         max_length=200,
         blank=True,
         null=True,
         help_text=_("The editorial's name.")
     )
+
+    objects = EditorialManager()
 
     class Meta:
         ordering = ['name']
@@ -171,7 +194,7 @@ class BookManager(models.Manager):
         if 'editorial' in kwargs:
             editorial = kwargs['editorial'].strip()
             if editorial:
-                books = books.filter(editorial__icontains=editorial)
+                books = books.filter(editorial__name__icontains=editorial)
 
         if 'category' in kwargs:
             category = kwargs['category'].strip()
@@ -217,7 +240,15 @@ class Book(models.Model):
         help_text=_("The publication date of the book.")
     )
 
-    editorial = models.ForeignKey(
+    editorial = models.CharField(
+         _('Editorial'),
+         max_length=100,
+         blank=True,
+         null=True,
+         help_text=_("The editorial that printed and released the book.")
+     )
+
+    editorial_fk = models.ForeignKey(
         Editorial,
         blank=True,
         null=True,
