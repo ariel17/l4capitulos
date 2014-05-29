@@ -159,6 +159,9 @@ class Editorial(models.Model):
     class Meta:
         ordering = ['name']
 
+    def __unicode__(self):
+        return unicode(self.name)
+
 
 class BookManager(models.Manager):
     """
