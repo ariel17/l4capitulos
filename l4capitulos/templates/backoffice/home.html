@@ -1,5 +1,5 @@
 {% extends "backoffice/base.html" %}
-{% load i18n %}
+{% load staticfiles i18n %}
 
 {% block "title" %}{% trans "Home" %}{% endblock %}
 
@@ -28,4 +28,60 @@
         <span class="text-muted">xxxxxx</span>
       </div>
     </div>
+
+    <div class="row">
+        <div id="container" style="width:100%; height:400px;"></div>
+    </div>
+
+    <div class="row">
+        <h2 class="sub-header">{% trans "Recent added books" %}</h2>
+        <div class="table-responsive">
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th>{% trans "Date" %}</th>
+                <th>{% trans "Title" %}</th>
+                <th>{% trans "Author" %}</th>
+              </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>2014-05-30</td>
+                    <td>The Left Hand of Darkness</td>
+                    <td>Ursula K. Le Guin</td>
+                </tr>
+            </tbody>
+          </table>
+        </div>
+    </div>
+
+    <div class="row">
+        <h2 class="sub-header">{% trans "Recent purchases" %}</h2>
+        <div class="table-responsive">
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th>{% trans "Date" %}</th>
+                <th>{% trans "Title" %}</th>
+                <th>{% trans "Price" %}</th>
+              </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>2014-05-30</td>
+                    <td>Bulk purchase on some site</td>
+                    <td>$30.00</td>
+                </tr>
+            </tbody>
+          </table>
+        </div>
+    </div>
+
 {% endblock "content" %}    
+
+{% block "footer" %}
+    {{ block.super }}
+    <script src="http://code.highcharts.com/highcharts.js"></script>
+    <script src="{% static "js/backoffice_home_chart.js" %}"></script>
+    <!--script src="{% static "js/chart_dark_theme.js" %}"></script-->
+{% endblock "footer" %}
