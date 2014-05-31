@@ -161,6 +161,7 @@ FINANCE_INVOICE_PATH = 'invoice'
 
 # Backoffice application configuration
 BACKOFFICE_DEFAULT_CHART_SELL_DAYS = 7
+BACKOFFICE_DEFAULT_RECENT_ITEMS = 5
 
 
 # Base sorl thumbnail configuration

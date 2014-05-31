@@ -53,11 +53,17 @@
               </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td>2014-05-30</td>
-                    <td>The Left Hand of Darkness</td>
-                    <td>Ursula K. Le Guin</td>
-                </tr>
+                {% for book in recent_books %}
+                    <tr>
+                        <td>{{ book.added_at }}</td>
+                        <td>
+                            <a href="{% url "backoffice_book_book_edit" book.pk %}">
+                                {{ book.title }}
+                            </a>
+                        </td>
+                        <td>{{ book.authors.all|join:", " }}</td>
+                    </tr>
+                {% endfor %}
             </tbody>
           </table>
         </div>
@@ -71,15 +77,53 @@
               <tr>
                 <th>{% trans "Date" %}</th>
                 <th>{% trans "Title" %}</th>
-                <th>{% trans "Price" %}</th>
+                <th>{% trans "Total items" %}</th>
+                <th>{% trans "Total price" %}</th>
               </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td>2014-05-30</td>
-                    <td>Bulk purchase on some site</td>
-                    <td>$30.00</td>
-                </tr>
+                {% for purchase in recent_purchases %}
+                    <tr>
+                        <td>{{ purchase.date }}</td>
+                        <td>
+                            <a href="{% url "backoffice_finance_purchase_edit" purchase.pk %}">
+                                {{ purchase.title }}
+                            </a>
+                        </td>
+                        <td>{{ purchase.get_total_units }} </td>
+                        <td>{{ purchase.get_total_price }} </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+          </table>
+        </div>
+    </div>
+
+    <div class="row">
+        <h2 class="sub-header">{% trans "Recent sells" %}</h2>
+        <div class="table-responsive">
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th>{% trans "Date" %}</th>
+                <th>{% trans "Title" %}</th>
+                <th>{% trans "Total items" %}</th>
+                <th>{% trans "Total price" %}</th>
+              </tr>
+            </thead>
+            <tbody>
+                {% for sell in recent_sells %}
+                    <tr>
+                        <td>{{ sell.date }}</td>
+                        <td>
+                            <a href="{% url "backoffice_finance_sell_edit" sell.pk %}">
+                                {{ sell.title }}
+                            </a>
+                        </td>
+                        <td>{{ sell.get_total_units }} </td>
+                        <td>{{ sell.get_total_price }} </td>
+                    </tr>
+                {% endfor %}
             </tbody>
           </table>
         </div>

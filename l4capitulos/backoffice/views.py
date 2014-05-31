@@ -41,19 +41,27 @@ def home(request):
         for sell in Sell.objects.filter(date__gte=days[0], date__lte=days[-1])
     ]
 
+    books = Book.objects.all()
+    purchases = Purchase.objects.all()
+    sells = Sell.objects.all()
+
     return render(request, 'backoffice/home.html', {
-        'books': Book.objects.all(),
+        'books': books,
+        'recent_books': books.order_by('-added_at')[:settings.BACKOFFICE_DEFAULT_RECENT_ITEMS],
+        'recent_sells': sells.order_by('-date')[:settings.BACKOFFICE_DEFAULT_RECENT_ITEMS],
+        'recent_purchases': purchases.order_by('-date')[:settings.BACKOFFICE_DEFAULT_RECENT_ITEMS],
         'authors': Author.objects.all(),
         'purchases': {
-            'total': Purchase.objects.all().count(),
+            'objects': purchases,
+            'total': purchases.count(),
             'total_items': sum([
-                item.quantity
-                for purchase in Purchase.objects.all()
+                item.quantity for purchase in purchases
                 for item in purchase.purchaseitem_set.all()
             ]),
         },
         'sells': {
-            'total': Sell.objects.all().count(),
+            'objects': sells,
+            'total': sells.count(),
             'total_items': sum([
                 item.quantity
                 for sell in Sell.objects.all()
