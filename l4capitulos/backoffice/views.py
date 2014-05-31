@@ -27,30 +27,56 @@ def home(request):
     """
     The home page.
     """
-    days = ["'%s'" % day for day in generate_passed_dates(
+    days = generate_passed_dates(
         days=settings.BACKOFFICE_DEFAULT_CHART_SELL_DAYS, today=datetime.now()
-    )]
+    )
+
+    sell_prices = [
+        sell.get_total_price()
+        for sell in Sell.objects.filter(date__gte=days[0], date__lte=days[-1])
+    ]
+
+    sell_costs = [
+        sell.get_total_cost()
+        for sell in Sell.objects.filter(date__gte=days[0], date__lte=days[-1])
+    ]
 
     return render(request, 'backoffice/home.html', {
         'books': Book.objects.all(),
         'authors': Author.objects.all(),
-        'purchases': Purchase.objects.all(),
-        'sells': Sell.objects.all(),
+        'purchases': {
+            'total': Purchase.objects.all().count(),
+            'total_items': sum([
+                item.quantity
+                for purchase in Purchase.objects.all()
+                for item in purchase.purchaseitem_set.all()
+            ]),
+        },
+        'sells': {
+            'total': Sell.objects.all().count(),
+            'total_items': sum([
+                item.quantity
+                for sell in Sell.objects.all()
+                for item in sell.sellitem_set.all()
+            ])
+        },
         'chart': {
             'days': {
                 'value': settings.BACKOFFICE_DEFAULT_CHART_SELL_DAYS,
-                'list': days,
+                'list': ["'%s'" % day for day in days],
             },
             'sells': {
-                'values': ['3', '2', '1', '3', '4', '6', '7'],
-                'total': 40,
+                'values': sell_prices,
+                'total': sum(sell_prices),
             },
             'purchases': {
-                'values': ['2', '3', '5', '7', '6', '5', '4'],
-                'total': 60,
+                'values': sell_costs,
+                'total': sum(sell_costs),
             },
             'average': {
-                'values': ['3', '2.67', '3', '6.33', '3.33', '5', '4'],
+                'values': [
+                    (a + b)/2 for (a, b) in zip(sell_prices, sell_costs)
+                ],
             },
         },
         'section': 'home',
