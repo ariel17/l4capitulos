@@ -9,7 +9,7 @@
     <div class="row placeholders">
       <div class="col-xs-6 col-sm-3 placeholder">
         <div class="dashboard_count">{{ books.count }}</div>
-        <h4>{% trans "Book(s) available" %}</h4>
+        <h4>{% trans "Book(s) in inventory" %}</h4>
         <span class="text-muted">xxxxxx</span>
       </div>
       <div class="col-xs-6 col-sm-3 placeholder">
@@ -18,14 +18,22 @@
         <span class="text-muted">xxxxxx</span>
       </div>
       <div class="col-xs-6 col-sm-3 placeholder">
-        <div class="dashboard_count">{{ purchases.count }}</div>
-        <h4>{% trans "Purchase(s) made" %}</h4>
-        <span class="text-muted">xxxxxx</span>
+        <div class="dashboard_count">{{ purchases.total_items }}</div>
+        <h4>{% trans "Book(s) purchased" %}</h4>
+        <span class="text-muted">
+            {% blocktrans with total=purchases.total %}
+                In {{ total }} purchases
+            {% endblocktrans %}
+        </span>
       </div>
       <div class="col-xs-6 col-sm-3 placeholder">
-        <div class="dashboard_count">{{ sells.count }}</div>
+        <div class="dashboard_count">{{ sells.total_items }}</div>
         <h4>{% trans "Book(s) selled" %}</h4>
-        <span class="text-muted">xxxxxx</span>
+        <span class="text-muted">
+            {% blocktrans with total=sells.total %}
+                In {{ total }} sells
+            {% endblocktrans %}
+        </span>
       </div>
     </div>
 
@@ -86,7 +94,7 @@
         $(function () {
             $('#container').highcharts({
                 title: {
-                    text: '{% blocktrans with days=chart.days.value %}Purchases vs Sells for last {{ days }} days{% endblocktrans %}'
+                    text: '{% blocktrans with days=chart.days.value %}Sells vs costs for last {{ days }} days{% endblocktrans %}'
                 },
                 xAxis: {
                     {% autoescape off %}
@@ -111,7 +119,7 @@
                     {% endautoescape %}
                 }, {
                     type: 'column',
-                    name: '{% trans "Purchases" %}',
+                    name: '{% trans "Costs" %}',
                     {% autoescape off %}
                         data: [{{ chart.purchases.values|join:", "}}]
                     {% endautoescape %}
@@ -134,7 +142,7 @@
                         y: {{ chart.sells.total }},
                         color: Highcharts.getOptions().colors[0] // Jane's color
                     }, {
-                        name: '{% trans "Purchases" %}',
+                        name: '{% trans "Costs" %}',
                         y: {{ chart.purchases.total }},
                         color: Highcharts.getOptions().colors[1] // Joe's color
                     }],
