@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-05-31 12:41+0000\n"
+"POT-Creation-Date: 2014-05-31 12:52+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,23 +17,23 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: account/forms.py:23
+#: account/forms.py:24
 msgid "Username"
 msgstr ""
 
-#: account/forms.py:27
+#: account/forms.py:29
 msgid "Password"
 msgstr ""
 
-#: account/forms.py:33
+#: account/forms.py:36
 msgid "Backoffice! u.u"
 msgstr ""
 
-#: account/forms.py:37
+#: account/forms.py:40
 msgid "Sign in"
 msgstr ""
 
-#: account/forms.py:53
+#: account/forms.py:56
 msgid "Username or password invalid."
 msgstr ""
 
@@ -1059,7 +1059,7 @@ msgid "Costs"
 msgstr ""
 
 #: templates/backoffice/home.html:172
-msgid "Averages"
+msgid "Differences"
 msgstr ""
 
 #: templates/backoffice/inventory.html:4 templates/backoffice/inventory.html:7
