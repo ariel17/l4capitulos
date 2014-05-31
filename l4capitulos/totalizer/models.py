@@ -24,6 +24,7 @@ class SellByCategory(models.Model):
     category = models.ForeignKey(
         'book.Category',
         editable=False,
+        verbose_name=_('Category')
     )
 
     total = models.PositiveIntegerField(
