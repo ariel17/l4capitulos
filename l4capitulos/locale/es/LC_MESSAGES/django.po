@@ -978,7 +978,7 @@ msgstr "Buscar ventas"
 
 #: templates/backoffice/finance_sell.html:14
 msgid "Add sell"
-msgstr "Agregar compra"
+msgstr "Agregar venta"
 
 #: templates/backoffice/finance_sell.html:21
 #, python-format
@@ -998,11 +998,11 @@ msgstr "Precio neto"
 
 #: templates/backoffice/finance_sell_add.html:4
 msgid "Add a sell"
-msgstr "Agregar una compra"
+msgstr "Agregar una venta"
 
 #: templates/backoffice/finance_sell_add.html:7
 msgid "New sell"
-msgstr "Nueva compra"
+msgstr "Nueva venta"
 
 #: templates/backoffice/finance_sell_edit.html:4
 msgid "Edit a sell"
