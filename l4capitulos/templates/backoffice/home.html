@@ -1,5 +1,5 @@
 {% extends "backoffice/base.html" %}
-{% load i18n %}
+{% load staticfiles i18n %}
 
 {% block "title" %}{% trans "Home" %}{% endblock %}
 
@@ -9,7 +9,7 @@
     <div class="row placeholders">
       <div class="col-xs-6 col-sm-3 placeholder">
         <div class="dashboard_count">{{ books.count }}</div>
-        <h4>{% trans "Book(s) available" %}</h4>
+        <h4>{% trans "Book(s) in inventory" %}</h4>
         <span class="text-muted">xxxxxx</span>
       </div>
       <div class="col-xs-6 col-sm-3 placeholder">
@@ -18,14 +18,186 @@
         <span class="text-muted">xxxxxx</span>
       </div>
       <div class="col-xs-6 col-sm-3 placeholder">
-        <div class="dashboard_count">{{ purchases.count }}</div>
-        <h4>{% trans "Purchase(s) made" %}</h4>
-        <span class="text-muted">xxxxxx</span>
+        <div class="dashboard_count">{{ purchases.total_items }}</div>
+        <h4>{% trans "Book(s) purchased" %}</h4>
+        <span class="text-muted">
+            {% blocktrans with total=purchases.total %}
+                In {{ total }} purchases
+            {% endblocktrans %}
+        </span>
       </div>
       <div class="col-xs-6 col-sm-3 placeholder">
-        <div class="dashboard_count">{{ sells.count }}</div>
+        <div class="dashboard_count">{{ sells.total_items }}</div>
         <h4>{% trans "Book(s) selled" %}</h4>
-        <span class="text-muted">xxxxxx</span>
+        <span class="text-muted">
+            {% blocktrans with total=sells.total %}
+                In {{ total }} sells
+            {% endblocktrans %}
+        </span>
       </div>
     </div>
+
+    <div class="row">
+        <div id="container" style="width:100%; height:400px;"></div>
+    </div>
+
+    <div class="row">
+        <h2 class="sub-header">{% trans "Recent added books" %}</h2>
+        <div class="table-responsive">
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th>{% trans "Date" %}</th>
+                <th>{% trans "Title" %}</th>
+                <th>{% trans "Author" %}</th>
+              </tr>
+            </thead>
+            <tbody>
+                {% for book in recent_books %}
+                    <tr>
+                        <td>{{ book.added_at }}</td>
+                        <td>
+                            <a href="{% url "backoffice_book_book_edit" book.pk %}">
+                                {{ book.title }}
+                            </a>
+                        </td>
+                        <td>{{ book.authors.all|join:", " }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+          </table>
+        </div>
+    </div>
+
+    <div class="row">
+        <h2 class="sub-header">{% trans "Recent purchases" %}</h2>
+        <div class="table-responsive">
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th>{% trans "Date" %}</th>
+                <th>{% trans "Title" %}</th>
+                <th>{% trans "Total items" %}</th>
+                <th>{% trans "Total price" %}</th>
+              </tr>
+            </thead>
+            <tbody>
+                {% for purchase in recent_purchases %}
+                    <tr>
+                        <td>{{ purchase.date }}</td>
+                        <td>
+                            <a href="{% url "backoffice_finance_purchase_edit" purchase.pk %}">
+                                {{ purchase.title }}
+                            </a>
+                        </td>
+                        <td>{{ purchase.get_total_units }} </td>
+                        <td>{{ purchase.get_total_price }} </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+          </table>
+        </div>
+    </div>
+
+    <div class="row">
+        <h2 class="sub-header">{% trans "Recent sells" %}</h2>
+        <div class="table-responsive">
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th>{% trans "Date" %}</th>
+                <th>{% trans "Title" %}</th>
+                <th>{% trans "Total items" %}</th>
+                <th>{% trans "Total price" %}</th>
+              </tr>
+            </thead>
+            <tbody>
+                {% for sell in recent_sells %}
+                    <tr>
+                        <td>{{ sell.date }}</td>
+                        <td>
+                            <a href="{% url "backoffice_finance_sell_edit" sell.pk %}">
+                                {{ sell.title }}
+                            </a>
+                        </td>
+                        <td>{{ sell.get_total_units }} </td>
+                        <td>{{ sell.get_total_price }} </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+          </table>
+        </div>
+    </div>
+
 {% endblock "content" %}    
+
+{% block "footer" %}
+    {{ block.super }}
+    <script src="{% static "js/highcharts.js" %}"></script>
+    <script type="text/javascript">
+        $(function () {
+            $('#container').highcharts({
+                title: {
+                    text: '{% blocktrans with days=chart.days.value %}Sells vs costs for last {{ days }} days{% endblocktrans %}'
+                },
+                xAxis: {
+                    {% autoescape off %}
+                        categories: [ {{ chart.days.list|join:", "}} ]
+                    {% endautoescape %}
+                },
+                labels: {
+                    items: [{
+                        html: '{% trans "Total transactions" %}',
+                        style: {
+                            left: '50px',
+                            top: '18px',
+                            color: (Highcharts.theme && Highcharts.theme.textColor) || 'black'
+                        }
+                    }]
+                },
+                series: [{
+                    type: 'column',
+                    name: '{% trans "Sells" %}',
+                    {% autoescape off %}
+                        data: [{{ chart.sells.values|join:", " }}]
+                    {% endautoescape %}
+                }, {
+                    type: 'column',
+                    name: '{% trans "Costs" %}',
+                    {% autoescape off %}
+                        data: [{{ chart.purchases.values|join:", "}}]
+                    {% endautoescape %}
+                }, {
+                    type: 'spline',
+                    name: '{% trans "Averages" %}',
+                    {% autoescape off %}
+                        data: [{{ chart.average.values|join:", "}}],
+                    {% endautoescape %}
+                    marker: {
+                    	lineWidth: 2,
+                    	lineColor: Highcharts.getOptions().colors[3],
+                    	fillColor: 'white'
+                    }
+                }, {
+                    type: 'pie',
+                    name: 'Total money',
+                    data: [{
+                        name: '{% trans "Sells" %}',
+                        y: {{ chart.sells.total }},
+                        color: Highcharts.getOptions().colors[0] // Jane's color
+                    }, {
+                        name: '{% trans "Costs" %}',
+                        y: {{ chart.purchases.total }},
+                        color: Highcharts.getOptions().colors[1] // Joe's color
+                    }],
+                    center: [100, 80],
+                    size: 100,
+                    showInLegend: false,
+                    dataLabels: {
+                        enabled: false
+                    }
+                }]
+            });
+        });
+    </script>
+{% endblock "footer" %}

@@ -6,16 +6,18 @@ Description: Backoffice application views.
 """
 __author__ = "Ariel Gerardo Rios (ariel.gerardo.rios@gmail.com)"
 
+from datetime import datetime, timedelta
 
+from django.conf import settings
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, get_object_or_404, redirect
 from django.utils.translation import ugettext as _
 
-
 from .forms.books import BookForm, BookSearchForm, AuthorForm, AuthorSearchForm, CategoryForm, StatusForm, BookImageForm, EditorialForm, EditorialSearchForm
 from .forms.commons import DeleteForm
 from .forms.finances import PurchaseForm, PurchaseSearchForm, PurchaseItemForm, PurchaseCostForm, SellForm, SellSearchForm, SellItemForm, SellCostForm
+from .utils import generate_passed_dates
 from book.models import Author, Book, Category, Status, BookImage, Editorial
 from finance.models import Purchase, PurchaseItem, PurchaseCost, Sell, SellItem, SellCost
 
@@ -25,11 +27,66 @@ def home(request):
     """
     The home page.
     """
+    days = generate_passed_dates(
+        days=settings.BACKOFFICE_DEFAULT_CHART_SELL_DAYS, today=datetime.now()
+    )
+
+    sell_prices = [
+        sell.get_total_price()
+        for sell in Sell.objects.filter(date__gte=days[0], date__lte=days[-1])
+    ]
+
+    sell_costs = [
+        sell.get_total_cost()
+        for sell in Sell.objects.filter(date__gte=days[0], date__lte=days[-1])
+    ]
+
+    books = Book.objects.all()
+    purchases = Purchase.objects.all()
+    sells = Sell.objects.all()
+
     return render(request, 'backoffice/home.html', {
-        'books': Book.objects.all(),
+        'books': books,
+        'recent_books': books.order_by('-added_at')[:settings.BACKOFFICE_DEFAULT_RECENT_ITEMS],
+        'recent_sells': sells.order_by('-date')[:settings.BACKOFFICE_DEFAULT_RECENT_ITEMS],
+        'recent_purchases': purchases.order_by('-date')[:settings.BACKOFFICE_DEFAULT_RECENT_ITEMS],
         'authors': Author.objects.all(),
-        'purchases': Purchase.objects.all(),
-        'sells': Sell.objects.all(),
+        'purchases': {
+            'objects': purchases,
+            'total': purchases.count(),
+            'total_items': sum([
+                item.quantity for purchase in purchases
+                for item in purchase.purchaseitem_set.all()
+            ]),
+        },
+        'sells': {
+            'objects': sells,
+            'total': sells.count(),
+            'total_items': sum([
+                item.quantity
+                for sell in Sell.objects.all()
+                for item in sell.sellitem_set.all()
+            ])
+        },
+        'chart': {
+            'days': {
+                'value': settings.BACKOFFICE_DEFAULT_CHART_SELL_DAYS,
+                'list': ["'%s'" % day for day in days],
+            },
+            'sells': {
+                'values': sell_prices,
+                'total': sum(sell_prices),
+            },
+            'purchases': {
+                'values': sell_costs,
+                'total': sum(sell_costs),
+            },
+            'average': {
+                'values': [
+                    (a + b)/2 for (a, b) in zip(sell_prices, sell_costs)
+                ],
+            },
+        },
         'section': 'home',
     })
 

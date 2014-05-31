@@ -65,6 +65,7 @@ PROJECT_APPS = (
     'book',
     'common',
     'finance',
+    'totalizer',
 )
 
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + PROJECT_APPS
@@ -126,6 +127,9 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
 
 
+FORMAT_MODULE_PATH = 'formats'
+
+
 # Crispy forms configuration
 CRISPY_TEMPLATE_PACK = 'bootstrap3'
 
@@ -153,6 +157,11 @@ BOOK_IMAGES_PATH = os.path.join(IMAGES_ROOT, 'book')
 
 # Finance application configuration
 FINANCE_INVOICE_PATH = 'invoice'
+
+
+# Backoffice application configuration
+BACKOFFICE_DEFAULT_CHART_SELL_DAYS = 7
+BACKOFFICE_DEFAULT_RECENT_ITEMS = 5
 
 
 # Base sorl thumbnail configuration
