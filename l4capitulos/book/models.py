@@ -80,7 +80,8 @@ class Category(models.Model):
     parent = models.ForeignKey(
         "self",
         blank=True,
-        null=True
+        null=True,
+        verbose_name=_('Parent'),
     )
 
     name = models.CharField(
@@ -247,6 +248,7 @@ class Book(models.Model):
         Editorial,
         blank=True,
         null=True,
+        verbose_name=_('Editorial')
     )
 
     summary = models.TextField(
@@ -266,13 +268,15 @@ class Book(models.Model):
     category = models.ForeignKey(
         Category,
         blank=True,
-        null=True
+        null=True,
+        verbose_name=_('Category')
     )
 
     status = models.ForeignKey(
         Status,
         blank=True,
-        null=True
+        null=True,
+        verbose_name=_('Status'),
     )
 
     objects = BookManager()
@@ -288,7 +292,10 @@ class BookImage(FileModel):
     """
     A book picture or image.
     """
-    book = models.ForeignKey(Book)
+    book = models.ForeignKey(
+        Book,
+        verbose_name=_('Book'),
+    )
 
     image = models.ImageField(
         _(u"Book image"),
@@ -312,7 +319,8 @@ class Availability(models.Model):
     """
     book = models.ForeignKey(
         Book,
-        unique=True
+        unique=True,
+        verbose_name=_('Book'),
     )
 
     quantity = models.PositiveIntegerField(

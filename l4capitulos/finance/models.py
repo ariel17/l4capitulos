@@ -77,7 +77,10 @@ class Item(models.Model):
     """
     An unit inside an operation.
     """
-    book = models.ForeignKey("book.Book")
+    book = models.ForeignKey(
+        "book.Book",
+        verbose_name=_('Book')
+    )
 
     quantity = models.PositiveIntegerField(
         _('Quantity'),
@@ -179,7 +182,10 @@ class PurchaseItem(Item):
     """
     An unit in a purchase.
     """
-    purchase = models.ForeignKey(Purchase)
+    purchase = models.ForeignKey(
+        Purchase,
+        verbose_name=_('Purchase')
+    )
 
     def __unicode__(self):
         return u"PurchaseItem#%d@Purchase#%d: q=%d" % (
@@ -191,7 +197,10 @@ class PurchaseCost(Cost):
     """
     Registers a cost entry for a purchase.
     """
-    purchase = models.ForeignKey(Purchase)
+    purchase = models.ForeignKey(
+        Purchase,
+        verbose_name=_('Purchase')
+    )
 
     def __unicode__(self):
         return u"PurchaseCost#%d@Purchase#%d: p=%s" % (
@@ -236,7 +245,10 @@ class SellItem(Item):
     """
     An item inside a sell.
     """
-    sell = models.ForeignKey(Sell)
+    sell = models.ForeignKey(
+        Sell,
+        verbose_name=_('Sell')
+    )
 
     def __unicode__(self):
         return u"SellItem#%d@Sell#%d: q=%d" % (
@@ -248,7 +260,10 @@ class SellCost(Cost):
     """
     A cost entry for a sell.
     """
-    sell = models.ForeignKey(Sell)
+    sell = models.ForeignKey(
+        Sell,
+        verbose_name=_('Sell')
+    )
 
     def __unicode__(self):
         return u"SellCost#%d@Sell#%d: p=%s" % (
