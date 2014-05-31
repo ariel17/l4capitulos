@@ -20,11 +20,14 @@ class LoginForm(forms.Form):
     """
     TODO
     """
-    username = forms.CharField(widget=forms.TextInput(attrs={
-        "placeholder": "username"
-    }))
+    username = forms.CharField(
+        label=_('Username'), widget=forms.TextInput(attrs={
+            "placeholder": "username"
+        }))
 
-    password = forms.CharField(widget=forms.PasswordInput())
+    password = forms.CharField(
+        label=_('Password'), widget=forms.PasswordInput()
+    )
 
     helper = FormHelper()
     helper.form_class = "form-signin"
