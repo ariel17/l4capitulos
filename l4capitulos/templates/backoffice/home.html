@@ -169,9 +169,9 @@
                     {% endautoescape %}
                 }, {
                     type: 'spline',
-                    name: '{% trans "Averages" %}',
+                    name: '{% trans "Differences" %}',
                     {% autoescape off %}
-                        data: [{{ chart.average.values|join:", "}}],
+                        data: [{{ chart.diff.values|join:", "}}],
                     {% endautoescape %}
                     marker: {
                     	lineWidth: 2,

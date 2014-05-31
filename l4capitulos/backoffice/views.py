@@ -80,9 +80,9 @@ def home(request):
                 'values': sell_costs,
                 'total': '%.2f' % sum(sell_costs),
             },
-            'average': {
+            'diff': {
                 'values': [
-                    (a + b)/2 for (a, b) in zip(sell_prices, sell_costs)
+                    a - b for (a, b) in zip(sell_prices, sell_costs)
                 ],
             },
         },
