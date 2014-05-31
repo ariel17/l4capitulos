@@ -63,8 +63,7 @@ def home(request):
             'objects': sells,
             'total': sells.count(),
             'total_items': sum([
-                item.quantity
-                for sell in Sell.objects.all()
+                item.quantity for sell in sells
                 for item in sell.sellitem_set.all()
             ])
         },
@@ -75,11 +74,11 @@ def home(request):
             },
             'sells': {
                 'values': sell_prices,
-                'total': sum(sell_prices),
+                'total': '%.2f' % sum(sell_prices),
             },
             'purchases': {
                 'values': sell_costs,
-                'total': sum(sell_costs),
+                'total': '%.2f' % sum(sell_costs),
             },
             'average': {
                 'values': [
