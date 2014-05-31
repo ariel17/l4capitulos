@@ -6,16 +6,18 @@ Description: Backoffice application views.
 """
 __author__ = "Ariel Gerardo Rios (ariel.gerardo.rios@gmail.com)"
 
+from datetime import datetime, timedelta
 
+from django.conf import settings
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, get_object_or_404, redirect
 from django.utils.translation import ugettext as _
 
-
 from .forms.books import BookForm, BookSearchForm, AuthorForm, AuthorSearchForm, CategoryForm, StatusForm, BookImageForm, EditorialForm, EditorialSearchForm
 from .forms.commons import DeleteForm
 from .forms.finances import PurchaseForm, PurchaseSearchForm, PurchaseItemForm, PurchaseCostForm, SellForm, SellSearchForm, SellItemForm, SellCostForm
+from .utils import generate_passed_dates
 from book.models import Author, Book, Category, Status, BookImage, Editorial
 from finance.models import Purchase, PurchaseItem, PurchaseCost, Sell, SellItem, SellCost
 
@@ -25,11 +27,32 @@ def home(request):
     """
     The home page.
     """
+    days = ["'%s'" % day for day in generate_passed_dates(
+        days=settings.BACKOFFICE_DEFAULT_CHART_SELL_DAYS, today=datetime.now()
+    )]
+
     return render(request, 'backoffice/home.html', {
         'books': Book.objects.all(),
         'authors': Author.objects.all(),
         'purchases': Purchase.objects.all(),
         'sells': Sell.objects.all(),
+        'chart': {
+            'days': {
+                'value': settings.BACKOFFICE_DEFAULT_CHART_SELL_DAYS,
+                'list': days,
+            },
+            'sells': {
+                'values': ['3', '2', '1', '3', '4', '6', '7'],
+                'total': 40,
+            },
+            'purchases': {
+                'values': ['2', '3', '5', '7', '6', '5', '4'],
+                'total': 60,
+            },
+            'average': {
+                'values': ['3', '2.67', '3', '6.33', '3.33', '5', '4'],
+            },
+        },
         'section': 'home',
     })
 

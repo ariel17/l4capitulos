@@ -126,6 +126,9 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
 
 
+FORMAT_MODULE_PATH = 'formats'
+
+
 # Crispy forms configuration
 CRISPY_TEMPLATE_PACK = 'bootstrap3'
 
@@ -153,6 +156,10 @@ BOOK_IMAGES_PATH = os.path.join(IMAGES_ROOT, 'book')
 
 # Finance application configuration
 FINANCE_INVOICE_PATH = 'invoice'
+
+
+# Backoffice application configuration
+BACKOFFICE_DEFAULT_CHART_SELL_DAYS = 7
 
 
 # Base sorl thumbnail configuration

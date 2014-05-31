@@ -81,7 +81,71 @@
 
 {% block "footer" %}
     {{ block.super }}
-    <script src="http://code.highcharts.com/highcharts.js"></script>
-    <script src="{% static "js/backoffice_home_chart.js" %}"></script>
-    <!--script src="{% static "js/chart_dark_theme.js" %}"></script-->
+    <script src="{% static "js/highcharts.js" %}"></script>
+    <script type="text/javascript">
+        $(function () {
+            $('#container').highcharts({
+                title: {
+                    text: '{% blocktrans with days=chart.days.value %}Purchases vs Sells for last {{ days }} days{% endblocktrans %}'
+                },
+                xAxis: {
+                    {% autoescape off %}
+                        categories: [ {{ chart.days.list|join:", "}} ]
+                    {% endautoescape %}
+                },
+                labels: {
+                    items: [{
+                        html: '{% trans "Total transactions" %}',
+                        style: {
+                            left: '50px',
+                            top: '18px',
+                            color: (Highcharts.theme && Highcharts.theme.textColor) || 'black'
+                        }
+                    }]
+                },
+                series: [{
+                    type: 'column',
+                    name: '{% trans "Sells" %}',
+                    {% autoescape off %}
+                        data: [{{ chart.sells.values|join:", " }}]
+                    {% endautoescape %}
+                }, {
+                    type: 'column',
+                    name: '{% trans "Purchases" %}',
+                    {% autoescape off %}
+                        data: [{{ chart.purchases.values|join:", "}}]
+                    {% endautoescape %}
+                }, {
+                    type: 'spline',
+                    name: '{% trans "Averages" %}',
+                    {% autoescape off %}
+                        data: [{{ chart.average.values|join:", "}}],
+                    {% endautoescape %}
+                    marker: {
+                    	lineWidth: 2,
+                    	lineColor: Highcharts.getOptions().colors[3],
+                    	fillColor: 'white'
+                    }
+                }, {
+                    type: 'pie',
+                    name: 'Total money',
+                    data: [{
+                        name: '{% trans "Sells" %}',
+                        y: {{ chart.sells.total }},
+                        color: Highcharts.getOptions().colors[0] // Jane's color
+                    }, {
+                        name: '{% trans "Purchases" %}',
+                        y: {{ chart.purchases.total }},
+                        color: Highcharts.getOptions().colors[1] // Joe's color
+                    }],
+                    center: [100, 80],
+                    size: 100,
+                    showInLegend: false,
+                    dataLabels: {
+                        enabled: false
+                    }
+                }]
+            });
+        });
+    </script>
 {% endblock "footer" %}
