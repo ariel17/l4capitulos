@@ -205,7 +205,7 @@ def deploy():
         release_dir_manage = path.join(release_dir, 'manage.py')
         run('%s syncdb --settings=%s' %
             (release_dir_manage, env.settings))
-        run('%s migrate --settings=%s' %
+        run('%s migrate --delete-ghost-migrations --settings=%s' %
             (release_dir_manage, env.settings))
         run('%s collectstatic --settings=%s --noinput' %
             (release_dir_manage, env.settings))
