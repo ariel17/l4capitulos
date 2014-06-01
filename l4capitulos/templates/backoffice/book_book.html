@@ -46,8 +46,16 @@
                                 <a href="{% url "backoffice_book_author_edit" author.pk %}">{{ author.get_full_name }}</a>{% if not forloop.last %},{% endif %}
                             {% endfor %}
                         </td>
-                        <td>{{ book.published_at }}</td>
-                        <td>{{ book.editorial.name }}</td>
+                        <td>
+                            {% if book.published_at %}
+                                {{ book.published_at }}
+                            {% endif %}
+                        </td>
+                        <td>
+                            {% if book.editorial %}
+                                <a href="{% url "backoffice_book_editorial_edit" book.editorial.pk %}">{{ book.editorial.name }}</a>
+                            {% endif %}
+                        </td>
                         <td>{{ book.quantity }}</td>
                         <td>{{ book.price }}</td>
                         <td>

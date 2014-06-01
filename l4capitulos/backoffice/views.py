@@ -14,11 +14,11 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, get_object_or_404, redirect
 from django.utils.translation import ugettext as _
 
-from .forms.books import BookForm, BookSearchForm, AuthorForm, AuthorSearchForm, CategoryForm, StatusForm, BookImageForm, EditorialForm, EditorialSearchForm, AvailabilityForm, AvailabilitySearchForm
+from .forms.books import BookForm, BookSearchForm, AuthorForm, AuthorSearchForm, CategoryForm, StatusForm, BookImageForm, EditorialForm, EditorialSearchForm
 from .forms.commons import DeleteForm
 from .forms.finances import PurchaseForm, PurchaseSearchForm, PurchaseItemForm, PurchaseCostForm, SellForm, SellSearchForm, SellItemForm, SellCostForm
 from .utils import generate_passed_dates
-from book.models import Author, Book, Category, Status, BookImage, Editorial, Availability
+from book.models import Author, Book, Category, Status, BookImage, Editorial
 from finance.models import Purchase, PurchaseItem, PurchaseCost, Sell, SellItem, SellCost
 
 
@@ -1093,7 +1093,7 @@ def finance_sell_delete(request, sell_id):
     """
     TODO
     """
-    sell = get_object_or_404(Purchase, pk=sell_id)
+    sell = get_object_or_404(Sell, pk=sell_id)
 
     if request.method == 'POST':
         sell.delete()
