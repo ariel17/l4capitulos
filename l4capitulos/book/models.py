@@ -227,6 +227,7 @@ class Book(models.Model):
         Author,
         blank=True,
         null=True,
+        verbose_name=_('Authors'),
     )
 
     isbn = models.CharField(
