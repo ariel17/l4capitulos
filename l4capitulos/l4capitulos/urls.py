@@ -109,22 +109,6 @@ urlpatterns = patterns('',
         'delete/$', 'backoffice.views.book_image_delete',
         name='backoffice_book_image_delete'),
 
-    url(r'^backoffice/book/availability/$',
-        'backoffice.views.book_availability',
-        name='backoffice_book_availability'),
-
-    url(r'^backoffice/book/Availability/add/$',
-        'backoffice.views.book_availability_add',
-        name='backoffice_book_availability_add'),
-
-    url(r'^backoffice/book/availability/(?P<availability_id>\d+)/edit/$',
-        'backoffice.views.book_availability_edit',
-        name='backoffice_book_availability_edit'),
-
-    url(r'^backoffice/book/availability/(?P<availability_id>\d+)/delete/$',
-        'backoffice.views.book_availability_delete',
-        name='backoffice_book_availability_delete'),
-
     url(r'^backoffice/finance/purchase/$', 'backoffice.views.finance_purchase',
         name='backoffice_finance_purchase'),
 

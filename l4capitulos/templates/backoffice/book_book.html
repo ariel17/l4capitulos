@@ -31,6 +31,8 @@
                 <th>{% trans "Authors" %}</th>
                 <th>{% trans "Published at" %}</th>
                 <th>{% trans "Editorial" %}</th>
+                <th>{% trans "Availables" %}</th>
+                <th>{% trans "Price" %}</th>
                 <th>{% trans "Actions" %}</th>
               </tr>
             </thead>
@@ -46,6 +48,8 @@
                         </td>
                         <td>{{ book.published_at }}</td>
                         <td>{{ book.editorial.name }}</td>
+                        <td>{{ book.quantity }}</td>
+                        <td>{{ book.price }}</td>
                         <td>
                             <a type="button" class="btn btn-default btn-xs" href="{% url "backoffice_book_book_edit" book.pk %}">
                                 <span class="glyphicon glyphicon-pencil"></span> {% trans "Edit" %}

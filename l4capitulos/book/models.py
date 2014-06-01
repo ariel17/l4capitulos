@@ -279,6 +279,22 @@ class Book(models.Model):
         verbose_name=_('Status'),
     )
 
+    quantity = models.PositiveIntegerField(
+        _('Quantity'),
+        default=0,
+        help_text=_('How many items of this book are available.')
+    )
+
+    price = models.DecimalField(
+        _('Price'),
+        max_digits=10,
+        decimal_places=2,
+        blank=True,
+        null=True,
+        default=0,
+        help_text=_('The operation price.')
+    )
+
     objects = BookManager()
 
     class Meta:
@@ -311,97 +327,3 @@ class BookImage(FileModel):
 
     def __unicode__(self):
         return u"picture#%d@book#%d" % (self.pk, self.book.pk)
-
-
-class AvailabilityManager(models.Manager):
-    """
-    Custom manager for availability model instances.
-    """
-    def search(self, *args, **kwargs):
-        """
-        Searches a book in filtering by indicated parameters.
-        """
-        books = self.all()
-
-        if 'title' in kwargs:
-            title = kwargs['title'].strip()
-            if title:
-                books = books.filter(title__icontains=title)
-
-        if 'authors' in kwargs:
-            for author in kwargs['authors'].split(' '):
-                author = author.strip()
-                if author:
-                    books = books.filter(authors__last_name__icontains=author)
-
-        if 'isbn' in kwargs:
-            isbn = kwargs['isbn'].strip()
-            if isbn:
-                books = books.filter(isbn__icontains=isbn)
-
-        # added_from
-        # added_to
-        # published_from
-        # published_to
-
-        if 'editorial' in kwargs:
-            editorial = kwargs['editorial'].strip()
-            if editorial:
-                books = books.filter(editorial__name__icontains=editorial)
-
-        if 'category' in kwargs:
-            category = kwargs['category'].strip()
-            if category:
-                books = books.filter(category__name__icontains=category)
-
-        if 'status' in kwargs:
-            status = kwargs['status'].strip()
-            if status:
-                books = books.filter(status__name__icontains=status)
-
-        return books
-
-
-class Availability(models.Model):
-    """
-    TODO
-    """
-    created_at = models.DateTimeField(
-        _('Created at'),
-        auto_now_add=True,
-        blank=True,
-        null=True,
-    )
-
-    updated_at = models.DateTimeField(
-        _('Updated at'),
-        auto_now=True,
-        blank=True,
-        null=True,
-    )
-
-    book = models.ForeignKey(
-        Book,
-        unique=True,
-        verbose_name=_('Book'),
-    )
-
-    quantity = models.PositiveIntegerField(
-        _('Quantity'),
-        default=0,
-        help_text=_('How many items of this book are available.')
-    )
-
-    price = models.DecimalField(
-        _('Price'),
-        max_digits=10,
-        decimal_places=2,
-        blank=True,
-        null=True,
-        default=0,
-        help_text=_('The operation price.')
-    )
-
-    def __unicode__(self):
-        return u"<Availability book='%s' quantity=%d price=%s>" %
-               (self.book.title, self.quantity, self.price)
