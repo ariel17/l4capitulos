@@ -6,7 +6,7 @@ Description: Backoffice application views.
 """
 __author__ = "Ariel Gerardo Rios (ariel.gerardo.rios@gmail.com)"
 
-from datetime import datetime, timedelta
+from datetime import datetime
 
 from django.conf import settings
 from django.contrib import messages
@@ -47,9 +47,16 @@ def home(request):
 
     return render(request, 'backoffice/home.html', {
         'books': books,
-        'recent_books': books.order_by('-added_at')[:settings.BACKOFFICE_DEFAULT_RECENT_ITEMS],
-        'recent_sells': sells.order_by('-date')[:settings.BACKOFFICE_DEFAULT_RECENT_ITEMS],
-        'recent_purchases': purchases.order_by('-date')[:settings.BACKOFFICE_DEFAULT_RECENT_ITEMS],
+
+        'recent_books':
+        books.order_by('-added_at')[:settings.BACKOFFICE_DEFAULT_RECENT_ITEMS],
+
+        'recent_sells':
+        sells.order_by('-date')[:settings.BACKOFFICE_DEFAULT_RECENT_ITEMS],
+
+        'recent_purchases':
+        purchases.order_by('-date')[:settings.BACKOFFICE_DEFAULT_RECENT_ITEMS],
+
         'authors': Author.objects.all(),
         'purchases': {
             'objects': purchases,
@@ -1086,7 +1093,7 @@ def finance_sell_delete(request, sell_id):
     """
     TODO
     """
-    sell = get_object_or_404(Purchase, pk=sell_id)
+    sell = get_object_or_404(Sell, pk=sell_id)
 
     if request.method == 'POST':
         sell.delete()

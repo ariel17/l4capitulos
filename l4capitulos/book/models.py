@@ -260,7 +260,7 @@ class Book(models.Model):
 
     added_at = models.DateTimeField(
         _('Added at'),
-        auto_now=True,
+        auto_now_add=True,
         blank=True,
         null=True,
     )
@@ -277,6 +277,22 @@ class Book(models.Model):
         blank=True,
         null=True,
         verbose_name=_('Status'),
+    )
+
+    quantity = models.PositiveIntegerField(
+        _('Quantity'),
+        default=0,
+        help_text=_('How many items of this book are available.')
+    )
+
+    price = models.DecimalField(
+        _('Price'),
+        max_digits=10,
+        decimal_places=2,
+        blank=True,
+        null=True,
+        default=0,
+        help_text=_('The operation price.')
     )
 
     objects = BookManager()
@@ -311,20 +327,3 @@ class BookImage(FileModel):
 
     def __unicode__(self):
         return u"picture#%d@book#%d" % (self.pk, self.book.pk)
-
-
-class Availability(models.Model):
-    """
-    TODO
-    """
-    book = models.ForeignKey(
-        Book,
-        unique=True,
-        verbose_name=_('Book'),
-    )
-
-    quantity = models.PositiveIntegerField(
-        _('Quantity'),
-        default=0,
-        help_text=_('How many items of this book are available.')
-    )
