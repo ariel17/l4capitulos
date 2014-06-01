@@ -915,8 +915,8 @@ def finance_purchase_cost_add(request, purchase_id):
     if request.method == 'POST':
         form = PurchaseCostForm(request.POST, instance=cost)
         if form.is_valid():
-            item = form.save()
-            messages.info(request, _("Purchase cost %d added :)") % item.pk)
+            cost = form.save()
+            messages.info(request, _("Purchase cost %d added :)") % cost.pk)
 
             if 'save' in request.POST:
                 return redirect('backoffice_finance_purchase_edit',
@@ -1227,6 +1227,8 @@ def finance_sell_cost_add(request, sell_id):
                                 sell_id=sell_id, cost_id=cost.pk)
     else:
         form = SellCostForm(instance=cost)
+
+    print form
 
     return render(request, 'backoffice/finance_sell_cost_add.html', {
         'form': form,

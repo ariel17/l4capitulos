@@ -313,4 +313,4 @@ class SellCostForm(forms.ModelForm, AddEditFormMixin):
 
     class Meta:
         model = SellCost
-        exclude = ['purchase']
+        exclude = ['sell']
