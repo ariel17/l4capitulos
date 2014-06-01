@@ -37,6 +37,12 @@
               {% trans "Books" %}
           </a>
       </li>
+      <li {% if section == 'book_availability' %}class="active"{% endif %}>
+          <a href="{% url "backoffice_book_availability" %}">
+              <span class="glyphicon glyphicon-list-alt"></span>
+              {% trans "Availability" %}
+          </a>
+      </li>
   </ul>
 
   <ul class="nav nav-sidebar">

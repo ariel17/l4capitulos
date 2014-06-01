@@ -15,7 +15,7 @@ from django.utils.translation import ugettext as _
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Layout, Fieldset, Div, Field, HTML
 
-from book.models import Author, Book, Category, Status, BookImage, Editorial
+from book.models import Author, Book, Category, Status, BookImage, Editorial, Availability
 from .commons import AddEditFormMixin, SearchFormMixin
 
 
@@ -208,6 +208,82 @@ class BookForm(forms.ModelForm, AddEditFormMixin):
 
     class Meta:
         model = Book
+
+
+class AvailabilitySearchForm(forms.Form, SearchFormMixin):
+    """
+    TODO
+    """
+    title = forms.CharField(
+        widget=forms.TextInput(attrs={"placeholder": _("Title")}),
+        required=False,
+    )
+
+    authors = forms.CharField(
+        widget=forms.TextInput(attrs={"placeholder": _("Authors")}),
+        required=False,
+    )
+
+    isbn = forms.CharField(
+        widget=forms.TextInput(attrs={"placeholder": _("ISBN number")}),
+        required=False,
+    )
+
+    editorial = forms.CharField(
+        widget=forms.TextInput(attrs={"placeholder": _("Editorial's name")}),
+        required=False,
+    )
+
+    category = forms.CharField(
+        widget=forms.TextInput(attrs={"placeholder": _("Category")}),
+        required=False,
+    )
+
+    def __init__(self, *args, **kwargs):
+        super(AvailabilitySearchForm, self).__init__(*args, **kwargs)
+        self.helper = FormHelper()
+        self.helper.form_method = 'get'
+        self.helper.form_class = 'form-inline'
+        self.helper.layout = Layout(
+            Div(
+                Field("title"),
+                Field("isbn"),
+                Field("category"),
+                Field("status"),
+                css_class="row group-padding-12"
+            ),
+
+            Div(
+                Field("editorial"),
+                Field("authors"),
+                css_class="row group-padding-12"
+            ),
+            self.get_button_holder()
+        )
+
+    class Meta:
+        model = Book
+
+
+class AvailabilityForm(forms.ModelForm, AddEditFormMixin):
+    """
+    TODO
+    """
+    def __init__(self, *args, **kwargs):
+        super(AvailabilityForm, self).__init__(*args, **kwargs)
+        self.helper = FormHelper()
+        self.helper.layout = Layout(
+            Fieldset(
+                _('Availability information'),
+                'book',
+                'quantity',
+                'price',
+            ),
+            self.get_button_holder()
+        )
+
+    class Meta:
+        model = Availability
 
 
 class BookSearchForm(forms.Form, SearchFormMixin):

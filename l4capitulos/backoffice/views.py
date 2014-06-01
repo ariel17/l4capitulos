@@ -6,7 +6,7 @@ Description: Backoffice application views.
 """
 __author__ = "Ariel Gerardo Rios (ariel.gerardo.rios@gmail.com)"
 
-from datetime import datetime, timedelta
+from datetime import datetime
 
 from django.conf import settings
 from django.contrib import messages
@@ -14,11 +14,11 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, get_object_or_404, redirect
 from django.utils.translation import ugettext as _
 
-from .forms.books import BookForm, BookSearchForm, AuthorForm, AuthorSearchForm, CategoryForm, StatusForm, BookImageForm, EditorialForm, EditorialSearchForm
+from .forms.books import BookForm, BookSearchForm, AuthorForm, AuthorSearchForm, CategoryForm, StatusForm, BookImageForm, EditorialForm, EditorialSearchForm, AvailabilityForm, AvailabilitySearchForm
 from .forms.commons import DeleteForm
 from .forms.finances import PurchaseForm, PurchaseSearchForm, PurchaseItemForm, PurchaseCostForm, SellForm, SellSearchForm, SellItemForm, SellCostForm
 from .utils import generate_passed_dates
-from book.models import Author, Book, Category, Status, BookImage, Editorial
+from book.models import Author, Book, Category, Status, BookImage, Editorial, Availability
 from finance.models import Purchase, PurchaseItem, PurchaseCost, Sell, SellItem, SellCost
 
 
@@ -47,9 +47,16 @@ def home(request):
 
     return render(request, 'backoffice/home.html', {
         'books': books,
-        'recent_books': books.order_by('-added_at')[:settings.BACKOFFICE_DEFAULT_RECENT_ITEMS],
-        'recent_sells': sells.order_by('-date')[:settings.BACKOFFICE_DEFAULT_RECENT_ITEMS],
-        'recent_purchases': purchases.order_by('-date')[:settings.BACKOFFICE_DEFAULT_RECENT_ITEMS],
+
+        'recent_books':
+        books.order_by('-added_at')[:settings.BACKOFFICE_DEFAULT_RECENT_ITEMS],
+
+        'recent_sells':
+        sells.order_by('-date')[:settings.BACKOFFICE_DEFAULT_RECENT_ITEMS],
+
+        'recent_purchases':
+        purchases.order_by('-date')[:settings.BACKOFFICE_DEFAULT_RECENT_ITEMS],
+
         'authors': Author.objects.all(),
         'purchases': {
             'objects': purchases,
@@ -690,6 +697,117 @@ def book_image_delete(request, book_id, image_id):
         'model': _('Book image'),
         'form': DeleteForm(),
         'section': 'book_book',
+    })
+
+
+@login_required
+def book_availability(request):
+    """
+    TODO
+    """
+    form = AvailabilitySearchForm(request.GET)
+
+    if len(request.GET.keys()):
+        if form.is_valid():
+            availables = Availability.objects.search(**form.cleaned_data)
+        else:
+            availables = []
+    else:
+        availables = []
+
+    return render(request, 'backoffice/book_availability.html', {
+        'form': form,
+        'availables': availables,
+        'section': 'book_availability',
+    })
+
+
+@login_required
+def book_availability_add(request):
+    """
+    TODO
+    """
+    if request.method == 'POST':
+        form = AvailabilityForm(request.POST)
+        if form.is_valid():
+            available = form.save()
+            messages.info(
+                request,
+                _("Availability for book '%s' added :)") % available.book.title
+            )
+
+            if 'save' in request.POST:
+                return redirect('backoffice_book_availability')
+
+            if 'save_and_edit' in request.POST:
+                return redirect('backoffice_book_availability_edit',
+                                available_id=available.pk)
+
+            elif 'save_and_new' in request.POST:
+                return redirect('backoffice_book_availability_add')
+    else:
+        form = AvailabilityForm()
+
+    return render(request, 'backoffice/book_availability_add.html', {
+        'form': form,
+        'section': 'book_availability',
+    })
+
+
+@login_required
+def book_availability_edit(request, availability_id):
+    """
+    TODO
+    """
+    available = get_object_or_404(Availability, pk=availability_id)
+
+    if request.method == 'POST':
+        form = StatusForm(request.POST, instance=available)
+        if form.is_valid():
+            form.save()
+            messages.info(
+                request,
+                _("Availability for book '%s' updated :)") %
+                available.book.title
+            )
+
+            if 'save' in request.POST:
+                return redirect('backoffice_book_availability')
+
+            if 'save_and_edit' in request.POST:
+                return redirect('backoffice_book_availability_edit',
+                                availability_id=availability_id)
+
+            elif 'save_and_new' in request.POST:
+                return redirect('backoffice_book_availability_add')
+
+    else:
+        form = AvailabilityForm(instance=available)
+
+    return render(request, 'backoffice/book_availability_edit.html', {
+        'form': form,
+        'available': available,
+        'section': 'book_availability',
+    })
+
+
+@login_required
+def book_availability_delete(request, availability_id):
+    """
+    TODO
+    """
+    available = get_object_or_404(Availability, pk=availability_id)
+
+    if request.method == 'POST':
+        available.delete()
+        messages.warning(request, _('Availability deleted.'))
+        return redirect('backoffice_book_availability')
+
+    return render(request, 'backoffice/commons_delete.html', {
+        'obj': available,
+        'model': _('Availability'),
+        'form': DeleteForm(),
+        'section': 'book_availability',
     })
 
 
