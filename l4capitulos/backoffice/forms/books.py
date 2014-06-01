@@ -179,7 +179,13 @@ class BookForm(forms.ModelForm, AddEditFormMixin):
                 'isbn',
                 'published_at',
                 'editorial',
+            ),
+            Fieldset(
+                _('Availability and price'),
+                'quantity',
+                'price',
             )
+
         )
 
         if self.instance.pk:

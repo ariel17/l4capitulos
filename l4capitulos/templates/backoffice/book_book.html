@@ -31,6 +31,8 @@
                 <th>{% trans "Authors" %}</th>
                 <th>{% trans "Published at" %}</th>
                 <th>{% trans "Editorial" %}</th>
+                <th>{% trans "Availables" %}</th>
+                <th>{% trans "Price" %}</th>
                 <th>{% trans "Actions" %}</th>
               </tr>
             </thead>
@@ -44,8 +46,18 @@
                                 <a href="{% url "backoffice_book_author_edit" author.pk %}">{{ author.get_full_name }}</a>{% if not forloop.last %},{% endif %}
                             {% endfor %}
                         </td>
-                        <td>{{ book.published_at }}</td>
-                        <td>{{ book.editorial.name }}</td>
+                        <td>
+                            {% if book.published_at %}
+                                {{ book.published_at }}
+                            {% endif %}
+                        </td>
+                        <td>
+                            {% if book.editorial %}
+                                <a href="{% url "backoffice_book_editorial_edit" book.editorial.pk %}">{{ book.editorial.name }}</a>
+                            {% endif %}
+                        </td>
+                        <td>{{ book.quantity }}</td>
+                        <td>{{ book.price }}</td>
                         <td>
                             <a type="button" class="btn btn-default btn-xs" href="{% url "backoffice_book_book_edit" book.pk %}">
                                 <span class="glyphicon glyphicon-pencil"></span> {% trans "Edit" %}
