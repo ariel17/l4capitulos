@@ -147,8 +147,8 @@ class Purchase(Operation):
     )
 
     def __unicode__(self):
-        return u"Purchase#%d@%s at $ %s" % (
-            self.pk, self.date, self.price
+        return unicode(_("Purchase at $ %s for day '%s'") % (
+            self.price, self.date
         )
 
     def get_total_price(self):
@@ -188,9 +188,7 @@ class PurchaseItem(Item):
     )
 
     def __unicode__(self):
-        return u"PurchaseItem#%d@Purchase#%d: q=%d" % (
-            self.pk, self.purchase.pk, self.quantity
-        )
+        return unicode(_("Book item '%s' id=%d") % (self.book.title, self.pk))
 
 
 class PurchaseCost(Cost):
@@ -203,9 +201,7 @@ class PurchaseCost(Cost):
     )
 
     def __unicode__(self):
-        return u"PurchaseCost#%d@Purchase#%d: p=%s" % (
-            self.pk, self.purchase.pk, self.price
-        )
+        return unicode(_("Cost '%s' at $ %s") % (self.title, self.price))
 
 
 class Sell(Operation):
@@ -213,9 +209,7 @@ class Sell(Operation):
     Registers the sell item.
     """
     def __unicode__(self):
-        return u"Sell#%d@%s at $ %s" % (
-            self.pk, self.date, self.price
-        )
+        return unicode(_("Sell '%s' at $ %s") % (self.title, self.price))
 
     def get_total_price(self):
         if self.price:
@@ -251,9 +245,9 @@ class SellItem(Item):
     )
 
     def __unicode__(self):
-        return u"SellItem#%d@Sell#%d: q=%d" % (
-            self.pk, self.sell.pk, self.quantity
-        )
+        return unicode(_("Sell item at $ %s for sell id=%d") % (
+            self.price, self.sell.pk
+        ))
 
 
 class SellCost(Cost):
@@ -266,6 +260,6 @@ class SellCost(Cost):
     )
 
     def __unicode__(self):
-        return u"SellCost#%d@Sell#%d: p=%s" % (
-            self.pk, self.sell.pk, self.price
-        )
+        return unicode(_("Sell cost at $ %s for sell id=%d") % (
+            self.price, self.sell.pk
+        ))
