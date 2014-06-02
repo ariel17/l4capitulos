@@ -26,9 +26,9 @@
           <table class="table table-striped">
             <thead>
               <tr>
-                <th>#</th>
                 <th>{% trans "Title" %}</th>
                 <th>{% trans "Authors" %}</th>
+                <th>{% trans "Category" %}</th>
                 <th>{% trans "Published at" %}</th>
                 <th>{% trans "Editorial" %}</th>
                 <th>{% trans "Availables" %}</th>
@@ -39,12 +39,16 @@
             <tbody>
                 {% for book in books %}
                     <tr>
-                        <td>{{ book.pk }}</td>
                         <td>{{ book.title }}</td>
                         <td>
                             {% for author in book.authors.all %}
                                 <a href="{% url "backoffice_book_author_edit" author.pk %}">{{ author.get_full_name }}</a>{% if not forloop.last %},{% endif %}
                             {% endfor %}
+                        </td>
+                        <td>
+                            <a href="{% url "backoffice_book_category_edit" book.category.pk %}">
+                                {{ book.category.get_full_name }}
+                            </a>
                         </td>
                         <td>
                             {% if book.published_at %}
