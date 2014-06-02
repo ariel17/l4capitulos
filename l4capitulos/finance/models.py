@@ -238,7 +238,7 @@ class Sell(Operation):
         """
         Returns the sell price minus the summatory of all costs.
         """
-        return self.price - self.get_total_cost()
+        return self.get_total_price() - self.get_total_cost()
 
 
 class SellItem(Item):

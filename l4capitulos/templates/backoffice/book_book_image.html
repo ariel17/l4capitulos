@@ -25,7 +25,7 @@
                     {% else %}
                         <span class="glyphicon glyphicon-remove"></span></td>
                     {% endif %}
-                <td><a href="{{ MEDIA_URL }}{{ image.image }}">{{ MEDIA_URL }}{{ image.image.url }}</a></td>
+                <td><a href="{{ MEDIA_URL }}{{ image.image.url }}">{{ MEDIA_URL }}{{ image.image.url }}</a></td>
                 <td>
                     <a type="button" class="btn btn-default btn-xs" href="{% url "backoffice_book_image_edit" book.pk image.pk %}">
                         <span class="glyphicon glyphicon-pencil"></span> {% trans "Edit" %}
