@@ -62,3 +62,19 @@ class DeleteForm(forms.Form):
                 Submit('yes', _('Yes'), css_class='button white'),
             )
         )
+
+
+class PostFormMixin(object):
+    """
+    Implements customized methods for social media post forms.
+    """
+    def get_button_holder(self):
+        """
+        Returns a holder with common buttons.
+        """
+        return ButtonHolder(
+            Button('cancel', _('I guess no'), css_class='btn btn-default'),
+            Submit('save', _('Do it!'), css_class='button white'),
+        )
+
+# vim: ai ts=4 sts=4 et sw=4 ft=python

@@ -4,8 +4,33 @@
 {% block "title-sufix" %}{% trans "Edit a book" %}{% endblock %}
 
 {% block "content" %}
-<h1 class="page-header">{% trans "Edit book" %}</h1>
+    <h1 class="page-header">{% trans "Edit book" %}</h1>
+    {% crispy form %}
 
-{% crispy form %}
-    
+    <hr />
+
+    <h2 class="page-header">{% trans "Social media operations" %}</h1>
+    {% if facebook.authenticated %}
+        <a href="#fbPostModal" role="button" class="btn btn-primary" data-toggle="modal">
+            {% trans "Post on Facebook" %}
+        </a>
+        <div class="modal fade" id="fbPostModal" tabindex="-1" role="dialog" aria-labelledby="fbPostModal" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="myModalLabel">{% trans "Post book to Facebook" %}</h4>
+              </div>
+              <div class="modal-body">
+                  {% crispy facebook.form %}
+              </div>
+            </div>
+          </div>
+        </div>
+    {% else %}
+        <a href="{% url 'social:begin' 'facebook' %}?next={{ request.path }}" class="btn btn-primary">
+            {% trans "Login on Facebook" %}
+        </a>
+    {% endif %}
+
 {% endblock "content" %}    
