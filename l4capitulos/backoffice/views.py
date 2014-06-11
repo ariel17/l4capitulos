@@ -7,6 +7,9 @@ Description: Backoffice application views.
 __author__ = "Ariel Gerardo Rios (ariel.gerardo.rios@gmail.com)"
 
 from datetime import datetime
+import logging
+
+from facepy import GraphAPI
 
 from django.conf import settings
 from django.contrib import messages
@@ -14,12 +17,17 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, get_object_or_404, redirect
 from django.utils.translation import ugettext as _
 
-from .forms.books import BookForm, BookSearchForm, AuthorForm, AuthorSearchForm, CategoryForm, StatusForm, BookImageForm, EditorialForm, EditorialSearchForm
+from social.apps.django_app.default.models import UserSocialAuth
+
+from .forms.books import BookForm, BookSearchForm, AuthorForm, AuthorSearchForm, CategoryForm, StatusForm, BookImageForm, EditorialForm, EditorialSearchForm, FacebookBookPostForm
 from .forms.commons import DeleteForm
 from .forms.finances import PurchaseForm, PurchaseSearchForm, PurchaseItemForm, PurchaseCostForm, SellForm, SellSearchForm, SellItemForm, SellCostForm
 from .utils import generate_passed_dates
 from book.models import Author, Book, Category, Status, BookImage, Editorial
 from finance.models import Purchase, PurchaseItem, PurchaseCost, Sell, SellItem, SellCost
+
+
+logger = logging.getLogger(__name__)
 
 
 @login_required
@@ -563,27 +571,66 @@ def book_book_edit(request, book_id):
     book = get_object_or_404(Book, pk=book_id)
 
     if request.method == 'POST':
-        form = BookForm(request.POST, instance=book)
-        if form.is_valid():
-            book = form.save()
-            messages.info(
-                request, _("Book '%s' updated :)") % book.title
+        if request.GET.get('action', '') == 'facebook_post':
+            logger.debug('Processing Facebook post')
+
+            form = BookForm(instance=book)
+            facebook_form = FacebookBookPostForm(
+                request.user, book, request.POST
             )
 
-            if 'save' in request.POST:
-                return redirect('backoffice_book_book')
+            if facebook_form.is_valid():
+                logger.debug('Facebook form is ok')
 
-            if 'save_and_edit' in request.POST:
-                return redirect('backoffice_book_book_edit', book_id=book.pk)
+                try:
+                    facebook_form.save()
+                except UserSocialAuth.DoesNotExist, e:
+                    messages.error(
+                        request,
+                        _("You must be logged into Facebook to be able to "
+                          "publish :(")
+                    )
 
-            elif 'save_and_new' in request.POST:
-                return redirect('backoffice_book_book_add')
+                messages.info(
+                    request, _("Book '%s' published on Facebook :)") %
+                    book.title
+                )
+            else:
+                logger.debug('Facebook form has errors')
+
+        else:
+            form = BookForm(request.POST, instance=book)
+            facebook_form = FacebookBookPostForm(request.user, book)
+
+            if form.is_valid():
+                book = form.save()
+
+                messages.info(
+                    request, _("Book '%s' updated :)") % book.title
+                )
+
+                if 'save' in request.POST:
+                    return redirect('backoffice_book_book')
+
+                if 'save_and_edit' in request.POST:
+                    return redirect(
+                        'backoffice_book_book_edit', book_id=book.pk
+                    )
+
+                elif 'save_and_new' in request.POST:
+                    return redirect('backoffice_book_book_add')
 
     else:
         form = BookForm(instance=book)
+        facebook_form = FacebookBookPostForm(request.user, book)
 
     return render(request, 'backoffice/book_book_edit.html', {
         'form': form,
+        'facebook': {
+            'form': facebook_form,
+            'authenticated':
+            request.user.social_auth.filter(provider='facebook').count() > 0
+        },
         'book': book,
         'section': 'book_book',
     })
@@ -1227,8 +1274,6 @@ def finance_sell_cost_add(request, sell_id):
                                 sell_id=sell_id, cost_id=cost.pk)
     else:
         form = SellCostForm(instance=cost)
-
-    print form
 
     return render(request, 'backoffice/finance_sell_cost_add.html', {
         'form': form,

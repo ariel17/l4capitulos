@@ -1,0 +1,6 @@
+{% load i18n thumbnail %}
+Nombre: {{ book.title }}
+Editorial: {{ book.editorial }}
+Estado: {{ book.status }}. {{ book.observations }}
+
+{{ book.summary }}

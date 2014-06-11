@@ -13,9 +13,9 @@ https://docs.djangoproject.com/en/1.6/ref/settings/
 
 import os
 
+from django.conf.global_settings import TEMPLATE_CONTEXT_PROCESSORS, AUTHENTICATION_BACKENDS
 from django.core.exceptions import ImproperlyConfigured
 from django.utils.translation import ugettext_lazy as _
-
 
 def get_env_setting(setting):
     """ Get the environment setting or return exception """
@@ -50,6 +50,7 @@ DJANGO_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.sites'
 )
 
 THIRD_PARTY_APPS = (
@@ -57,6 +58,7 @@ THIRD_PARTY_APPS = (
     'raven.contrib.django.raven_compat',
     'sorl.thumbnail',
     'south',
+    'social.apps.django_app.default',
 )
 
 PROJECT_APPS = (
@@ -78,6 +80,8 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 )
+
+SITE_ID = 1
 
 ROOT_URLCONF = 'l4capitulos.urls'
 
@@ -167,3 +171,28 @@ BACKOFFICE_DEFAULT_RECENT_ITEMS = 5
 # Base sorl thumbnail configuration
 THUMBNAIL_KEY_PREFIX = 'sorl-thumbnail-l4capitulos'
 THUMBNAIL_PREFIX = os.path.join(IMAGES_ROOT, 'cache/')
+
+
+# Social Auth configuration
+TEMPLATE_CONTEXT_PROCESSORS += (
+    'social.apps.django_app.context_processors.backends',
+    'social.apps.django_app.context_processors.login_redirect',
+)
+
+AUTHENTICATION_BACKENDS = (
+    'social.backends.facebook.FacebookOAuth2',
+) + AUTHENTICATION_BACKENDS
+
+SOCIAL_AUTH_FACEBOOK_KEY = get_env_setting('FACEBOOK_APP_ID')
+SOCIAL_AUTH_FACEBOOK_SECRET = get_env_setting('FACEBOOK_APP_SECRET')
+SOCIAL_AUTH_LOGIN_URL = LOGIN_URL
+SOCIAL_AUTH_LOGIN_REDIRECT_URL = LOGIN_REDIRECT_URL
+SOCIAL_AUTH_FACEBOOK_SCOPE = [
+    'manage_pages', 'publish_actions', 'user_photos', 'publish_stream',
+    'offline_access'
+]
+
+FACEBOOK_FAN_APP_ID = get_env_setting('FACEBOOK_FAN_APP_ID')
+FACEBOOK_IMAGE_POST_URL = "https://www.facebook.com/photo.php?fbid="
+
+# vim: ai ts=4 sts=4 et sw=4 ft=python

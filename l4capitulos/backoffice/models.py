@@ -26,3 +26,5 @@ class Profile(models.Model):
         default=settings.BACKOFFICE_PROFILE_DEFAULT_LAST_ACTIVITY_ITEMS,
         help_text=_('How many last activity items to show.')
     )
+
+# vim: ai ts=4 sts=4 et sw=4 ft=python

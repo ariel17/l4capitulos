@@ -259,6 +259,13 @@ class Book(models.Model):
         help_text=_('Book summary about its content and why should buy it.')
     )
 
+    observations = models.TextField(
+        _('Observations'),
+        blank=True,
+        null=True,
+        help_text=_('Observations about the book (marks?, fails?).')
+    )
+
     added_at = models.DateTimeField(
         _('Added at'),
         auto_now_add=True,

@@ -23,6 +23,11 @@ def account_login(request):
             login(request, form.get_user())
             return redirect('backoffice_home')
 
+    elif request.user.is_authenticated():
+        if 'next' in request.GET:
+            print request.GET['next']
+            return redirect(request.GET['next'])
+        return redirect('backoffice_home')
     else:
         form = LoginForm()
 
