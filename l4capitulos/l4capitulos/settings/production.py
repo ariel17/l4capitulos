@@ -13,13 +13,11 @@ from os import environ
 from base import *
 
 
-########## HOST CONFIGURATION
+# Allowed hosts configuration
 # See: https://docs.djangoproject.com/en/1.5/releases/1.5/#allowed-hosts-required-in-production
 ALLOWED_HOSTS = ['*']
-########## END HOST CONFIGURATION
 
-
-########## DATABASE CONFIGURATION
+# Database configuration
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#databases
 DATABASES = {
     'default': {
@@ -31,10 +29,8 @@ DATABASES = {
         'PORT': '',
     }
 }
-########## END DATABASE CONFIGURATION
 
-
-########## CACHE CONFIGURATION
+# Cache configuration
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#caches
 CACHES = {
     'default': {
@@ -43,14 +39,10 @@ CACHES = {
         'KEY_PREFIX': 'production-',
     },
 }
-########## END CACHE CONFIGURATION
 
-
-########## INSTALLED APPS
+# Installed apps configuration
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps
 INSTALLED_APPS += ('gunicorn',)
-########## END INSTALLED APPS
-
 
 # Sentry client configuration
 RAVEN_CONFIG = {
@@ -58,10 +50,14 @@ RAVEN_CONFIG = {
     '15ff77ecb7734f9bac1b8b614c03de31@sentry.ariel17.com.ar/8',
 }
 
-
-########## SECRET CONFIGURATION
+# Secret key configuration
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#secret-key
 SECRET_KEY = get_env_setting('SECRET_KEY')
-########## END SECRET CONFIGURATION
+
+# Social media configuration
+
+SOCIAL_AUTH_FACEBOOK_KEY = get_env_setting('FACEBOOK_APP_ID')
+SOCIAL_AUTH_FACEBOOK_SECRET = get_env_setting('FACEBOOK_APP_SECRET')
+FACEBOOK_FAN_APP_ID = get_env_setting('FACEBOOK_FAN_APP_ID')
 
 # vim: ai ts=4 sts=4 et sw=4 ft=python

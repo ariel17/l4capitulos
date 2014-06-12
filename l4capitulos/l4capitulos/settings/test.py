@@ -37,4 +37,12 @@ RAVEN_CONFIG = {
 
 SECRET_KEY = "(b-5!nc)b*x--bcx-d!d@g+l!4tmp1in*gfidq)+7ta@&9tq+&"
 
+# Social media configuration
+
+SOCIAL_AUTH_FACEBOOK_KEY = '1234'
+SOCIAL_AUTH_FACEBOOK_SECRET = '1234abcd'
+FACEBOOK_FAN_APP_ID = '5678'
+
+
+
 # vim: ai ts=4 sts=4 et sw=4 ft=python
