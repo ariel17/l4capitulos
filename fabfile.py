@@ -8,7 +8,7 @@ __author__ = "Ariel Gerardo Rios (ariel.gerardo.rios@gmail.com)"
 
 
 from datetime import datetime
-from os import path
+from os import path, environ
 
 from fabric.api import env, settings, abort, local, run, prefix, task, cd, sudo
 from fabric.contrib.console import confirm
@@ -98,6 +98,9 @@ def clean():
 #     env.requirements = REMOTE_REQUIREMENTS_DEVELOPMENT
 #     env.settings = '%s.settings.development' % APPLICATION
 #     env.application = '%s_dev' % APPLICATION
+#     env.facebook_app_id = environ['DEVELOPMENT_FACEBOOK_APP_ID']
+#     env.facebook_app_secret = environ['DEVELOPMENT_FACEBOOK_APP_SECRET']
+#     env.facebook_fan_app_id = environ['DEVELOPMENT_FACEBOOK_FAN_APP_ID']
 
 
 @task
@@ -113,14 +116,22 @@ def production():
     env.settings = '%s.settings.production' % APPLICATION
     env.application = APPLICATION
 
+    env.facebook_app_id = environ['PRODUCTION_FACEBOOK_APP_ID']
+    env.facebook_app_secret = environ['PRODUCTION_FACEBOOK_APP_SECRET']
+    env.facebook_fan_app_id = environ['PRODUCTION_FACEBOOK_FAN_APP_ID']
+
 
 @task
 def set_env_vars():
     """
     Configures needed environment variables.
     """
-    export_secret_key = 'declare -x SECRET_KEY="%s"' % create_secret_key()
-    declarations = [export_secret_key]
+    declarations = [
+        'declare -x SECRET_KEY="%s"' % create_secret_key(),
+        'declare -x FACEBOOK_APP_ID="%s"' % env.facebook_app_id,
+        'declare -x FACEBOOK_APP_SECRET="%s"' % env.facebook_app_secret,
+        'declare -x FACEBOOK_FAN_APP_ID="%s"' % env.facebook_fan_app_id,
+    ]
 
     for export in declarations:
         run(export)

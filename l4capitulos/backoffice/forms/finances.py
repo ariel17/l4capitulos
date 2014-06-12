@@ -80,24 +80,29 @@ class PurchaseForm(forms.ModelForm, AddEditFormMixin):
 class PurchaseSearchForm(forms.Form, SearchFormMixin):
 
     date_from = forms.DateField(
+        label=_('Date from'),
         required=False,
     )
 
     date_to = forms.DateField(
+        label=_('Date to'),
         required=False,
     )
 
     title = forms.CharField(
+        label=_('Title'),
         widget=forms.TextInput(attrs={"placeholder": _("Title")}),
         required=False,
     )
 
     price_from = forms.DecimalField(
+        label=_('Price from'),
         widget=forms.TextInput(attrs={"placeholder": _("Price from")}),
         required=False,
     )
 
     price_to = forms.DecimalField(
+        label=_('Price to'),
         widget=forms.TextInput(attrs={"placeholder": _("Price to")}),
         required=False,
     )
@@ -234,19 +239,23 @@ class SellForm(forms.ModelForm, AddEditFormMixin):
 class SellSearchForm(forms.Form, SearchFormMixin):
 
     date_from = forms.DateField(
+        label=_('Date from'),
         required=False,
     )
 
     date_to = forms.DateField(
+        label=_('Date to'),
         required=False,
     )
 
     price_from = forms.DecimalField(
+        label=_('Price from'),
         widget=forms.TextInput(attrs={"placeholder": _("Price from")}),
         required=False,
     )
 
     price_to = forms.DecimalField(
+        label=_('Price to'),
         widget=forms.TextInput(attrs={"placeholder": _("Price to")}),
         required=False,
     )
@@ -314,3 +323,5 @@ class SellCostForm(forms.ModelForm, AddEditFormMixin):
     class Meta:
         model = SellCost
         exclude = ['sell']
+
+# vim: ai ts=4 sts=4 et sw=4 ft=python

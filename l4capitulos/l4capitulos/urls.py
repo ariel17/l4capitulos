@@ -24,6 +24,8 @@ urlpatterns = patterns('',
         name='account_login'),
 
     url(r'^backoffice/$', 'backoffice.views.home', name='backoffice_home'),
+    url(r'^backoffice/home/$', 'backoffice.views.home',
+        name='backoffice_home'),
 
     url(r'^backoffice/book/author/$', 'backoffice.views.book_author',
         name='backoffice_book_author'),
@@ -188,6 +190,11 @@ urlpatterns = patterns('',
         '(?P<cost_id>\d+)/delete/$',
         'backoffice.views.finance_sell_cost_delete',
         name='backoffice_finance_sell_cost_delete'),
+
+    url('', include('social.apps.django_app.urls', namespace='social')),
+
+    url(r'^api/facebook/book/(?P<book_id>\d+)/post/',
+        'api.views.facebook_book_post', name='api_book_post'),
 )
 
 
