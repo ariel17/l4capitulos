@@ -14,6 +14,7 @@ https://docs.djangoproject.com/en/1.6/ref/settings/
 import os
 
 from django.conf.global_settings import TEMPLATE_CONTEXT_PROCESSORS, AUTHENTICATION_BACKENDS
+from django.contrib.messages import constants as messages
 from django.core.exceptions import ImproperlyConfigured
 from django.utils.translation import ugettext_lazy as _
 
@@ -127,12 +128,53 @@ STATICFILES_DIRS = (
 
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#std:setting-MEDIA_ROOT
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#std:setting-MEDIA_URL
 MEDIA_URL = '/media/'
 
 
 FORMAT_MODULE_PATH = 'formats'
 
+# Login Configuration
+# See: https://docs.djangoproject.com/en/dev/ref/settings/#logging
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'filters': {
+        'require_debug_false': {
+            '()': 'django.utils.log.RequireDebugFalse'
+        }
+    },
+    'formatters': {
+        'verbose': {
+            'format': '%(levelname)s %(asctime)s %(module)s %(process)d %(thread)d %(message)s'
+        },
+    },
+    'handlers': {
+        'console': {
+            'level': 'DEBUG',
+            'class': 'logging.StreamHandler',
+            'formatter': 'verbose'
+        },
+    },
+    'loggers': {
+        'django.request': {
+            'handlers': ['console'],
+            'level': 'DEBUG',
+            'propagate': True,
+        },
+        'totalizer': {
+            'handlers': ['console'],
+            'level': 'DEBUG',
+            'propagate': True,
+        },
+        'backoffice': {
+            'handlers': ['console'],
+            'level': 'DEBUG',
+            'propagate': True,
+        },
+    }
+}
 
 # Crispy forms configuration
 CRISPY_TEMPLATE_PACK = 'bootstrap3'
@@ -141,8 +183,6 @@ CRISPY_TEMPLATE_PACK = 'bootstrap3'
 # Default settings for Backoffice
 BACKOFFICE_PROFILE_DEFAULT_LAST_ACTIVITY_ITEMS = 10
 
-
-from django.contrib.messages import constants as messages
 MESSAGE_TAGS = {
     messages.INFO: 'info',
     messages.SUCCESS: 'success',
@@ -173,7 +213,7 @@ THUMBNAIL_KEY_PREFIX = 'sorl-thumbnail-l4capitulos'
 THUMBNAIL_PREFIX = os.path.join(IMAGES_ROOT, 'cache/')
 
 
-# Social Auth configuration
+# Social media configuration
 TEMPLATE_CONTEXT_PROCESSORS += (
     'social.apps.django_app.context_processors.backends',
     'social.apps.django_app.context_processors.login_redirect',
@@ -183,8 +223,6 @@ AUTHENTICATION_BACKENDS = (
     'social.backends.facebook.FacebookOAuth2',
 ) + AUTHENTICATION_BACKENDS
 
-SOCIAL_AUTH_FACEBOOK_KEY = get_env_setting('FACEBOOK_APP_ID')
-SOCIAL_AUTH_FACEBOOK_SECRET = get_env_setting('FACEBOOK_APP_SECRET')
 SOCIAL_AUTH_LOGIN_URL = LOGIN_URL
 SOCIAL_AUTH_LOGIN_REDIRECT_URL = LOGIN_REDIRECT_URL
 SOCIAL_AUTH_FACEBOOK_SCOPE = [
@@ -192,7 +230,6 @@ SOCIAL_AUTH_FACEBOOK_SCOPE = [
     'offline_access'
 ]
 
-FACEBOOK_FAN_APP_ID = get_env_setting('FACEBOOK_FAN_APP_ID')
 FACEBOOK_IMAGE_POST_URL = "https://www.facebook.com/photo.php?fbid="
 
 # vim: ai ts=4 sts=4 et sw=4 ft=python
