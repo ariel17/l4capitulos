@@ -222,7 +222,7 @@ class SellForm(forms.ModelForm, AddEditFormMixin):
                     Fieldset(
                         _("Costs for this sell"),
                         HTML(render_to_string(
-                            "backoffice/finance_purchase_cost.html", {
+                            "backoffice/finance_sell_cost.html", {
                                 "costs": self.instance.sellcost_set.all(),
                                 "sell": self.instance,
                             })))
